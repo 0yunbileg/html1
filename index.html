@@ -2,19 +2,32 @@
 
 <head>
     <title>My world</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <main>
         <nav>
-            <a>Main</a>
+            <a href="#main">Main</a>
             <a href="#aboutUs">About us</a>
             <a href="#contact">Contact</a>
         </nav>
 
-        <article>
+        <article id="main">
             <h1>Main</h1>
-            <aside>
+
+            <section id="introduction">
+                <h3>Intoduction</h3>
+                <ul class="list">
+                    <li>17 years old</li>
+                    <li>From Mongolia</li>
+                    <li>Highschool student</li>
+                    <li>Learning web development</li>
+                    <li>Likes science(especially physics)</li>
+                </ul>
+            </section>
+
+            <aside class="hobbies">
                 <h3>My hobbies</h3>
                 <ul>
                     <li>Reading</li>
@@ -33,44 +46,6 @@
                 </ol>
             </section>
 
-            <section>
-                <h3>Favourite things from each seasons</h3>
-                <section>
-                    <h5>Spring</h5>
-                    <p>All the snow melts, Trees start to get <span style="color: green;">green</span></p>
-                    <details>
-                        <summary>things I dislike</summary>
-                        <p>Too windy</p>
-                    </details>
-                </section>
-
-                <section>
-                    <h5>Summer</h5>
-                    <p>Rain, Sun, <mark>Sumer Trips</mark>, No School</p>
-                    <details>
-                        <summary>things I dislike</summary>
-                        <p>Too short</p>
-                    </details>
-                </section>
-
-                <section>
-                    <h5>Autumn</h5>
-                    <p>Weather is nice, Get into social interactions again</p>
-                    <details>
-                        <summary>things I dislike</summary>
-                        <p>End of Summer</p>
-                    </details>
-                </section>
-
-                <section>
-                    <h5>Winter</h5>
-                    <p>Snow, New Year</p>
-                    <details>
-                        <summary>things I dislike</summary>
-                        <p>Too cold</p>
-                    </details>
-                </section>
-            </section>
         </article>
 
         <article id="aboutUs">
@@ -91,30 +66,57 @@
                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
             <table border="2">
-                <caption>School Subjects Ranked by my personal opinion</caption>
+                <caption></caption>
                 <thead>
                     <tr>
-                        <th rowspan="2"></th>
-                        <th rowspan="2">Math</th>
-                        <th colspan="3">Science</th>
-                        <th colspan="2">Others</th>
-                    </tr>
-                    <tr>
-                        <th>Physics</th>
-                        <th>Chem</th>
-                        <th>Bio</th>
-                        <th>History</th>
-                        <th>PE</th>
+                        <th></th>
+                        <th>Spring</th>
+                        <th>Summer</th>
+                        <th>Fall</th>
+                        <th>Winter</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    <tr>
+                        <td>Things I like</td>
+                        <td>All the snow melts, Trees start to get <span style="color: green;">green</span></td>
+                        <td>Rain, Sun, <mark>Sumer Trips</mark>, No School</td>
+                        <td>Weather is nice, Get into social interactions again</td>
+                        <td>Snow, New Year</td>
+                    </tr>
+
+                    <tr>
+                        <td>Things I don't like</td>
+                        <td>Too windy</td>
+                        <td>Too short</td>
+                        <td>End of Summer</td>
+                        <td>Too cold</td>
+                    </tr>
+                </tbody>
                 <tfoot></tfoot>
             </table>
         </article>
 
         <article id="contact">
             <h1>Contact</h1>
+
+            <form>
+                <legend><b>Contact me</b></legend>
+
+                <label for="name">Your name </label><br>
+                <input type="text" name="name"><br>
+
+                <label for="email">Your email</label><br>
+                <input type="email" name="email"><br>
+
+                <label for="number">Your number</label><br>
+                <input type="number" name="number">
+
+                <button type="submit">Contact</button>
+            </form>
+
             <section>
+                <h4>Contact info: </h4>
                 <p>Phone: 94949494</p>
                 <p>Email: oyunbileg@gmail.com</p>
                 <p>Discord: 0yunbileg</p>

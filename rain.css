@@ -1,0 +1,54 @@
+body {
+    background-color: rgb(241, 241, 241);
+    margin: 0;
+}
+
+.mainTitle {
+    background-image: url(images/drops.jpg);
+    background-size: cover;
+    padding: 30px;
+    text-align: center;
+    margin: 0;
+}
+
+nav {
+    text-align: center;
+}
+
+nav section {
+    background-color: rgba(61, 56, 56, 0.86);
+    padding: 10px;
+}
+
+nav a {
+    padding: 10px;
+    color: white;
+}
+
+.homeSection {
+    display: flex;
+}
+
+.homeSection p {
+    margin-left: 30px;
+}
+
+.mainPart {
+    background-color: white;
+    margin: 10px 60px 30px 60px;
+    border-radius: 30px;
+    padding: 25px;
+}
+
+footer {
+    background-color: rgba(61, 56, 56, 0.86);
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+.umbrella {
+    border-width: 10px;
+    border-color: aqua;
+    border-radius: 15px;
+}
