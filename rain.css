@@ -1,6 +1,7 @@
 body {
-    background-color: rgb(241, 241, 241);
+    background-color: #F4F4F4;
     margin: 0;
+    font-family: sans-serif;
 }
 
 .mainTitle {
@@ -16,8 +17,9 @@ nav {
 }
 
 nav section {
-    background-color: rgba(61, 56, 56, 0.86);
+    background-color: #444444;
     padding: 10px;
+    
 }
 
 nav a {
@@ -38,17 +40,26 @@ nav a {
     margin: 10px 60px 30px 60px;
     border-radius: 30px;
     padding: 25px;
+    /* box-shadow: 10px 5px 5px #444444; */
 }
 
 footer {
-    background-color: rgba(61, 56, 56, 0.86);
+    background-color: #444444;
     color: white;
     text-align: center;
     padding: 10px;
 }
 
 .umbrella {
-    border-width: 10px;
-    border-color: aqua;
+    border: 1px solid gray;
+    padding: 5px;
     border-radius: 15px;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 26px;
 }
