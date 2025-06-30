@@ -1,0 +1,26 @@
+h1 { 
+    color: blue;
+    background-color: lightyellow;
+}
+h3 {color: cornflowerblue;}
+.hobbies {
+    font-style: italic;
+    font-size: large;
+    background-color: pink;
+    margin-left: 80%;
+}
+/* body {
+    text-align: center;
+} */
+
+#introduction {
+    border: 10px dashed;
+    border-color: aqua purple yellow orange;
+    border-radius: 30px;
+    padding-left: 40px;
+    margin: 20px;
+}
+
+.list {
+    
+}
