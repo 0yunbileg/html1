@@ -1,0 +1,42 @@
+nav {
+    background-color: aliceblue;
+    display: flex;
+}
+
+nav p {
+    justify-self: center;
+    color: aqua;
+}
+
+.section1 {
+    background-color: aquamarine;
+}
+
+.section2 {
+    background-color: bisque;
+}
+
+.section3 {
+    background-color: gray;
+}
+
+.section4 {
+    background-color: cornflowerblue;
+}
+
+article {
+    display: flex;
+}
+
+.logo {
+    width: 100px;
+}
+
+h1 {
+    justify-self: center;
+    text-decoration: underline;
+}
+
+body {
+    background-color: #F8F3EB;
+}
