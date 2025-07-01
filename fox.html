@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fox News</title>
     <link rel="stylesheet" href="fox.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -15,7 +16,7 @@
         <div class="navDiv">
             <a>Login</a>
             <a>Get 1 year for $50 USD</a>
-            <a>Menu</a>
+            <a>Menu <i class="fa fa-solid fa-bars"></i></a>
         </div>
     </nav>
 
@@ -24,7 +25,7 @@
         <article>
             <section class="section1">
                 <div id="div1">
-                    <h2>The First Signs of Alcoholic Liver Damage Are Not in the Liver</h2>
+                    <h2>The First Signs of <span>Alcoholic Liver</span> Damage Are Not in the Liver</h2>
                     <p class="text">The combination of my father's death and my personal back ground lit a fire in me to
                         know more</p>
                     <p class="text">He was admitted to the hospital on June 24, 2016</p>
@@ -48,14 +49,13 @@
                     <h2>How 7 Lines of Code Turned Into a $36 Billion Empire</h2>
                     <p class="text">Yeah, it's safe to say these guys have a great sense of humor, which isn't really
                         surprising for us considering their seemingly absurd solution to online payments. Instead of
-                        chasing
-                        1000-hour programming contracts to build clunky payments solutions for each individual client,
-                        the
+                        chasing 1000-hour programming contracts to build clunky payments solutions for each individual
+                        client, the
                         Collision...</p>
                     <div class="author" id="James">
-                        <img class="profile">
+                        <img class="profile" id="JamesImg" src="https://assets.codepen.io/285131/author-2.png">
                         <div>
-                            <p class="name">James Robert</p>
+                            <p class="name"><b>James Robert</b></p>
                             <p class="role">Editor</p>
                         </div>
                     </div>
@@ -82,17 +82,22 @@
                     <p class="text">Slack has become indispensible for many businesses operation remotely during the
                         pandemic. Here's what the acquisition could mean for users...</p>
                     <div class="author" id="James">
-                        <img class="profile">
+                        <img class="profile" id="David" src="https://assets.codepen.io/285131/author-2.png">
                         <div>
-                            <p class="name">James Robert</p>
+                            <p class="name"><b>James Robert</b></p>
                             <p class="role">Editor</p>
                         </div>
                     </div>
                 </div>
 
                 <div id="div7">
-                    <p></p>
+                    <p><i class="fa fa-regular fa-headphones"></i> Post Reports / Podcast</p>
                     <h2>Things to Do After 6 P.M Will Enrich Your Life</h2>
+                    <div id="podcast">
+                        <p><i class="fa fa-regular fa-play" id="playIcon"></i></p>
+                        <p id="playStatus"></p>
+                        <p>23:45</p>
+                    </div>
                     <p>Apple Podcasts, Google Podcasts, Stitcher</p>
                     <div class="author" id="David">
                         <img class="profile" id="David" src="images/David.png">

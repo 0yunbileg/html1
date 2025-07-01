@@ -1,14 +1,18 @@
 body {
     background-color: #F8F3EB;
+    font-family: sans-serif;
 }
 
 nav {
     display: flex;
+    background-color: #F8F3EB;
     justify-content: space-between;
     align-items: center;
+    font-family: sans-serif;
+    font-weight: 550;
+    font-size: 18px;
     position: sticky;
     top: 0;
-    background-color: #F8F3EB;
 }
 
 .logo {
@@ -76,6 +80,11 @@ section {
     margin-right: 16px;
 }
 
+#div3 .author .profile {
+    width: 7.5%;
+    height: 7.5%;
+}
+
 .author {
     display: flex;
     align-items: flex-start;
@@ -86,4 +95,25 @@ section {
     margin: 0;
     font-size: 20px;
     justify-self: end;
+}
+
+#playIcon {
+    color: white;
+    background-color: #323232;
+    padding: 15px;
+    border-radius: 26%;
+}
+
+#podcast {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#playStatus {
+    width: 60%;
+    height: 10px;
+    background-color: #F8996F;
+    z-index: 2;
+    border-radius: 5px;
 }
