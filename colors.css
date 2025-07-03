@@ -1,0 +1,88 @@
+.task1 {
+    display: flex;
+    margin: 100px;
+    border-bottom: 1px dashed blue;
+}
+
+.task1 div {
+    margin: 30px;
+    padding: 38px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+#div1:hover {
+    color: white;
+    background-color: #f9004d;
+    background: linear-gradient(90deg,#f61b10,#ef0963);
+}
+
+h1 {
+    font-size: 50px;
+    justify-self: center;
+}
+
+.info {
+    justify-self: center;
+    font-size: 20px;
+    width: 600px;
+    text-align: center;
+    color: rgba(57, 55, 55, 0.91);
+}
+
+#articles {
+    display: flex;
+    justify-self: center;
+}
+
+#articles div {
+    margin: 20px;
+    padding: 16px;
+    width: 300px;
+    height: 450px;
+    background-size: cover;
+    display: flex;
+    align-items: end;
+    border-radius: 10px;
+}
+
+#news1 {
+    background-image: url(images/news1img.jpg);
+}
+
+#news2 {
+    background-image: url(images/news2img.jpg);
+}
+
+#news3 {
+    background-image: url(images/news3img.jpg);
+}
+
+.title {
+    font-size: 26px;
+    color: white;
+}
+
+.category {
+    color: gray;
+}
+
+button {
+    padding: 15px;
+    border-radius: 5px;
+    border: 3px solid #ef0963;
+    background: none;
+    color: white;
+}
+
+button:hover {
+    padding: 15px;
+    border-radius: 5px;
+    border: 3px solid #ef0963;
+    background: #ef0963;
+    color: white;
+}
+
+#news1:hover {
+    background-image: linear-gradient(180deg,#fc004d,#000000a2), url(images/news1img.jpg);
+}
