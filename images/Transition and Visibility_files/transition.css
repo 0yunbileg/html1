@@ -1,0 +1,22 @@
+.box {
+    width: 400px;
+    height: 600px;
+    background-color: skyblue;
+    background-image: url(images/news1img.jpg);
+    background-size: cover;
+    border-radius: 30px;
+    transition: all 1s linear;
+    opacity: 1;
+    display: flex;
+    align-items: flex-end;
+}
+
+.box:hover {
+    width: 600px;
+    height: 850px;
+    background-color: coral;
+    background-image: url(images/news1img.jpg);
+    background-size: cover;
+    border-radius: 60px;
+    opacity: 1;
+}

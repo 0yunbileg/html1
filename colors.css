@@ -46,6 +46,10 @@ h1 {
     border-radius: 10px;
 }
 
+#articles div button {
+    display: none;
+}
+
 #news1 {
     background-image: url(images/news1img.jpg);
 }
@@ -85,4 +89,24 @@ button:hover {
 
 #news1:hover {
     background-image: linear-gradient(180deg,#fc004d,#000000a2), url(images/news1img.jpg);
+}
+
+#articles div:hover button {
+    display:block;
+}
+
+#news2:hover {
+    background-image: linear-gradient(180deg,#000000a2, #70686aa4), url(images/news2img.jpg);
+}
+
+#news3:hover {
+    background-image: linear-gradient(180deg,#3743ec,#000000a2), url(images/news3img.jpg);
+}
+
+.task3 {
+    width: 600px;
+    height: 900px;
+    border: 1px solid gray;
+    background-image: url(images/magazine1.png);
+    background-repeat: no-repeat;
 }
