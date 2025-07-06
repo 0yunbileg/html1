@@ -8,6 +8,7 @@ body {
     width: 1200px;
     height: 300px;
     margin-top: 200px;
+    color: #2D424E;
 }
 
 #people {
@@ -64,11 +65,11 @@ h1 {
     margin: 0;
 }
 
-.person:hover .description{
+.text:hover .description{
     display: block;
 }
 
-.person:hover .text {
+.text:hover{
     background-color: #F1F1F1;
     height: 60px;
     margin-bottom: 0;
@@ -96,7 +97,6 @@ h1 {
 }
 
 .task3 {
-    border: 1px solid blue;
     margin-top: 100px;
     width: 1200px;
     height: 1200px;
@@ -106,7 +106,6 @@ h1 {
 }
 
 .col {
-    border: 1px solid gray;
     display: grid;
     gap: 24px;
 }
@@ -124,28 +123,65 @@ h1 {
 }
 
 .cell {
-    border: 1px solid gray;
-    background-image: url(images/cat.jpeg);
-    background-size: cover;
     display: flex;
     align-items: end;
 }
 
 .cell p {
-    /* display: none; */
     width: 100%;
-    background-color: white;
-    text-align: center;
-    margin-bottom: -30px;
-    transition: color 0.8s linear, margin-bottom 0.3s linear;
-    color: white;
-    z-index: -1;
+    margin: 0;
+    transition: all 0.5s ease-out;
+    height: 0px;
+    opacity: 0;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .cell:hover p {
     color: #2D424E;
-    display: block;
-    margin-bottom: 0;
-    z-index: 0;
+    background-color: white;
+    height: 90px;
+    opacity: 0.75;
 }
 
+#cell1 {
+    background-image: linear-gradient(rgba(105, 104, 104, 0.271), rgba(105, 104, 104, 0.271)), url(images/plant1.jpg);
+    background-size: cover;
+}
+
+#cell2 {
+    background-image: linear-gradient(rgba(105, 104, 104, 0.271), rgba(105, 104, 104, 0.271)),  url(images/plant2.jpg);
+    background-size: cover;
+}
+
+#cell3 {
+    background-image: linear-gradient(rgba(105, 104, 104, 0.271), rgba(105, 104, 104, 0.271)),  url(images/plant3.jpg);
+    background-size: cover;
+}
+
+#cell4 {
+    background-image: linear-gradient(rgba(105, 104, 104, 0.271), rgba(105, 104, 104, 0.271)),  url(images/plant4.jpg);
+    background-size: cover;
+}
+
+#cell5 {
+    background-image: linear-gradient(rgba(105, 104, 104, 0.271), rgba(105, 104, 104, 0.271)),  url(images/plant5.jpg);
+    background-size: cover;
+}
+
+#cell6 {
+    background-image: linear-gradient(rgba(105, 104, 104, 0.271), rgba(105, 104, 104, 0.271)),  url(images/plant6.jpg);
+    background-size: cover;
+}
+
+#cell7 {
+    background-image: linear-gradient(rgba(105, 104, 104, 0.271), rgba(105, 104, 104, 0.271)),  url(images/plant7.jpg);
+    background-size: cover;
+}
+
+#cell8 {
+    background-image: linear-gradient(rgba(105, 104, 104, 0.271), rgba(105, 104, 104, 0.271)),  url(images/plant8.jpg);
+    background-size: cover;
+}
