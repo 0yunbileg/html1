@@ -86,3 +86,103 @@ button:hover {
 #news1:hover {
     background-image: linear-gradient(180deg,#fc004d,#000000a2), url(images/news1img.jpg);
 }
+
+.task3 {
+    position: relative;
+    width: 800px;
+    height: 1000px;
+    margin: 0 auto;
+    border: 1px solid gray;
+    display: flex;
+    background: linear-gradient(60deg,#9898989b,#5c5c5ce5);
+    justify-self:flex-start;
+    margin-top: 40px;
+    color: #F79F79;
+    z-index: -2;
+    padding: 40px;
+}
+
+.imgDiv {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 150px;
+    padding-bottom: 0;
+}
+
+.coverPortrait {
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    width: 90%;
+    height: 85%;
+}
+
+.magazineText {
+    width: 100%;
+    display: grid;
+    color: white;
+}
+
+.magazineText div {
+    position: absolute;
+    display: flex;
+}
+
+#masthead {
+    font-size: 240px;
+    justify-self: center;
+    z-index: -1;
+}
+
+#issue {
+    margin-left: 30px;
+    color: white;
+}
+
+#deck {
+    color: white;
+    justify-self: right;
+    margin: 10px;
+    z-index: 2;
+    top: 260px;
+    width: 160px;
+}
+
+span {
+    color: #F79F79;
+}
+
+.supportingCoverLine {
+    font-size: 28px;
+}
+
+#supportingCoverLine1 {
+    width: 330px;
+    top: 320px;
+}
+
+#supportingCoverLine2 {
+    width: 210px;
+    top: 480px;
+}
+
+#supportingCoverLine3 {
+    width: 160px;
+    top: 360px;
+    left: 700px;
+}
+
+#supportingCoverLine4 {
+    width: 160px;
+    top: 760px;
+    left: 710px;
+}
+
+#leadArticleLine {
+    flex-direction: column;
+    font-size: 36px;
+    width: 380px;
+    top: 640px;
+}
