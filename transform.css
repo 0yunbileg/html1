@@ -1,0 +1,61 @@
+body {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.task1 {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: relative;
+    transition: all 2s;
+}
+
+.task1:hover {
+    transform: translateX(50px) translateY(200px);
+}
+
+.task2 {
+    width: 80px;
+    transition: all 2s;
+}
+
+.task2:hover {
+    transform: rotate(360deg);
+}
+
+.task3 {
+    width: 100px;
+    height: 100px;
+    background-color: orange;
+    position: relative;
+    transition: all 1s;
+}
+
+.task3:hover {
+    transform: scale(1.2); 
+}
+
+.task4 {
+    transition: all 1s;
+    transform: skew(20deg);
+    font-size: 26px;
+}
+
+.task4:hover {
+    transform: skew(0deg);
+}
+
+.task5 {
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    position: relative;
+    transition: all 1s;
+}
+
+.task5:hover {
+    transform: rotate(10deg) scale(1.1) translateX(10px) skew(30deg);
+    background-color: aqua;
+}
