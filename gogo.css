@@ -149,10 +149,10 @@ main {
     height: 175px;
 }
 
-#section2 .article .imgDiv img{
+.artImg{
     height: 175px;
     width: auto;
-    
+    border-radius: 8px;
 }
 
 #ad1 {
