@@ -26,18 +26,17 @@ header {
 main {
     height: 100%;
     background-image: url(https://images-assets.nasa.gov/image/PIA04921/PIA04921~orig.jpg);
-    background-size:contain;
+    background-size: cover;
     background-repeat: no-repeat;
     color: white;
 }
 
 .quotes {
-    margin: 0 200px;
     display: grid;
     grid-template: 1fr / repeat(5, 1fr);
-    gap: 200px;
+    gap: 5%;
     position: absolute;
-    bottom: 10vh;
+    /* bottom: 10vh; */
 }
 
 .quoteDiv {
@@ -53,7 +52,7 @@ main {
     flex-direction: column;
     justify-content: end;
     align-items: end;
-    padding: 36px 0;
+    /* padding: 36px 0; */
 }
 
 .quoteDiv img {
@@ -61,5 +60,5 @@ main {
 }
 
 .quoteDiv p {
-    margin: 0 36px;
+    /* margin: 0 36px; */
 }
