@@ -145,18 +145,12 @@ main {
     grid-template: 1fr/repeat(4, 1fr);
 }
 
-#section2 div {
+.article {
     height: 175px;
 }
 
-#section2 .article .imgDiv img{
-    height: 175px;
-    width: auto;
-    
-}
-
-#ad1 {
-    height: 283px;
+#section2 img, video {
+    width: 100%;
 }
 
 #section2 .article p {
@@ -164,4 +158,35 @@ main {
     font-size: 14px;
     font-family: "Helvetica Neue", sans-serif, Arial;
     font-weight: 600;
+}
+
+.section3 {
+    width: 1100px;
+    height: 280px;
+}
+
+.section3 h2 {
+    font-family: "Helvetica Neue", sans-serif, Arial;
+    font-size: 14px;
+    margin-bottom: 20px;
+    height: 22px;
+}
+
+.stories {
+    width: 200%;
+    height: 235px;
+    display: grid;
+    grid-template: 1fr/repeat(12, 1fr);
+    gap: 15px;
+    border: 1px solid orange;
+    animation: slideLeft 3s infinite alternate;
+}
+
+@keyframes slideLeft {
+    from{transform: translateX(0);}
+    to{transform: translateX(-1100px);}
+}
+
+.story {
+    border: 1px solid palevioletred;
 }
