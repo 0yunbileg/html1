@@ -1,0 +1,69 @@
+.pageTitle {
+    color: white;
+    font-size: 20px;
+    display: flex;
+}
+
+.mainDiv {
+    display: grid;
+    gap: 30px;
+    padding: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    .pageTitle {
+        background-color: green;
+        height: 60px;
+    }
+
+    .mainDiv {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .columnName {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 601px) {
+    .pageTitle {
+        background-color: red;
+        height: 100px;
+        justify-content: center;
+    }
+
+    .mainDiv {
+        grid-template: repeat(2, 1fr)/repeat(2, 1fr);
+    }
+
+    .cityName {
+        display: none;
+    }
+
+    .columnName {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 993px) {
+    .pageTitle {
+        background-color: #2096F3;
+        height: 80px;
+        align-items: center;
+        justify-content: start;
+        padding-left: 20px;
+    }
+
+    .mainDiv {
+        grid-template: 1fr/repeat(3, 1fr);
+    }
+
+    .cityName {
+        display: block;
+    }
+
+    .columnName {
+        display: none;
+    }
+}

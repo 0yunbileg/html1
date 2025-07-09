@@ -1,0 +1,48 @@
+body {
+    height: 200vh;
+    margin: 0;
+}
+
+header {
+    background-color: black;
+    border-bottom: 1px solid white;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    font-size: 24px;
+}
+
+.menu {
+    display: flex;
+    gap: 36px;
+}
+
+.logo img {
+    width: 70px;
+}
+
+main {
+    height: 100%;
+    background-image: url(https://images-assets.nasa.gov/image/PIA04921/PIA04921~orig.jpg);
+    background-size:contain;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+.quotes {
+    margin: 80px;
+    display: flex;
+    justify-content: space-around;
+    gap: 80px;
+    position: absolute;
+    bottom: 10vh;
+}
+
+.quoteDiv {
+    aspect-ratio: 1 / 1; 
+    border: 1px solid white;
+    background-color: white;
+    color: black;
+}

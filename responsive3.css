@@ -1,0 +1,41 @@
+.articleLayout {
+    height: 50vh;
+    display: grid;
+    display: grid;
+}
+
+.sideBar {
+    background-color: azure;
+    padding: 20px;
+}
+
+.mainArticle {
+    background-color: cadetblue;
+    padding: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    .sideBar {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .articleLayout {
+        grid-template: 3fr 1fr / 1fr;
+    }
+
+    .sideBar {
+        order: 2;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .articleLayout {
+        grid-template: 1fr / 1fr 3fr;
+    }
+
+    .sideBar {
+        order: 0s;
+    }
+}

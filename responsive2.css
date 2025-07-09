@@ -1,0 +1,30 @@
+.gallery {
+    margin: 50px;
+    display: grid;
+    gap: 30px;
+}
+
+.galleryImg {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    border: 10px solid rgba(96, 215, 94, 0.603);
+}
+
+@media only screen and (max-width: 600px) {
+    .gallery {
+        grid-template: repeat(6, 1fr) / 1fr;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .gallery {
+        grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .gallery {
+        grid-template: repeat(2, 1fr) / repeat(3, 1fr);
+    }
+}
