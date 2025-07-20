@@ -79,6 +79,10 @@ main {
     font-size: 20px;
 }
 
+.era a {
+    text-decoration: none;
+}
+
 .era:hover {
     color: #C4D9FF;
     background-color: #c5baff;
@@ -108,7 +112,9 @@ main {
 }
 
 .quoteDiv img {
-    width: 100%;
+    width: 90%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .quotes {
@@ -118,15 +124,41 @@ main {
 }
 
 .quoteDiv {
-    border: 1px solid black;
     width: 18%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.quoteDiv p {
+    margin: 5px 15px;
+}
+
+#quoteDiv1 {
+    background-color: #F7CFD8;
+}
+
+#quoteDiv2 {
+    background-color: #F4F8D3;
+}
+
+#quoteDiv3 {
+    background-color: #A6D6D6;
+}
+
+#quoteDiv4 {
+    background-color: #8E7DBE;
+}
+
+#quoteDiv5 {
+    background-color: #FDB7EA;
 }
 
 .timeline {
     color: #7e67f1c1;
     width: 1350px;
-    border: 1px solid black;
-    /* z-index: -1; */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 

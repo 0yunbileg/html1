@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" media="screen" href="styles.css">
+    <link rel="stylesheet" media="screen and (min-width: 480px) and (max-width: 700px)" href="mobile.css">
+    <link rel="stylesheet" media="screen and (min-width: 701px) and (max-width: 900px)" href="tablet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <div class="logo"><img src="images/bulb-brain.png"></div>
+
+        <nav class="menu">
+            <a>Reading Notes</a>
+            <a>Mind Maps</a>
+            <a>Open Questions</a>
+            <a>Diaries</a>
+            <a>Random</a>
+        </nav>
+
+        <div class="menuDiv"><i class="fa-solid fa-bars"></i></div>
+    </header>
+
+    <main>
+        <div class="sideBar">
+            <h4>TimeLine</h4>
+            <ul class="timeNav">
+                <li class="era">Antiquity</li>
+                <li class="era">Middle Ages</li>
+                <li class="era">16th Century</li>
+                <li class="era">17th Century</li>
+                <li class="era">18th Century</li>
+                <li class="era">19th Century</li>
+                <li class="era">20th Century</li>
+                <li class="era">21th Century</li>
+                <li class="era">Future</li>
+            </ul>
+        </div>
+
+        <div class="mainContent">
+            <div class="mainTitle">
+                <p class="titlePart1">A BRIEF HISTORY of</p>
+                <p class="titlePart2">CURIOSITY</p>
+            </div>
+
+            <div class="quotes">
+                <div class="quoteDiv" id="quoteDiv1">
+                    <img src="images/einstein1.png">
+                    <p class="quote">"Science without religion is lame, religion without science is blind."</p>
+                    <p class="quoteName">- Albert Einstein</p>
+                </div>
+
+                <div class="quoteDiv" id="quoteDiv2">
+                    <img src="images/feynman1.png">
+                    <p class="quote">"Nature's imagination is so much greater than man's, she's never going to let us
+                        relax."</p>
+                    <p class="quoteName">- Richard Feynman</p>
+                </div>
+
+                <div class="quoteDiv" id="quoteDiv3">
+                    <img src="images/newton1.png">
+                    <p class="quote">"If I have seen further, it is by standing on the shoulders of giants."</p>
+                    <p class="quoteName">- Isaac Newton</p>
+                </div>
+
+                <div class="quoteDiv" id="quoteDiv4">
+                    <img src="images/hawking.jpg">
+                    <p class="quote">"Look up at the stars and not down at your feet."</p>
+                    <p class="quoteName">- Stephen Hawking</p>
+                </div>
+
+                <div class="quoteDiv" id="quoteDiv5">
+                    <img src="images/sagan.jpg">
+                    <p class="quote">"Somewhere, something incredible is waiting to be known."</p>
+                    <p class="quoteName">- Carl Sagan</p>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="eraWrapper" id="antiquityWrapper">
+                    <div class="inventionWrapper left one" id="invention1">
+                        <div class="textWrapper text1">
+                            <h3 class="scientist">Thales of Miletus</h3>
+
+                            <p class="shortDesc">Introduced natural philosophy as an explanation of the universe without mythology.</p>
+
+                            <ul class="discoveries">
+                                <li class="discovery"> introduced natural explanations for phenomena
+                                    <ul class="results">
+                                        <li class="result"> considered the founder of Western science and philosophy
+                                        </li>
+                                        <li class="result"> replaced myth with reason and observation</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">624-546 BCE</h2>
+                        </div>
+
+                        <div class="imgWrapper">
+                            <img src="images/inv1.png">
+                        </div>
+                    </div>
+
+                    <div class="inventionWrapper right two" id="invention2">
+                        <div class="imgWrapper">
+                            <img src="images/inv2.png">
+                        </div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">610–546 BCE</h2>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="textWrapper">
+                            <h3 class="scientist">Anaximander</h3>
+
+                            <p class="shortDesc">Proposed that Earth floats freely in space.</p>
+
+                            <ul class="discoveries">
+                                <li class="discovery">proposed Earth floats freely in space</li>
+                                <li class="discovery">introduced "apeiron" (infinite) as the origin of all things
+                                    <ul class="results">
+                                        <li class="result">early ideas of cosmology and infinity</li>
+                                        <li class="result">influenced scientific speculation beyond Earth</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="inventionWrapper left three" id="invention3">
+                        <div class="textWrapper">
+                            <h3 class="scientist">Democritus</h3>
+
+                            <p class="shortDesc">Suggested that all matter is made of indivisible atoms.</p>
+
+                            <ul class="discoveries">
+                                <li class="discovery">developed atomic theory: matter consists of indivisible atoms
+                                    <ul class="results">
+                                        <li class="result">anticipated modern particle physics</li>
+                                        <li class="result">challenged continuous-matter views dominant at the time</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">460–370 BCE</h2>
+                        </div>
+
+                        <div class="imgWrapper">
+                            <img src="images/inv3.png">
+                        </div>
+                    </div>
+
+                    <div class="inventionWrapper right one" id="invention4">
+                        <div class="imgWrapper">
+                            <img src="images/inv4.png">
+                        </div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">384–322 BCE</h2>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="textWrapper">
+                            <h3 class="scientist">Aristotle</h3>
+
+                            <p class="shortDesc">Developed early physical theories based on logic and observation.</p>
+
+                            <ul class="discoveries">
+                                <li class="discovery">defined motion, elements, and the geocentric universe</li>
+                                <li class="discovery">introduced teleology (purpose-driven nature)
+                                    <ul class="results">
+                                        <li class="result">dominated physics and astronomy for 2,000 years</li>
+                                        <li class="result">limited progress due to inaccurate models but structured
+                                            scientific thought
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="inventionWrapper left two" id="invention5">
+                        <div class="textWrapper">
+                            <h3 class="scientist">Euclid</h3>
+
+                            <p class="shortDesc">Created Euclidean geometry, foundational to space and optics.</p>
+
+                            <ul class="discoveries">
+                                <li class="discovery">formulated axioms and proofs in Elements
+                                    <ul class="results">
+                                        <li class="result">foundation of geometry, optics, and space modeling</li>
+                                        <li class="result">used in general relativity and spacetime mathematics</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">c. 300 BCE</h2>
+                        </div>
+
+                        <div class="imgWrapper">
+                            <img src="images/inv5.png">
+                        </div>
+                    </div>
+
+                    <div class="inventionWrapper right three" id="invention6">
+                        <div class="imgWrapper">
+                            <img src="images/inv6.png">
+                        </div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">c. 250 BCE</h2>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="textWrapper">
+                            <h3 class="scientist">Archimedes</h3>
+
+                            <p class="shortDesc">Discovered buoyancy (Archimedes’ principle) and formulated basic mechanics.</p>
+
+                            <ul class="discoveries">
+                                <li class="discovery">discovered laws of buoyancy, levers, pulleys</li>
+                                <li class="discovery">calculated areas, volumes, and pi
+                                    <ul class="results">
+                                        <li class="result">advanced mechanics, hydrostatics, and early calculus concepts
+                                        </li>
+                                        <li class="result">laid groundwork for classical mechanics</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="inventionWrapper left one" id="invention7">
+                        <div class="textWrapper">
+                            <h3 class="scientist">Aristarchus of Samos</h3>
+
+                            <p class="shortDesc">First known proposer of a heliocentric model.</p>
+
+                            <ul class="discoveries">
+                                <li class="discovery">proposed Sun-centered (heliocentric) model
+                                    <ul class="results">
+                                        <li class="result">first known heliocentric theory</li>
+                                        <li class="result">predated Copernicus by 1,800 years</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">310–230 BCE</h2>
+                        </div>
+
+                        <div class="imgWrapper">
+                            <img src="images/inv7.png">
+                        </div>
+                    </div>
+
+                    <div class="inventionWrapper right two" id="invention8">
+                        <div class="imgWrapper">
+                            <img src="images/inv8.png">
+                        </div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">276–194 BCE</h2>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="textWrapper">
+                            <h3 class="scientist">Eratosthenes</h3>
+
+                            <p class="shortDesc">Accurately measured Earth’s circumference.</p>
+
+                            <ul class="discoveries">
+                                <li class="discovery">calculated Earth’s circumference using shadow angles
+                                    <ul class="results">
+                                        <li class="result">early use of geometry and observation in geophysics</li>
+                                        <li class="result">proved Earth was large and round</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="inventionWrapper left three" id="invention9">
+                        <div class="textWrapper">
+                            <h3 class="scientist">Hipparchus</h3>
+
+                            <p class="shortDesc">Compiled a star catalog and discovered precession of the equinoxes.</p>
+
+                            <ul class="discoveries">
+                                <li class="discovery">created first accurate star catalog</li>
+                                <li class="discovery">discovered precession of the equinoxes
+                                    <ul class="results">
+                                        <li class="result">foundational work in astronomy and celestial mechanics</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">129 BCE</h2>
+                        </div>
+
+                        <div class="imgWrapper">
+                            <img src="images/inv9.png">
+                        </div>
+                    </div>
+
+                    <div class="inventionWrapper right one" id="invention10">
+                        <div class="imgWrapper">
+                            <img src="images/inv10.png">
+                        </div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">c. 150 CE</h2>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="textWrapper">
+                            <h3 class="scientist">Ptolemy</h3>
+
+                            <p class="shortDesc">Codified the geocentric model, dominating astronomy for centuries.</p>
+
+                            <ul class="discoveries">
+                                <li class="discovery">systematized geocentric model using epicycles</li>
+                                <li class="discovery">published Almagest, combining centuries of astronomy
+                                    <ul class="results">
+                                        <li class="result">became dominant model until the 16th century</li>
+                                        <li class="result">influenced Islamic and European science</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="eraWrapper" id="middleAgesWrapper">
+                    <div class="inventionWrapper left two" id="invention11">
+                        <div class="textWrapper text1">
+                            <h3 class="scientist">John Philoponus</h3>
+
+                            <p class="shortDesc">Proposed the theory of impetus, a precursor to inertia.</p>
+
+                            <ul class="discoveries">
+                                <li class="discovery">introduced theory of impetus (objects carry internal force after being pushed)
+                                    <ul class="results">
+                                        <li class="result">challenged Aristotle’s view on motion</li>
+                                        <li class="result">precursor to inertia and Newtonian mechanics</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">500 CE</h2>
+                        </div>
+
+                        <div class="imgWrapper">
+                            <img src="images/inv11.png">
+                        </div>
+                    </div>
+
+                    <div class="inventionWrapper right three" id="invention12">
+                        <div class="imgWrapper">
+                            <img src="images/inv12.png">
+                        </div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">1010</h2>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="textWrapper">
+                            <h3 class="scientist">Ibn al-Haytham</h3>
+
+                            <p class="shortDesc">Developed a scientific theory of vision and optics.</p>
+
+                            <ul class="discoveries">
+                                <li class="discovery">developed experimental method</li>
+                                <li class="discovery">proposed finite speed of light
+                                    <ul class="results">
+                                        <li class="result">founded modern optics</li>
+                                        <li class="result">anticipated scientific method principles</li>
+                                    </ul>
+                                </li>
+                                <li class="discovery">explained vision via light entering the eye(not emitted from it)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="inventionWrapper left one" id="invention13">
+                        <div class="textWrapper">
+                            <h3 class="scientist">Al-Biruni</h3>
+
+                            <p class="shortDesc">Correctly noted that light travels faster than sound.</p>
+
+                            <ul class="discoveries">
+                                <li class="discovery">correctly stated light is much faster than sound</li>
+                                <li class="discovery">applied mathematics to astronomy and physics
+                                    <ul class="results">
+                                        <li class="result">advanced experimental science and measurement accuracy</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">c. 1050</h2>
+                        </div>
+
+                        <div class="imgWrapper">
+                            <img src="images/inv13.png">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="eraWrapper" id="16thCentury">
+                    <div class="inventionWrapper right two" id="invention14">
+                        <div class="imgWrapper">
+                            <img src="images/inv4.png">
+                        </div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">1514</h2>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="textWrapper">
+                            <h3 class="scientist">Copernicus</h3>
+
+                            <p class="shortDesc">Reintroduced heliocentrism with mathematical support.</p>
+
+                            <!-- <ul class="discoveries">
+                                <li class="discovery">defined motion, elements, and the geocentric universe</li>
+                                <li class="discovery">introduced teleology (purpose-driven nature)
+                                    <ul class="results">
+                                        <li class="result">dominated physics and astronomy for 2,000 years</li>
+                                        <li class="result">limited progress due to inaccurate models but structured
+                                            scientific thought
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul> -->
+                        </div>
+                    </div>
+
+                    <div class="inventionWrapper left three" id="invention15">
+                        <div class="textWrapper">
+                            <h3 class="scientist">Simon Stevin</h3>
+
+                            <p class="shortDesc"></p>
+
+                            <ul class="discoveries">
+                                <li class="discovery">showed equal fall rates regardless of weight
+                                    <ul class="results">
+                                        <li class="result">paved way for Galileo’s work</li>
+                                        <li class="result">helped debunk Aristotelian physics</li>
+                                    </ul>
+                                </li>
+                                <li class="discovery">performed Delft tower experiment on falling bodies</li>
+                            </ul>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">1586</h2>
+                        </div>
+
+                        <div class="imgWrapper">
+                            <img src="images/inv5.png">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="eraWrapper" id="17thCentury">
+                    <div class="inventionWrapper right one" id="invention16">
+                        <div class="imgWrapper">
+                            <img src="images/inv6.png">
+                        </div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">1610-1632</h2>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="textWrapper">
+                            <h3 class="scientist">Galileo Galilei</h3>
+
+                            <p class="shortDesc"></p>
+
+                            <ul class="discoveries">
+                                <li class="discovery">discovered moons of Jupiter, supported heliocentrism</li>
+                                <li class="discovery">used telescope scientifically
+                                    <ul class="results">
+                                        <li class="result">revolutionized observational astronomy</li>
+                                        <li class="result">set foundation for modern physics</li>
+                                    </ul>
+                                </li>
+                                <li class="discovery">formulated inertia and principle of relativity</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="inventionWrapper left two" id="invention17">
+                        <div class="textWrapper">
+                            <h3 class="scientist">Johannes Kepler</h3>
+
+                            <p class="shortDesc"></p>
+
+                            <ul class="discoveries">
+                                <li class="discovery">formulated three laws of planetary motion
+                                    <ul class="results">
+                                        <li class="result">confirmed heliocentric model mathematically</li>
+                                        <li class="result">linked geometry to real-world motion</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">1609–1619</h2>
+                        </div>
+
+                        <div class="imgWrapper">
+                            <img src="images/inv7.png">
+                        </div>
+                    </div>
+
+                    <div class="inventionWrapper right three" id="invention18">
+                        <div class="imgWrapper">
+                            <img src="images/inv8.png">
+                        </div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">1621</h2>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="textWrapper">
+                            <h3 class="scientist">Willebrord Snellius </h3>
+
+                            <p class="shortDesc"></p>
+
+                            <ul class="discoveries">
+                                <li class="discovery">discovered law of refraction (Snell's Law)
+                                    <ul class="results">
+                                        <li class="result">essential to geometric optics</li>
+                                        <li class="result">explained light bending across media</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="inventionWrapper left one" id="invention19">
+                        <div class="textWrapper">
+                            <h3 class="scientist">Blaise Pascal</h3>
+
+                            <p class="shortDesc"></p>
+
+                            <ul class="discoveries">
+                                <li class="discovery">formulated Pascal’s Law (fluid pressure transmission)
+                                    <ul class="results">
+                                        <li class="result">foundation of hydraulics</li>
+                                        <li class="result">influenced fluid mechanics</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">1660</h2>
+                        </div>
+
+                        <div class="imgWrapper">
+                            <img src="images/inv9.png">
+                        </div>
+                    </div>
+
+                    <div class="inventionWrapper right two" id="invention20">
+                        <div class="imgWrapper">
+                            <img src="images/inv10.png">
+                        </div>
+
+                        <div class="connectingLine">
+                            <h2 class="year">1660</h2>
+                        </div>
+
+                        <div class="column"></div>
+
+                        <div class="textWrapper">
+                            <h3 class="scientist">Robert Hooke</h3>
+
+                            <p class="shortDesc"></p>
+
+                            <ul class="discoveries">
+                                <li class="discovery">discovered Hooke’s Law (force ∝ extension in springs)
+                                    <ul class="results">
+                                        <li class="result">fundamental in elasticity and mechanical systems</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
