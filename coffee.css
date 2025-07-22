@@ -9,6 +9,8 @@ body {
     width: 100%;
     height: 100%;
     font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -18,6 +20,10 @@ header {
     justify-content: space-between;
     padding: 0 80px;
     color: rgba(52, 51, 51, 0.942);
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 2;
 }
 
 .leftMenu {
@@ -46,6 +52,15 @@ header {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.menuItem, .navItem {
+    transition: all 0.5s;
+} 
+
+.menuItem:hover, .navItem:hover {
+    color: #C7A17A;
+    cursor: pointer;
 }
 
 .heroSection {
@@ -101,6 +116,11 @@ header {
     font-size: 16px;
     border: none;
     margin-top: 60px;
+    transition: background-color 0.4s;
+}
+
+.callToAction:hover {
+    background-color: black;
 }
 
 .heroImg {
@@ -171,6 +191,12 @@ header {
 
 .popularName {
     font-size: 16px;
+    transition: color 0.5s;
+}
+
+.popularName:hover {
+    color: #C7A17A;
+    cursor: pointer;
 }
 
 .popularDescription {
@@ -316,6 +342,7 @@ header {
 
 .reservationArea {
     text-align: center;
+    background-color: #F6F6F6;
 }
 
 .reservationBody {
@@ -323,6 +350,7 @@ header {
     display: flex;
     justify-content: space-between;
     margin: 40px auto;
+    margin-bottom: 120px;
 }
 
 .locationImg {
@@ -335,12 +363,63 @@ header {
 
 .bookingDiv {
     width: 460px;
+    border: 1px solid gray;
+    background-color: white;
+    padding: 40px;
 }
 
+.reservation {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
 
+.tag {
+    margin-bottom: 30px;
+    color: #C7A17A;
+}
 
+fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
 
+legend {
+    text-align: left;
+    font-size: 26px;
+    font-weight: bold;
+}
 
+input {
+    height: 40px;
+    width: 100%;
+    border: 0.5px solid rgba(128, 128, 128, 0.734);
+    padding-left: 14px;
+}
+
+textarea {
+    margin: 12px 0;
+    height: 110px;
+    width: 100%;
+    padding: 14px 0 0 14px;
+}
+
+.bookingBtn {
+    height: 46px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.bookingBtn:hover {
+    background-color: #C7A17A;
+}
 
 footer {
     background-image: url("https://htmldemo.net/kofi/kofi/assets/images/footer/footer-bg.jpg");
@@ -356,7 +435,7 @@ footer a {
 
 .footerTopDiv {
     display: flex;
-    padding: 30px 400px;
+    padding: 30px 10%;
     justify-content: space-between;
     line-height: 2.5;
     font-weight: 100;
@@ -403,7 +482,7 @@ footer a {
     display: flex;
     border-top: .5px solid gray;
     font-size: 14px;
-    padding: 30px 400px;
+    padding: 30px 10%;
     font-weight: bolder;
     justify-content: space-between;
     align-items: center;
