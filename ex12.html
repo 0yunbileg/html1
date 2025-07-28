@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let heights = [];
+        heights.push(Number(prompt("height of student1: ")));
+        heights.push(Number(prompt("height of student2: ")));
+        heights.push(Number(prompt("height of student3: ")));
+        heights.push(Number(prompt("height of student4: ")));
+        heights.push(Number(prompt("height of student5: ")));
+        heights.push(Number(prompt("height of student6: ")));
+
+        function decideRow(height, avgHeight) {
+            if(height == avgHeight) {return 2}
+            else if(height > avgHeight) {return 3}
+            return 1;
+        }
+
+        function countStudentsByHeight(heights) {
+            let sum = 0;
+            heights.forEach(height => {sum += height;});
+            let avgHeight = sum / 6;
+            
+            let row1 = 0;
+            let row2 = 0;
+            let row3 = 0;
+
+            heights.forEach(height => {
+                if(decideRow(height, avgHeight) == 1) {row1 ++}
+                else if(decideRow(height, avgHeight) == 2) {row2 ++}
+                else {row3 ++}
+            });
+
+            console.log(row1);
+            console.log(row2);
+            console.log(row3);
+        }
+
+        countStudentsByHeight(heights);
+    </script>
+</body>
+</html>

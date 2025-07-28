@@ -3,31 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task1</title>
+    <title>Document</title>
 </head>
 <body>
     <script>
-        // Example1
-        let a = 100;
-        var b = 100;
-        const c = 100;
-        
-        console.log(a);
-        console.log(b);
-        console.log(c);
+        let age = 25; //number
+        let name = "Alice" //string
+        let isStudent = true; //boolean
+        let address; //undefined
+        let salary = null; //null
+        let person = {firstName: "John", lastName: "Doe"}; //object
+        let numbers = [1, 2, 3, 4, 5]; //array
+        function greet(name) {
+            return `Hello, ${name}`;
+        } //function
 
-        // Example2
-        let x = 5;
-        x = 10;
-        console.log(x)
-
-        // Example3
-        let n1 = 3;
-        let n2 = "3";
-        
-        console.log(n1 == n2);
-        console.log(n1 === n2);
-        console.log(n1 !== n2);
+        console.log(greet(name));
     </script>
 </body>
 </html>

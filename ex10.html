@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task10</title>
+    <title>Document</title>
 </head>
 <body>
     <script>
-        const x = Number(prompt());
+        let a = Number(prompt());
+        let b = Number(prompt());
+        let c = Number(prompt());
 
-        let n2 = x % 10;
-        let n1 = Math.floor(x / 10);
+        function highestNumber(a, b, c) {
+            let highestNumber = c;
+            if(a > b && a > c) {highestNumber = a;}
+            else if(b > c){highestNumber = b;}
 
-        console.log(n1 * n2);
+            return highestNumber;
+        }
+
+        console.log(highestNumber(a, b, c));
     </script>
 </body>
 </html>

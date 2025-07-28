@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task9</title>
+    <title>Document</title>
 </head>
-
 <body>
     <script>
-        const x = Number(prompt());
+        let a = Number(prompt());
 
-        let n1 = x % 100;
+        function isLeapYear(a) {
+            let isLeapYear = true;
+            if(a % 4 != 0) {isLeapYear = false}
+            else if(a % 100 == 0 && a % 400 != 0){
+                isLeapYear = false;
+            };
+            return isLeapYear;
+        }
 
-        console.log(Math.floor(n1 / 10));
+        console.log(isLeapYear(a));
     </script>
 </body>
-
 </html>

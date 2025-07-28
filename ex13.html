@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let numbers = [];
+        numbers.push(Number(prompt("number1: ")));
+        numbers.push(Number(prompt("number2: ")));
+        numbers.push(Number(prompt("number3: ")));
+        numbers.push(Number(prompt("number4: ")));
+
+        function numberFunction1(numbers) {
+            let sum = 0;
+            let product = 1;
+            let count = 0;
+
+            numbers.forEach(number => {
+                if(number == 0) {count ++}
+                else if(number > 0) {sum += number}
+                else {product *= number}
+            });
+
+            console.log("sum of positive numbers: " + sum);
+            console.log("number of 0s: " + count);
+            console.log("product of negative numbers: " + product);
+        }
+
+        numberFunction1(numbers);
+    </script>
+</body>
+
+</html>

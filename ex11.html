@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task11</title>
+    <title>Document</title>
 </head>
-
 <body>
     <script>
-        const x = Number(prompt());
+        let name = prompt("name: ");
+        let age = prompt("age: ");
+        let gender = prompt("gender: ");
+        let role = prompt("role: ");
+        let members = [];
 
-        let n3 = x % 10;
-        let n2 = Math.floor(x / 10);                                                                       
-        let n1 = Math.floor(x / 100);
+        function addMember(name, age, gender, role) {
+            let member = {
+                name: name,
+                age: age,
+                gender: gender,
+                role: role
+            };
+            members.push(member);
+        };
 
-        console.log(n1 + n2 + n3);
+        addMember(name, age, gender, role);
+
+        console.log(members.pop());
     </script>
 </body>
-
 </html>
