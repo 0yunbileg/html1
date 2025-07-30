@@ -204,17 +204,15 @@
         }
 
         function findLowestScoreStudent(students) {
-            let g1 = students[1].grade;
-            let g2 = students[2].grade;
-            let g3 = students[3].grade;
-            let g4 = students[4].grade;
-            let g5 = students[5].grade;
+            let lowest;
 
-            if(g1 < g2 && g1 < g3 && g1 < g4 && g1 < g5) {return students[1];}
-            else if(g2 < g3 && g2 < g4 && g2 < g5) {return students[2];}
-            else if(g3 < g4 && g3 < g5) {return students[3];}
-            else if(g4 < g5) {return students[4];}
-            return students[5];
+            if(students[1].grade < students[2].grade) {lowest = students[1];}
+            else {lowest = students[2]};
+            if(lowest.grade > students[3].grade) {lowest = students[3]};
+            if(lowest.grade > students[4].grade) {lowest = students[4]};
+            if(lowest.grade > students[5].grade) {lowest = students[5]};
+
+            return lowest;
         }
 
         console.log("student average is:", calculateAverage());

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //Ex 1
+        const booksArray = ["book1", "book2", "book3", "book4", "book5"];
+        console.log("ex1: ", booksArray[2]);
+
+        //Ex2 
+        const animals = ["Lion", "Tiger", "Elephant", "Giraffe"];
+        animals[1] = "Panda";
+        console.log("ex2: ", animals);
+
+        //Ex3
+        const books = ["1984", "Brave New World", "Fahrenheit 451"];
+        books.push("math book");
+        books.push("English book");
+        console.log("ex3: ", books);
+
+        //Ex4
+        const numbers = [10, 20, 30, 40, 50];
+        console.log("ex4: index of 30 is ", numbers.indexOf(30));
+
+        //Ex5
+        const fruits1 = ["fruit1", "fruit2", "fruit3"];
+        const fruits2 = ["fruit4", "fruit5", "fruit6"];
+        const allFruits = fruits1.concat(fruits2);
+        console.log("ex5: ", allFruits);
+
+        //Ex6
+        const colors = ["Red", "Green", "Blue", "Yellow", "Purple"];
+        console.log("ex6, Red: ", colors.includes("Red"));
+        console.log("ex6, Green: ", colors.includes("Green"));
+        console.log("ex6, Black: ", colors.includes("Black"));
+        console.log("ex6, Purple: ", colors.includes("Purple"));
+        console.log("ex6, Blue: ", colors.includes("Blue"));
+        console.log("ex6, Yellow: ", colors.includes("Yellow"));
+
+        //Ex7
+        const array1 = ["a", "b", "c"];
+        const array2 = ["a", "b", "c"];
+
+        function haveEqualLength(array1, array2) {
+            return array1.length == array2.length;
+        }
+
+        console.log("ex7, Arrays have equal length: ", haveEqualLength(array1, array2));
+
+        //Ex8
+        const words = ["JavaScript", "is", "a", "versatile", "language"];
+        //console.log("ex8: ", words.toString());
+        console.log("ex8: ", words.join(" "));
+
+        //Ex9
+        const students = [
+            { name: "Anu", grade: 85 },
+            { name: "Bold", grade: 92 },
+            { name: "Tuvshin", grade: 78 },
+            { name: "Naraa", grade: 88 },
+            { name: "Solongo", grade: 95 }
+        ];
+
+        //9.1
+        let topStudents = new Array();
+        students.forEach(student => { if (student.grade > 90) { topStudents.push(student) } });
+        console.log("d1, top students: ", topStudents);
+
+        //9.2
+        console.log("d1, sorted by grade: ", students.sort((x, y) => y.grade - x.grade));
+
+        //9.3
+
+        let highestGrade = 0;
+
+        students.forEach(student => { if (student.grade > highestGrade) { highestGrade = student.grade } });
+        let highestStudent = students.find(student => student.grade == highestGrade);
+        console.log("d1, highest grade student: ", highestStudent);
+
+
+        //Ex10
+        const products = [
+            { id: 1, name: "Laptop", price: 2500 },
+            { id: 2, name: "Mouse", price: 25 },
+            { id: 3, name: "Monitor", price: 400 },
+            { id: 4, name: "Keyboard", price: 100 },
+            { id: 5, name: "Phone", price: 1200 }
+        ];
+
+        //10.1
+        const cheapProductNames = new Array();
+        products.forEach(product => { if (product.price < 500) { cheapProductNames.push(product.name) } });
+        console.log("d2, cheap product names: ", cheapProductNames);
+
+        //10.2
+        console.log("d2, sorted by price: ", products.sort((x, y) => x.price - y.price));
+
+        //10.3
+        function getHigherThan1000(value, index, array) { return value.price > 1000 };
+        let higherThan1000 = products.find(getHigherThan1000);
+        console.log("d2, first product higher than 1000: ", higherThan1000);
+
+        //Ex11
+        const students1 = [
+            { id: 1, name: "Anu", grades: [90, 88, 95] },
+            { id: 2, name: "Bold", grades: [75, 80, 85] },
+            { id: 3, name: "Anu", grades: [92, 91, 94] },
+            { id: 4, name: "Tuvshin", grades: [80, 78, 82] },
+            { id: 5, name: "Solongo", grades: [95, 94, 93] },
+            { id: 6, name: "Tuvshin", grades: [80, 90, 90] },
+        ];
+
+        //11.1
+        const sameNameArray = new Array();
+
+        function getAverageGrade(grades) {
+            let averageGrade = 0;
+            grades.forEach(grade => { averageGrade += grade; })
+            return Math.floor(averageGrade / 3);
+        }
+
+        students1.forEach(student => { student.grades = getAverageGrade(student.grades); });
+
+        students1.forEach(student => {
+            let index = students1.indexOf(student);
+            let sname = student.name;
+            const sameNameStudents = students1.filter(function (student) {
+                return student.name === sname;
+            });
+            if (sameNameStudents.length > 1) {
+                let grade1 = sameNameStudents[0].grades;
+                let grade2 = sameNameStudents[1].grades;
+
+                student.grades = grade1 > grade2 ? grade1 : grade2;
+                delete students1[index];
+                sameNameArray.push(sameNameStudents);
+            }
+        });
+
+        console.log("d3, after removing same names: ", students1);
+
+        //11.2
+        console.log("d3, sorted by grade: ", students1.sort((x, y) => y.grades - x.grades));
+
+        //11.3
+        console.log(students1);
+        function getLowerThan80(value, index, array) {
+            console.log("value: ", value.grades);
+            value.grades <= 90;
+        };
+        let lowerThan80 = students1.find(getLowerThan80);
+        console.log("d3, first student lower than 80: ", lowerThan80);
+
+        // function getHigherThan1000(value, index, array) { return value.price > 1000 };
+        // let higherThan1000 = products.find(getHigherThan1000);
+        // console.log("d2, first product higher than 1000: ", higherThan1000);
+    </script>
+</body>
+
+</html>
