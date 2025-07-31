@@ -192,15 +192,99 @@
         //12.4
         function getHigherThan1000(value, index, array) { return value.averagePrice > 1000 };
         let higherThan10001 = products1.find(getHigherThan1000);
-        console.log("d2, first product higher than 1000: ", higherThan10001);
+        console.log("d4, first product higher than 1000: ", higherThan10001);
 
         //12.5
-        let productNames = new Array();
-        products1.forEach(product => { productNames.push(product.name)});
+        products1.forEach(product => {
+            let name = product.name;
+            let index = products1.indexOf(product);
+            console.log(`d4, index of ${name} is ${index}.`);
+        });
 
-        productNames.forEach(productName => {
-            console.log(`d4, id of ${productName} is ${products1.indexOf()})
-        })
+        //Ex13
+        const moviesA = [
+            { id: 1, title: "Inception", genre: "Sci-Fi", rating: 9 },
+            { id: 2, title: "Titanic", genre: "Romance", rating: 8 },
+            { id: 3, title: "The Matrix", genre: "Sci-Fi", rating: 9 }
+        ];
+
+        const moviesB = [
+            { id: 4, title: "The Godfather", genre: "Crime", rating: 10 },
+            { id: 5, title: "Titanic", genre: "Romance", rating: 8 },
+            { id: 6, title: "Interstellar", genre: "Sci-Fi", rating: 9 }
+        ];
+
+        //13.1
+        const allMovies = moviesA.concat(moviesB);
+        console.log("d5, all movies: ", allMovies);
+
+        //13.2
+        moviesA.forEach(movieA => {
+            moviesB.forEach(movieB => {
+                if (movieA.title == movieB.title) {
+                    delete moviesB[moviesB.indexOf(movieB)];
+                };
+            });
+        });
+
+        const uniqueMovies = moviesA.concat(moviesB);
+        console.log("d5, unique movies: ", uniqueMovies);
+
+        //13.3
+        console.log("d5, sorted by rating: ", uniqueMovies.sort((x, y) => y.rating - x.rating));
+
+        //13.4
+        function getFirstSciFi(value, index, array) {
+            return value.genre === "Sci-Fi";
+        }
+        let firstSciFi = uniqueMovies.find(getFirstSciFi);
+        console.log("d5, first sci-fi: ", firstSciFi);
+
+        //13.5
+        let titles = new Array();
+        uniqueMovies.forEach(movie => { titles.push(movie.title); });
+        console.log("d5, movie titles: ", titles.join(", "));
+
+        //13.6
+        let genres = new Array();
+        uniqueMovies.forEach(movie => { if (!genres.includes(movie.genre)) { genres.push(movie.genre) }; });
+        console.log("d5, movie genres: ", genres);
+
+        //Ex14
+        const asia = [
+            { id: 1, country: "Japan", cities: ["Tokyo", "Kyoto"] },
+            { id: 2, country: "Mongolia", cities: ["Ulaanbaatar", "Erdenet"] }
+        ];
+
+        const europe = [
+            { id: 3, country: "France", cities: ["Paris", "Nice"] },
+            { id: 4, country: "Germany", cities: ["Berlin", "Munich"] },
+            { id: 2, country: "Mongolia", cities: ["Ulaanbaatar", "Erdenet"] } // давхардсан
+        ];
+
+        //14.1
+        const allDestinations = asia.concat(europe);
+        console.log("d6, all destinations: ", allDestinations);
+
+        //14.2
+        asia.forEach(destinationA => {
+            europe.forEach(destinationE => {
+                if(destinationA.country == destinationE.country) {
+                    delete europe[europe.indexOf(destinationE)]
+                }
+            })
+        });
+
+        const uniqueDestinations = asia.concat(europe);
+        console.log("d6, unique destinations: ", uniqueDestinations);
+
+        //14.3
+        const allCities = new Array();
+        uniqueDestinations.forEach(destination => {
+            destination.cities.forEach(city => {allCities.push(city);});
+        });
+        console.log("d6, all cities: ", allCities);
+
     </script>
 </body>
 
