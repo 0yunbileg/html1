@@ -113,12 +113,10 @@
             { id: 3, name: "Anu", grades: [92, 91, 94] },
             { id: 4, name: "Tuvshin", grades: [80, 78, 82] },
             { id: 5, name: "Solongo", grades: [95, 94, 93] },
-            { id: 6, name: "Tuvshin", grades: [80, 90, 90] },
+            { id: 6, name: "Tuvshin", grades: [80, 60, 50] },
         ];
 
         //11.1
-        const sameNameArray = new Array();
-
         function getAverageGrade(grades) {
             let averageGrade = 0;
             grades.forEach(grade => { averageGrade += grade; })
@@ -128,18 +126,15 @@
         students1.forEach(student => { student.grades = getAverageGrade(student.grades); });
 
         students1.forEach(student => {
-            let index = students1.indexOf(student);
-            let sname = student.name;
-            const sameNameStudents = students1.filter(function (student) {
-                return student.name === sname;
+            const sameNameStudents = students1.filter(function (student1) {
+                return student1.name === student.name;
             });
             if (sameNameStudents.length > 1) {
-                let grade1 = sameNameStudents[0].grades;
-                let grade2 = sameNameStudents[1].grades;
+                let index1 = students1.indexOf(sameNameStudents[0]);
+                let index2 = students1.indexOf(sameNameStudents[1]);
 
-                student.grades = grade1 > grade2 ? grade1 : grade2;
-                delete students1[index];
-                sameNameArray.push(sameNameStudents);
+                if (sameNameStudents[0].grades > sameNameStudents[1].grades) { delete students1[index2] }
+                else { delete students1[index1] };
             }
         });
 
@@ -149,17 +144,63 @@
         console.log("d3, sorted by grade: ", students1.sort((x, y) => y.grades - x.grades));
 
         //11.3
-        console.log(students1);
         function getLowerThan80(value, index, array) {
-            console.log("value: ", value.grades);
-            value.grades <= 90;
+            return value.grades <= 80;
         };
         let lowerThan80 = students1.find(getLowerThan80);
         console.log("d3, first student lower than 80: ", lowerThan80);
 
-        // function getHigherThan1000(value, index, array) { return value.price > 1000 };
-        // let higherThan1000 = products.find(getHigherThan1000);
-        // console.log("d2, first product higher than 1000: ", higherThan1000);
+        //Ex12
+        const products1 = [
+            { id: 101, name: "Laptop", prices: [2000, 2100, 1900] },
+            { id: 102, name: "Mouse", prices: [25, 27, 24] },
+            { id: 103, name: "Keyboard", prices: [100, 110, 90] },
+            { id: 104, name: "Laptop", prices: [1950, 1980, 2000] },
+            { id: 105, name: "Monitor", prices: [400, 390, 410] }
+        ];
+
+        //12.1
+        function getAveragePrice(prices) {
+            let averagePrice = 0;
+            prices.forEach(price => { averagePrice += price; })
+            return Math.floor(averagePrice / 3);
+        }
+
+        products1.forEach(product => { product.averagePrice = getAveragePrice(product.prices); });
+
+        console.log("d4, added average prices: ", products1);
+
+        //12.2
+        products1.forEach(product => {
+            const sameNameProducts = products1.filter(function (product1) {
+                return product1.name === product.name;
+            });
+            if (sameNameProducts.length > 1) {
+                let index1 = products1.indexOf(sameNameProducts[0]);
+                let index2 = students1.indexOf(sameNameProducts[1]);
+
+                if (sameNameProducts[0].averagePrice < sameNameProducts[1].averagePrice) { delete products1[index2] }
+                else { delete products1[index1] };
+            }
+        });
+
+        console.log("d4, removed same name products: ", products1);
+
+        //12.3
+        console.log("d4, sorted by average price: ", products1.sort((x, y) => x.averagePrice - y.averagePrice));
+
+        //12.4
+        function getHigherThan1000(value, index, array) { return value.averagePrice > 1000 };
+        let higherThan10001 = products1.find(getHigherThan1000);
+        console.log("d2, first product higher than 1000: ", higherThan10001);
+
+        //12.5
+        let productNames = new Array();
+        products1.forEach(product => { productNames.push(product.name)});
+
+        productNames.forEach(productName => {
+            console.log(`d4, id of ${productName} is ${products1.indexOf()})
+        })
     </script>
 </body>
 
