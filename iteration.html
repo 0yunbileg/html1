@@ -122,7 +122,7 @@
         const mathStudentsNames = students
             .filter(student => student.selectedSubjects.includes(subject.name))
             .map(mathStudent => mathStudent.name);
-            
+
         console.log("ex2: ", mathStudentsNames);
 
         //Ex3.3
@@ -136,8 +136,45 @@
 
         const usersOrders = orders1.filter(order => order.userId === user.id);
         const userItems = usersOrders.map(order => order.items.flat().join(", "));
-        
+
         console.log(`ex3: ${user.name} has ordered: `, userItems.toString());
+
+        //Ex4
+        const users2 = [
+            { id: 1, name: 'Zorigoo', vip: true },
+            { id: 2, name: 'Ariuka', vip: false },
+            { id: 3, name: 'Ugudei', vip: true },
+            { id: 4, name: 'Tuguldur', vip: false },
+        ];
+
+        const orders2 = [
+            { userId: 1, items: ['Phone', 'Laptop'], total: 120000 },
+            { userId: 2, items: ['Book'], total: 20000 },
+            { userId: 3, items: ['Fridge', 'TV'], total: 300000 },
+            { userId: 4, items: ['Mouse'], total: 15000 },
+            { userId: 1, items: ['Tablet'], total: 80000 },
+            { userId: 3, items: ['Camera'], total: 100000 },
+        ];
+
+        //4.1
+        const vipUsers = users2.filter(user => user.vip === true);
+        console.log("ex4, vip users: ", vipUsers);
+
+        //4.2
+        const highAvgUsers = users2.filter(user => {
+            const usersOrders = orders2.filter(order => order.userId === user.id);
+            const totalAmount = usersOrders.reduce((sum, order) => sum + order.total, 0);
+            const avgAmount = usersOrders.length > 0 ? totalAmount / usersOrders.length : 0;
+            return avgAmount > 100000;
+        });
+        console.log("ex4, avg more than 100000:", highAvgUsers);
+
+        //4.3
+        const cameraUsers = users2.filter(user => {
+            const usersOrders = orders2.filter(order => order.userId === user.id);
+            return usersOrders.some(order => order.items.includes('Camera'))
+        });
+        console.log("ex4, camera users: ", cameraUsers);
     </script>
 </body>
 
