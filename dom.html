@@ -68,7 +68,7 @@
             }
 
             removeItem(itemName) {
-                return this.items.filter(item => item.name === itemName);
+                return this.items =  this.items.filter(item => item.name !== itemName);
             }
 
             getInventoryValue() {
