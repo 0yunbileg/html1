@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form onsubmit="rps(event)">
+        <h2>Choose one: </h2>
+        <div id="choices">
+            <img src="rock.png" alt="Rock" onclick="rps(1)" width="100">
+            <img src="paper.png" alt="Paper" onclick="rps(2)" width="100">
+            <img src="scissors.png" alt="Scissors" onclick="rps(0)" width="100">
+        </div>
+
+        <p id="yourChoice"></p>
+        <p id="myChoice"></p>
+        <p id="result"></p>
+    </form>
+
+    <script>
+        function getName(n) {
+            if (n === 1) return "rock"
+            if (n === 2) return "paper"
+            if (n === 0) return "scissors"
+        }
+
+        function rps(n) {
+            let n1 = Math.floor(Math.random() * 3);
+
+            let result;
+            if (n === n1) { result = "It's a tie"; }
+            else {
+                if (n == 0) {
+                    if (n1 === 1) { result = "You lose!"; }
+                    else { result = "You win!"; }
+                }
+                else if (n1 == 0) {
+                    if (n === 1) { result = "You win!"; }
+                    else { result = "You lose!"; }
+                }
+                else if (n > n1) { result = "You win!"; }
+                else { result = "You lose!"; }
+            }
+
+            document.getElementById("yourChoice").innerHTML = `Your Choice: ${getName(n)}`;
+            document.getElementById("myChoice").innerHTML = `My Choice: ${getName(n1)}`;
+            document.getElementById("result").innerHTML = result;
+        }
+    </script>
+</body>
+
+</html>

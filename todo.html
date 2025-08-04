@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+</head>
+
+<body>
+    <main>
+        <div class="addDiv">
+            <form>
+                <input type="text" placeholder="To do ..." id="taskToAdd">
+                <button onclick="addTask()">add</button>
+            </form>
+        </div>
+
+        <div class="todoDiv" style="height: 30vh;">
+            <h2>To Do:</h2>
+            <ul id="todoList"></ul>
+        </div>
+
+        <div class="removeDiv">
+            <form>
+                <input type="text" placeholder="Done ..." id="taskToRemove">
+                <button onclick="removeTask()">remove</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        class Task {
+            // constructor(name, date, priority) {
+            //     this.name = name;
+            //     this.date = date;
+            //     this.priority = priority;
+            // }
+
+            constructor(name) {
+                this.name = name;
+            }
+
+            timeLeft() { }
+        }
+
+        class Todo {
+            constructor() {
+                this.tasks = new Array();
+            }
+
+            addTask(task) {
+                this.tasks.push(task);
+            }
+
+            removeTask(taskName) {
+                this.tasks = this.tasks.filter(task => task.name !== taskName);
+            }
+        }
+
+        function displayList() {
+            const list = document.getElementById('todoList');
+            list.innerHTML = "";
+
+            todo.tasks.forEach(task => {
+                const li = document.createElement("li");
+                li.textContent = task.name;
+                list.appendChild(li);
+            });
+        }
+
+        let todo = new Todo();
+
+        function addTask() {
+            event.preventDefault();
+            let taskName = document.getElementById("taskToAdd").value;
+            let task = new Task(taskName);
+            todo.addTask(task);
+            document.getElementById("taskToAdd").value = "";
+            displayList();
+        }
+
+        function removeTask() {
+            event.preventDefault();
+            let taskName = document.getElementById("taskToRemove").value;
+            todo.removeTask(taskName);
+            document.getElementById("taskToRemove").value = "";
+            displayList();
+        }
+
+    </script>
+</body>
+
+</html>
