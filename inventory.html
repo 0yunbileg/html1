@@ -12,18 +12,35 @@
     <main>
         <div class="addItem">
             <label for="name">Name</label>
-            <input type="text" name="name" placeholder="Enter name ...">
+            <input type="text" name="name" id="nameInput" placeholder="Enter name ...">
 
             <label for="price">Price</label>
-            <input type="number" name="price" placeholder="Enter price ...">
+            <input type="number" name="price" id="priceInput" placeholder="Enter price ...">
 
             <label for="quantity">Quantity</label>
-            <input type="number" name="quantity" placeholder="Enter quantity ...">
+            <input type="number" name="quantity" id="quantityInput" placeholder="Enter quantity ...">
 
-            <button type="submit" id="addItemButton">Add Item</button>
+            <button type="submit" id="addItemButton" onclick="addItem()">Add Item</button>
         </div>
-        <p id="totals"></p>
-        <p id="printInventory"></p>
+
+        <div class="output">
+            <h3>Inventory:</h3>
+            <table id="inventoryTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Price ($)</th>
+                        <th>Quantity</th>
+                        <th>Total ($)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+            <strong>Total Inventory Value: $<span id="totalValue"></span></strong>
+        </div>
     </main>
 
     <script>
@@ -64,10 +81,11 @@
                 this.items.forEach(item => printValues += Object.entries(item).toString() + "<br>");
                 return printValues;
             }
+
+            getItems() {
+                return this.items
+            }
         }
-
-        let addItemButton = document.getElementById("addItemButton");
-
 
         const item1 = new Item('Laptop', 1200, 2);
         const item2 = new Item('Mouse', 25, 10);
@@ -84,14 +102,43 @@
 
         inventory.removeItem("name5");
 
+        function updateDisplay() {
+            const tableBody = document.querySelector('#inventoryTable tbody');
+            tableBody.innerHTML = '';
 
+            inventory.getItems().forEach((item, index) => {
+                const row = document.createElement('tr');
 
-        addItemButton.addEventListener('click', () => inventory.addItem(item1));
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${item.name}</td>
+                    <td>${item.price}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.getTotalPrice()}</td>`;
 
-        console.log(addItemButton);
+                tableBody.appendChild(row);
+            });
 
-        document.getElementById("totals").innerHTML = `total: ${inventory.getInventoryValue()}`;
-        document.getElementById("printInventory").innerHTML = inventory.printInventory();
+            document.getElementById('totalValue').textContent = inventory.getInventoryValue();
+        }
+
+        function addItem() {
+            let name = document.getElementById("nameInput").value;
+            let price = document.getElementById("priceInput").value;
+            let quantity = document.getElementById("quantityInput").value;
+
+            if (!name || isNaN(price) || isNaN(quantity)) {
+                alert('Please fill in all fields correctly.');
+                return;
+            }
+
+            const item = new Item(name, price, quantity);
+            inventory.addItem(item);
+            document.getElementById("nameInput").value = "";
+            document.getElementById("priceInput").value = "";
+            document.getElementById("quantityInput").value = "";
+            updateDisplay();
+        }
     </script>
 </body>
 
