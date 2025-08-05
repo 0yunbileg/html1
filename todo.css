@@ -1,0 +1,82 @@
+.done {
+    text-decoration: line-through;
+    color: #4682A9;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+    display: flex;
+    font-size: 20px;
+}
+
+h2 {
+    margin-top: 16vh;
+    color: #4682A9;
+    margin-left: 8%;
+    font-size: 28px;
+}
+
+.addDiv {
+    background-color: #91C8E4;
+    width: 400px;
+    height: 100vh;
+}
+
+.formDiv {
+    display: flex;
+    flex-direction: column;
+    width: 84%;
+    margin: auto;
+}
+
+#taskToAdd {
+    height: 80px;
+    margin-bottom: 20px;
+    padding: 16px;
+    border: none;
+    border-radius: 20px;
+    font-size: 18px;
+
+}
+
+.addBtn {
+    height: 50px;
+    background-color: #749BC2;
+    color: whitesmoke;
+    border: none;
+    border-radius: 20px;
+    font-size: 18px;
+    transition: all .3s ease-in;
+}
+
+.addBtn:hover {
+    background-color: #4682A9;
+}
+
+.todoDiv {
+    background-color: #FFFBDE;
+    width: 100%;
+}
+
+#tasksTable {
+    margin-left: 8%;
+    color: whitesmoke;
+}
+
+#tasksTable,
+th,
+td {
+    border: 1px solid whitesmoke;
+    border-collapse: collapse;
+    background-color: #749BC2;
+    padding: 10px;
+}
+
+.cnumber {
+    width: 80px;
+}

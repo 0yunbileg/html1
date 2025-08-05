@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="todo.css">
+</head>
+
+<body>
+    <main>
+        <aside class="addDiv">
+            <h2>Add New Task: </h2>
+            <div class="formDiv">
+                <input type="text" placeholder="To do ..." id="taskToAdd">
+                <button onclick="addTask()" class="addBtn">Add Task</button>
+            </div>
+        </aside>
+
+        <div class="todoDiv">
+            <h2>To Do:</h2>
+            <table id="tasksTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Task</th>
+                        <th>Done</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        class Task {
+            constructor(name) {
+                this.name = name;
+                this.done = false;
+            }
+        }
+
+        class Todo {
+            constructor() {
+                this.tasks = new Array();
+            }
+
+            addTask(taskName) {
+                if (!taskName) {
+                    alert('Please fill in all fields correctly.');
+                    return;
+                }
+                this.tasks.push(new Task(taskName));
+            }
+
+            removeTask(taskIndex) {
+                this.tasks = this.tasks.filter((task, index) => index !== taskIndex);
+            }
+
+            getTasks() {
+                return this.tasks;
+            }
+
+            done(taskIndex) {
+                let isDone;
+                this.tasks.map((task, index) => {
+                    if (index === taskIndex) {
+                        task.done = !task.done;
+                        isDone = task.done;
+                    }
+                });
+                return isDone;
+            }
+        }
+
+        let todo = new Todo();
+
+        function updateDisplay() {
+            const tableBody = document.querySelector('#tasksTable tbody');
+            tableBody.innerHTML = '';
+            todo.getTasks().forEach((task, index) => {
+                const row = document.createElement('tr');
+
+                if (task.done === true) {
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td id="${index}" class="done">${task.name}</td>
+                        <td onclick="done(${index})">undo</td>
+                        <td onclick="removeTask(${index})">delete</td>
+                    `;
+                }
+                else {
+                    row.innerHTML = `
+                    <td >${index + 1}</td>
+                    <td id="${index}">${task.name}</td>
+                    <td onclick="done(${index})">done</td>
+                    <td onclick="removeTask(${index})">delete<td>
+                `;
+                }
+
+
+                tableBody.appendChild(row);
+            });
+        }
+
+        function addTask() {
+            let taskName = document.getElementById("taskToAdd").value;
+            todo.addTask(taskName);
+            document.getElementById("taskToAdd").value = "";
+            updateDisplay();
+        }
+
+        function done(index) {
+            todo.done(index);
+            updateDisplay();
+        }
+
+        function removeTask(index) {
+            todo.removeTask(index);
+            updateDisplay();
+        }
+
+    </script>
+</body>
+
+</html>
