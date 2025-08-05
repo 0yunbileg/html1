@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <main>
         <p id="personGreet"></p>
         <p id="studentGreet"></p>
         <p id="studentStudy"></p>
-
-        <p id="totals"></p>
-        <p id="printInventory"></p>
     </main>
     <script>
         class Person {
@@ -45,62 +44,8 @@
         document.getElementById("studentGreet").innerHTML = student.greet();
         document.getElementById("studentStudy").innerHTML = student.study();
 
-        class Item {
-            constructor(name, price, quantity) {
-                this.name = name;
-                this.price = price;
-                this.quantity = quantity;
-            }
 
-            getTotalPrice() {
-                return this.price * this.quantity;
-            }
-        }
-
-        class Inventory extends Item{
-            constructor(name, price, quantity) {
-                super(name, price, quantity);
-                this.items = new Array();
-            }
-
-            addItem(item) {
-                this.items.push(item);
-            }
-
-            removeItem(itemName) {
-                return this.items.filter(item => item.name === itemName);
-            }
-
-            getInventoryValue() {
-                let total = 0;
-                this.items.map(item => total += item.getTotalPrice());
-                return total;
-            }
-
-            printInventory() {
-                let printValues = "";
-                this.items.forEach(item => printValues += Object.entries(item).toString() + "<br>");
-                return printValues;
-            }
-        }
-
-        const item1 = new Item('Laptop', 1200, 2);
-        const item2 = new Item('Mouse', 25, 10);
-        const item3 = new Item('Keyboard', 75, 5);
-        const item4 = new Item("name4", 4, 4);
-        const item5 = new Item("name5", 5, 5);
-
-        const inventory = new Inventory();
-        inventory.addItem(item1);
-        inventory.addItem(item2);
-        inventory.addItem(item3);
-        inventory.addItem(item4);
-        inventory.addItem(item5);
-
-        inventory.removeItem("name5");
-
-        document.getElementById("totals").innerHTML = `total: ${inventory.getInventoryValue()}`;
-        document.getElementById("printInventory").innerHTML = inventory.printInventory();
     </script>
 </body>
+
 </html>
