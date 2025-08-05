@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <button>wefwwef</button>
     <script>
         //Ex 1
         const booksArray = ["book1", "book2", "book3", "book4", "book5"];
@@ -269,7 +270,7 @@
         //14.2
         asia.forEach(destinationA => {
             europe.forEach(destinationE => {
-                if(destinationA.country == destinationE.country) {
+                if (destinationA.country == destinationE.country) {
                     delete europe[europe.indexOf(destinationE)]
                 }
             })
@@ -281,7 +282,7 @@
         //14.3
         const allCities = new Array();
         uniqueDestinations.forEach(destination => {
-            destination.cities.forEach(city => {allCities.push(city);});
+            destination.cities.forEach(city => { allCities.push(city); });
         });
         console.log("d6, all cities: ", allCities);
 

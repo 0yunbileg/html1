@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <main>
         <p id="personGreet"></p>
         <p id="studentGreet"></p>
         <p id="studentStudy"></p>
-
-        <p id="totals"></p>
-        <p id="printInventory"></p>
     </main>
     <script>
         class Person {
@@ -45,13 +44,8 @@
         document.getElementById("studentGreet").innerHTML = student.greet();
         document.getElementById("studentStudy").innerHTML = student.study();
 
-        class Item {
-            constructor(name, price, quantity) {
-                this.name = name;
-                this.price = price;
-                this.quantity = quantity;
-            }
 
+<<<<<<< HEAD
             getTotalPrice() {
                 return this.price * this.quantity;
             }
@@ -101,6 +95,9 @@
 
         document.getElementById("totals").innerHTML = `total: ${inventory.getInventoryValue()}`;
         document.getElementById("printInventory").innerHTML = inventory.printInventory();
+=======
+>>>>>>> ca8c2fd6ea59176bf3966274a12c60c434a569bc
     </script>
 </body>
+
 </html>
