@@ -66,14 +66,12 @@
             }
 
             done(taskIndex) {
-                let isDone;
                 this.tasks.map((task, index) => {
                     if (index === taskIndex) {
                         task.done = !task.done;
-                        isDone = task.done;
+                        return task.done
                     }
                 });
-                return isDone;
             }
         }
 
@@ -101,8 +99,6 @@
                     <td class="cdelete" onclick="removeTask(${index})"><i class="fa-regular fa-trash-can"></i></td>
                 `;
                 }
-
-
                 tableBody.appendChild(row);
             });
         }

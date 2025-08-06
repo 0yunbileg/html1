@@ -11,6 +11,7 @@
 <body>
     <main>
         <div class="addItem">
+            <h2>Add New Item: </h2>
             <label for="name">Name</label>
             <input type="text" name="name" id="nameInput" placeholder="Enter name ...">
 
@@ -24,22 +25,22 @@
         </div>
 
         <div class="output">
-            <h3>Inventory:</h3>
+            <h2>Inventory:</h2>
             <table id="inventoryTable">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Price ($)</th>
-                        <th>Quantity</th>
-                        <th>Total ($)</th>
+                        <th class="cnumber">№</th>
+                        <th class="cname">Name</th>
+                        <th class="cprice">Price ($)</th>
+                        <th class="cquantity">Quantity</th>
+                        <th class="ctotal">Total ($)</th>
                     </tr>
                 </thead>
                 <tbody>
                 </tbody>
             </table>
 
-            <strong>Total Inventory Value: $<span id="totalValue"></span></strong>
+            <strong class="total">Total Inventory Value: <span id="totalValue"></span></strong>
         </div>
     </main>
 
@@ -102,6 +103,8 @@
 
         inventory.removeItem("name5");
 
+        updateDisplay();
+
         function updateDisplay() {
             const tableBody = document.querySelector('#inventoryTable tbody');
             tableBody.innerHTML = '';
@@ -111,7 +114,7 @@
 
                 row.innerHTML = `
                     <td>${index + 1}</td>
-                    <td>${item.name}</td>
+                    <td class="cname">${item.name}</td>
                     <td>${item.price}</td>
                     <td>${item.quantity}</td>
                     <td>${item.getTotalPrice()}</td>`;
@@ -119,7 +122,7 @@
                 tableBody.appendChild(row);
             });
 
-            document.getElementById('totalValue').textContent = inventory.getInventoryValue();
+            document.getElementById('totalValue').textContent = `$${inventory.getInventoryValue()}`;
         }
 
         function addItem() {

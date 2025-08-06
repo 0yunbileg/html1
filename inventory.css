@@ -1,5 +1,78 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #FFF7FC;
+}
+
+main {
+    display: flex;
+}
+
+h2 {
+    font-size: 30px;
+}
+
 .addItem {
     display: flex;
     flex-direction: column;
-    width: fit-content;
+    background-color: #8CCDEB;
+    width: 400px;
+    height: 100vh;
+    padding: 5%;
+}
+
+.addItem input, #addItemButton{
+    width: 80%;
+    height: 40px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 28px;
+    border: none;
+}
+
+#addItemButton {
+    width: 85%;
+    background-color: #8B93FF;
+    transition: all .3s ease-in;
+}
+
+#addItemButton:hover {
+    background-color: #5755FE;
+}
+
+.output {
+    background-color: #8B93FF;
+    width: 80%;
+    padding: 5%;
+}
+
+#inventoryTable {
+    color: whitesmoke;
+    border-collapse: collapse;
+    background-color: #8CCDEB;
+    font-size: 20px;
+}
+
+tr {
+    border: 1px solid whitesmoke;
+    height: 46px;
+}
+
+td {
+    width: 100px;
+    text-align: center;
+}
+
+.cname {
+    width: 400px;
+    text-align: left;
+}
+
+.total {
+    font-size: 22px;
+    position: relative;
+    top: 20px;
+    width: 800px;
+    display: flex;
+    justify-content: space-between;
 }
