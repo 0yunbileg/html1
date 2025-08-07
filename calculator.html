@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="calculator.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <main>
+        <div class="calculator">
+            <div class="displayDiv">
+                <label for="result"></label>
+                <input type="number" name="result" id="display" placeholder="0">
+            </div>
+
+            <div class="buttonsDiv">
+                <button class="numberBtn" onclick="numberBtnClicked(1)">1</button>
+                <button class="numberBtn" onclick="numberBtnClicked(2)">2</button>
+                <button class="numberBtn" onclick="numberBtnClicked(3)">3</button>
+                <button class="functionBtn" onclick="functionBtnClicked('add')">+</button>
+                <button class="numberBtn" onclick="numberBtnClicked(4)">4</button>
+                <button class="numberBtn" onclick="numberBtnClicked(5)">5</button>
+                <button class="numberBtn" onclick="numberBtnClicked(6)">6</button>
+                <button class="functionBtn" onclick="functionBtnClicked('subtract')">-</button>
+                <button class="numberBtn" onclick="numberBtnClicked(7)">7</button>
+                <button class="numberBtn" onclick="numberBtnClicked(8)">8</button>
+                <button class="numberBtn" onclick="numberBtnClicked(9)">9</button>
+                <button class="functionBtn" onclick="functionBtnClicked('product')">*</button>
+                <button class="numberBtn" onclick="numberBtnClicked(0)">0</button>
+                <button class="cBtn" onclick="clearAll()">C</button>
+                <button class="functionBtn" onclick="calculate()">=</button>
+                <button class="functionBtn" onclick="functionBtnClicked('divide')">/</button>
+            </div>
+        </div>
+    </main>
+    <script>
+        let n1;
+        let function1;
+        let n2;
+        let a = true;
+
+        function numberBtnClicked(n) {
+            document.getElementById("display").value = `${document.getElementById("display").value}${n}`;
+            a = true;
+        }
+
+        function functionBtnClicked(functionName) {
+            n1 = Number(document.getElementById("display").value);
+            document.getElementById("display").value = "";
+            function1 = functionName;
+
+            a = undefined;
+        }
+
+        function calculate() {
+            let result;
+            if (a === true) {
+                n2 = Number(document.getElementById("display").value);
+            }
+
+            if (a === undefined) {
+                result = n1;
+            } else {
+                switch (function1) {
+                    case "add": result = n1 + n2; break
+                    case "subtract": result = n1 - n2; break
+                    case "product": result = n1 * n2; break
+                    case "divide": result = n1 / n2; break
+                }
+                console.log("switch worked")
+                n1 = result;
+                a = false;
+            }
+
+            document.getElementById("display").value = result;
+        }
+
+        function clearAll() {
+            n1 = 0;
+            n2 = 0;
+            function1 = "";
+            document.getElementById("display").value = 0;
+        }
+    </script>
+</body>
+
+</html>
