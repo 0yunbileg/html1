@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aim lab</title>
+</head>
+<style>
+    body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: repeat(10, 50px);
+    }
+
+    .box {
+        height: 50px;
+        border: 1px solid black;
+    }
+
+    .dot {
+        background-color: red;
+    }
+</style>
+
+<body>
+    <div class="container"></div>
+    <p id="point"></p>
+</body>
+<script>
+    let point = 0;
+    const square = 100;
+    const boxes = [];
+    let clickedIndex, dotIndex;
+
+    const container = document.querySelector(".container");
+
+    function createGrid() {
+        for (let i = 0; i < square; i++) {
+            const box = document.createElement("div");
+            box.classList.add("box");
+            box.onclick = () => {
+                clickedIndex = i;
+                if (clickedIndex === dotIndex) {
+                    boxes[clickedIndex].classList.remove("dot");
+                    randomDotGenerator();
+                    point += 10;
+                }
+            };
+
+            boxes.push(box);
+            container.appendChild(box);
+        }
+    }
+
+    function randomDotGenerator() {
+        dotIndex = Math.floor(Math.random() * square);
+        boxes[dotIndex].classList.add("dot");
+    }
+
+    createGrid();
+    randomDotGenerator();
+</script>
+
+</html>

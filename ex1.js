@@ -44,3 +44,55 @@ const users1 = [
 
 const admins = users1.filter((user) => user.group === "admin");
 console.log("admins: ", admins);
+
+//ex6
+function myMap(array, a) {
+  for (let i = 0; i < array.length; i++) {
+    array[i] = a(array[i]);
+  }
+  return array;
+}
+
+console.log("parse int: ", myMap(["5", "7", "22"], parseInt));
+console.log("number: ", myMap(["5", "7", "22"], Number));
+console.log(
+  "2x function: ",
+  myMap(["5", "7", "22"], (x) => Number(x) * 2)
+);
+
+//ex7
+function myFilter(array, a) {
+  const target = new Array();
+  for (let i = 0; i < array.length; i++) {
+    if (a(array[i])) {
+      target.push(array[i]);
+    }
+  }
+  return target;
+}
+
+function isEven(n) {
+  return n % 2 === 0;
+}
+
+console.log("is even: ", myFilter([1, 2, 3, 4], isEven));
+
+//ex8
+const chocolates = [
+  { dark: true, flavour: "strawberry" },
+  { dark: false, flavour: "strawberry" },
+  { dark: false, flavour: "almond" },
+  { dark: true, flavour: "almond" },
+  { dark: false, flavour: "lemon" },
+];
+
+function checkProperty(property, value) {
+  return function (c) {
+    return c[property] === value;
+  };
+}
+
+const darkChocolates = chocolates.filter(checkProperty("dark", true));
+console.log("dark chocolates: ", darkChocolates);
+const almondChocolates = chocolates.filter(checkProperty("flavour", "almond"));
+console.log("almond chocolates: ", almondChocolates);
