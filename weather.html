@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="weather.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <aside class="sideBar">
+            <h1 class="mainTitle">Weather App</h1>
+            <label for="city-name" class="inputLabel">City Name</label>
+            <input type="text" id="city-input" placeholder="Enter city name" />
+            <button id="get-weather" onclick="getWeather()">Get Weather</button>
+        </aside>
+
+        <div id="weather-info" class="mainDiv"></div>
+
+    </div>
+
+    <script>
+        function displayData(a) {
+            // const city = a.name;
+            // const temp = a.main.temp;
+            // const feels_like = a.main.feels_like;
+            // const temp_min = a.main.temp_min;
+            // const temp_max = a.main.temp_max;
+
+            // const pressure = a.main.pressure;
+            // const humidity = a.main.humidity;
+            // const sea_level = a.main.sea_level;
+            // const grnd_level = a.main.grnd_level;
+
+            // const visiblity = a.visiblity;
+            // const wind_speed = a.wind.speed;
+            // const wind_deg = a.wind.deg;
+            // const wind_gust = a.wind.gust;
+
+            const description = a.weather[0].description;
+            const icon = a.weather[0].icon;
+            const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+
+            const out = `
+            <div class="headerDiv">
+                <span class="cityName">${a.name}</span>
+                <img src="${iconUrl}" class="weatherIcon">
+            </div>
+            <div class="dataDiv">
+                <div class="tempDiv">
+                    <h3>Temprature: </h3>
+                    <p>Temp: ${a.main.temp}°C</p>
+                    <p class="feelsLike">Feels Like: ${a.main.feels_like}°C</p>
+                    <p>Min Temp: ${a.main.temp_min}°C</p>
+                    <p>Max Temp: ${a.main.temp_max}°C</p>
+                </div>
+                <div class="windDiv">
+                    <h3>Wind: </h3>
+                    <p>Visiblity: ${a.visiblity}</p>
+                    <p>Speed: ${a.wind.speed}</p>
+                    <p>Deg: ${a.wind.deg}</p>
+                    <p>Gust: ${a.wind.gust}</p>
+                </div>
+                <div class="othersDiv">
+                    <h3>Others: </h3>
+                    <p>Pressure: <span class="value">${a.main.pressure}Pa</span></p>
+                    <p>Humidity: ${a.main.humidity}</p>
+                    <p>Sea Level: ${a.main.sea_level}</p>
+                    <p>Ground Level: ${a.main.grnd_level}</p>
+                </div>
+            </div>
+            `;
+            return out;
+        }
+
+        function getWeather() {
+            const city = document.getElementById('city-input').value;
+
+            const res = fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=ffc74c9e41d3cd99bf6bb25a7f582a7a`)
+                .then(res => {
+                    if (!res.ok) { throw new Error("City not found") };
+                    return res.json();
+                })
+                .then(data => {
+                    document.getElementById('weather-info').innerHTML = displayData(data);
+                }
+                );
+        }
+    </script>
+</body>
+
+</html>
