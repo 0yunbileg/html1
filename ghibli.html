@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ghibli</title>
     <link rel="stylesheet" href="ghibli.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 </head>
 
@@ -14,29 +15,64 @@
         <header>
             <div class="headerLeft">
                 <div class="logoWrapper">
-                    <img class="logo" src="">
-                    <nav class="menu">
-                        <a>home</a>
-                        <a>series</a>
-                        <a>movie</a>
-                        <a>game</a>
-                        <a>Latest Content</a>
-                        <a>My Wishlist</a>
-                        <a>Browse by Language</a>
-                    </nav>
+                    <img class="logo" src="images/logo.jpg">
                 </div>
+                <nav class="menu">
+                    <a>home</a>
+                    <a>series</a>
+                    <a>movie</a>
+                    <a>game</a>
+                    <a>Latest Content</a>
+                    <a>My Wishlist</a>
+                    <a>Browse by Language</a>
+                </nav>
             </div>
             <div class="headerRight">
-                <div class="searchWrapper"><i></i></div>
-                <div>Kids</div>
-                <i></i>
-                <i></i>
+                <i class="material-icons">search</i>
+                <span>Kids</span>
+                <i class="material-icons">notifications</i>
+                <i class="material-icons">account_circle</i>
             </div>
         </header>
+
+        <div class="container">
+        </div>
     </main>
 
     <script>
+        const container = document.querySelector(".container");
 
+        function getMovies() {
+            fetch(`https://ghibliapi.vercel.app/films`)
+                .then((res) => {
+                    if (!res.ok) throw new Error("Movies not found, api wrong");
+                    return res.json();
+                })
+                .then((data) => {
+                    console.log(data);
+                    const movies = data;
+                    movies.map((movie) => {
+                        const list = document.createElement("div");
+                        list.classList.add("movieContainer");
+
+                        list.innerHTML = `
+                            <div class="imgDiv">
+                                <img src="${movie.image}" alt="${movie.title}"/>
+                                <div class="detailsDiv">
+                                    <p class="titleD">${movie.title}</p>
+                                    <p class="descriptionD">${movie.description}</p>
+
+                                </div>
+                            </div>
+                            <h2 class="movieTitle">${movie.title}</h2>
+                            `;
+
+                        container.appendChild(list);
+                    });
+                });
+        }
+
+        getMovies();
     </script>
 </body>
 
