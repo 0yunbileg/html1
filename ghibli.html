@@ -15,11 +15,17 @@
         <header>
             <div class="headerLeft">
                 <div class="logoWrapper">
-                    <img class="logo" src="images/logo.jpg">
+                    <img class="logo" src="images/logo.png">
                 </div>
                 <nav class="menu">
                     <a>home</a>
-                    <a>series</a>
+                    <a class="ratingSearch">
+                        <p>rating</p>
+                        <!-- <label for="minRating">min</label>
+                        <input type="number" />
+                        <label for="maxRating">max</label>
+                        <input type="number" /> -->
+                    </a>
                     <a>movie</a>
                     <a>game</a>
                     <a>Latest Content</a>
@@ -28,14 +34,20 @@
                 </nav>
             </div>
             <div class="headerRight">
-                <i class="material-icons">search</i>
-                <span>Kids</span>
-                <i class="material-icons">notifications</i>
-                <i class="material-icons">account_circle</i>
+                <div id="search">
+                    <form class="searchArea">
+                        <input type="text" name="movieName" placeholder="Enter movie name ..." class="nameInput">
+                    </form>
+                    <i class="material-icons searchIcon" onclick="search()">search</i>
+                </div>
+                <span class="headerIcon">Kids</span>
+                <i class="material-icons headerIcon">notifications</i>
+                <i class="material-icons headerIcon">account_circle</i>
             </div>
         </header>
 
-        <div class="container">
+        <div class="mainDiv">
+            <div class="container"></div>
         </div>
     </main>
 
@@ -51,28 +63,86 @@
                 .then((data) => {
                     console.log(data);
                     const movies = data;
-                    movies.map((movie) => {
-                        const list = document.createElement("div");
-                        list.classList.add("movieContainer");
-
-                        list.innerHTML = `
-                            <div class="imgDiv">
-                                <img src="${movie.image}" alt="${movie.title}"/>
-                                <div class="detailsDiv">
-                                    <p class="titleD">${movie.title}</p>
-                                    <p class="descriptionD">${movie.description}</p>
-
-                                </div>
-                            </div>
-                            <h2 class="movieTitle">${movie.title}</h2>
-                            `;
-
-                        container.appendChild(list);
-                    });
+                    movies.map((movie) => { displayMovie(movie) });
                 });
         }
-
         getMovies();
+
+        function displayMovie(movie) {
+            const list = document.createElement("div");
+            list.classList.add("movieContainer");
+
+            list.innerHTML = `
+                            <img class="movieImg" src="${movie.image}" alt="${movie.title}" onclick="displayMovieDetail('${movie.id}')"/>
+                            <div class="detailsDiv">
+                                <p class="titleD">${movie.title} (${movie.release_date})</p>
+                                <p class="originalTitle">${movie.original_title} - ${movie.original_title_romanised}</p>
+                                <p class="director">Director: <span>${movie.director}</span></p>
+                                <p class="producer">Producer: <span>${movie.producer}</span></p>
+                            </div>
+                            `;
+
+            container.appendChild(list);
+        }
+
+        function displaySearchArea() {
+            const search = document.querySelector(".searchArea");
+            if (search.classList.contains("searchAreaDisplay")) {
+                search.classList.remove("searchAreaDisplay");
+            } else {
+                search.classList.add("searchAreaDisplay");
+            };
+        }
+
+        function search() {
+            displaySearchArea();
+            const name = document.querySelector(".nameInput").value;
+
+            if (name) {
+                container.innerHTML = "";
+            }
+
+            fetch(`https://ghibliapi.vercel.app/films`)
+                .then((res) => {
+                    if (!res.ok) throw new Error("Movies not found, api wrong");
+                    return res.json();
+                })
+                .then((data) => {
+                    const movies = data;
+                    const target = movies.filter((movie) => movie.title.toLowerCase().includes(name.toLowerCase()));
+                    target.map((movie) => { displayMovie(movie); });
+                });
+
+            document.querySelector(".nameInput").value = "";
+        }
+
+        function displayMovieDetail(id) {
+            console.log("movie detail: ", id);
+
+            fetch(`https://ghibliapi.vercel.app/films`)
+                .then((res) => {
+                    if (!res.ok) throw new Error("Movies not found, api wrong");
+                    return res.json();
+                })
+                .then((data) => {
+                    const movies = data;
+                    const movie = movies.find((movie) => movie.id === id);
+                    const list = document.createElement("div");
+                    list.classList.add("movieDetailDiv");
+
+                    list.innerHTML = `
+                            <img class="movieBanner" src="${movie.movie_banner}" alt="${movie.title}"/>
+                            <div class="infoDiv">
+                                <p class="titleD">${movie.title} (${movie.release_date})</p>
+                                <p class="originalTitle">${movie.original_title} - ${movie.original_title_romanised}</p>
+                                <p class="director">Director: <span>${movie.director}</span></p>
+                                <p class="producer">Producer: <span>${movie.producer}</span></p>
+                            </div>
+                            `;
+
+                    document.querySelector(".mainDiv").appendChild(list);
+                });
+        }
     </script>
 </body>
 
