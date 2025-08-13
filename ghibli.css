@@ -1,18 +1,23 @@
-/* * {
+* {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
     font-family: sans-serif;
-    background-color: whitesmoke;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 header {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
-    background-color: red;
+    background-color: #556B5B;
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -30,7 +35,7 @@ a,
 
 a:hover,
 .headerIcon:hover {
-    color: #5AB2FF;
+    color: blanchedalmond;
 }
 
 .headerLeft,
@@ -45,17 +50,15 @@ nav {
     width: 100px;
 }
 
-.ratingSearch:hover {}
-
 #search,
 .nameInput {
     display: flex;
-    color: gray;
+    color: #556B5B;
     border: none;
     border-radius: 20px;
     padding: 4px 6px;
-    background-color: #FFF9D0;
-    accent-color: #FFF9D0;
+    background-color: blanchedalmond;
+    accent-color: blanchedalmond;
     overflow: hidden;
 }
 
@@ -64,7 +67,7 @@ nav {
 }
 
 .searchIcon {
-    color: #A0DEFF;
+    color: #556B5B;
 }
 
 .searchArea {
@@ -77,63 +80,116 @@ nav {
 .searchAreaDisplay {
     width: 200px;
     visibility: visible;
+}
+
+.hero {
+    width: 1600px;
+    border-radius: 10px;
+    background-color: #B5D6D6;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    padding: 60px 0;
+    margin-top: 60px;
+}
+
+.heroVid {
+    border: none;
+    width: 1320px;
+    position: relative;
+}
+
+.heroVid iframe {
+    width: 1320px;
+    height: 742px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.heroText {
+    position: absolute;
+    top: 26%;
+    left: 10%;
+    z-index: 1;
+    width: 600px;
+    position: absolute;
+    color: white;
+}
+
+.mainTitle {
+    font-size: 60px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.heroDescription {
+    font-size: 28px;
+    line-height: 30px;
+    font-family: serif;
+}
+
+.heroBtn {
+    margin-top: 50px;
+    background-color: #9BBF9B;
+    color: white;
+    border: none;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.mainDiv {
+    width: 1600px;
+    background-color: blanchedalmond;
+    border-radius: 10px;
+    margin-top: 60px;
+}
+
+.mainDivTitle {
+    font-size: 40px;
+    color: #556B5B;
+    margin-left: 100px;
 }
 
 .container {
     width: 1400px;
-    border: 1px solid red;
-    margin: 160px auto;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 60px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    padding-bottom: 60px;
 }
 
 .movieContainer {
-    border: 1px solid red;
-
     position: relative;
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: all .2s ease-in;
-} */
+    transition: all .3s ease-out;
+}
 
 .movieImg {
+    display: block;
     width: 100%;
     border-radius: 8px;
-    object-fit: cover;
-    display: block;
 }
 
 .movieContainer:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 
 .detailsDiv {
+    border-radius: 8px;
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    width: 100%;
+    height: 100%;
     top: 0;
-    opacity: .4;
-    background: white;
-    padding-left: 1rem;
-    font-size: 12px;
-    transition: opacity 0.3s ease-in-out;
-    overflow-y: auto;
-    z-index: 2;
+    opacity: 0;
+    padding: 0 20px;
+    font-size: 10px;
+    background: rgb(0, 0, 0);
+    color: white;
+    transition: all .3s ease-out;
 }
 
 .movieContainer:hover .detailsDiv {
-    opacity: .7;
-}
-
-.movieContainer:hover img {
-    border-radius: 0;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+    opacity: .6;
 }
 
 .titleD {
@@ -151,180 +207,90 @@ nav {
 }
 
 .movieDetailDiv {
-    position: absolute;
-    top: 100px;
+    position: fixed;
+    top: 20%;
     width: 800px;
-    border: 1px solid black;
+    display: flex;
     z-index: 3;
+    background-color: whitesmoke;
+    border-radius: 10px;
 }
 
-.movieBanner {
-    width: 800px;
-    border: 1px solid red;
+.detailImage {
+    width: 400px;
+    border-radius: 10px;
 }
 
 .infoDiv {
-    background-color: white;
     width: 100%;
-    position: absolute;
-    border: 1px solid red;
+    padding: 40px 30px;
 }
 
-
-
-/* * {
-    box-sizing: border-box;
+.progressBarContainer {
+    display: flex;
+    align-items: center;
 }
 
-body {
-    margin: 0;
-    font-family: sans-serif;
-    background-color: whitesmoke;
+.progressBar {
+    width: 250px;
+    height: 10px;
+    background-color: grey;
+    border-radius: 10px;
 }
 
-header {
+.progress {
+    width: 200px;
+    height: 10px;
+    background-color: red;
+    border-radius: 10px;
+}
+
+.runningTime {
+    margin-left: 20px;
+}
+
+.overlay {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #A0DEFF;
     width: 100%;
-    display: flex;
-    justify-content: space-around;
-    font-size: 16px;
-    height: 80px;
-    color: white;
-    z-index: 2;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    z-index: 1;
 }
 
-a,
-.material-icons,
-.headerIcon {
-    transition: all .2s;
+.overlay.active {
+    display: block;
 }
 
-a:hover,
-.headerIcon:hover {
-    color: #5AB2FF;
-}
-
-.headerLeft,
-.headerRight,
-nav {
+.closeDetailBtn {
+    background-color: rgba(128, 128, 128, 0.808);
+    border: none;
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    color: whitesmoke;
     display: flex;
     align-items: center;
+    justify-content: center;
+    justify-self: end;
+    margin-top: -20px;
+    font-size: 26px;
+}
+
+footer {
+    background-color: #556B5B;
+    width: 100%;
+    margin-top: 60px;
+}
+
+.footerTop {
+    display: flex;
     gap: 40px;
 }
 
-.logo {
-    width: 100px;
+a {
+    text-decoration: none;
+    color: black;
 }
-
-.ratingSearch:hover {}
-
-#search,
-.nameInput {
-    display: flex;
-    color: gray;
-    border: none;
-    border-radius: 20px;
-    padding: 4px 6px;
-    background-color: #FFF9D0;
-    accent-color: #FFF9D0;
-    overflow: hidden;
-}
-
-.nameInput:focus {
-    outline: none;
-}
-
-.searchIcon {
-    color: #A0DEFF;
-}
-
-.searchArea {
-    visibility: hidden;
-    width: 0px;
-    transition: visibility .1s ease;
-    transition: width .5s ease;
-}
-
-.searchAreaDisplay {
-    width: 200px;
-    visibility: visible;
-}
-
-.container {
-    width: 1800px;
-    margin: 160px auto;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 60px;
-}
-
-.movieContainer {
-    width: 200%;
-    display: flex;
-    transition: all .2s ease-in;
-}
-
-.movieImg {
-    width: 50%;
-    border-radius: 8px;
-}
-
-.movieContainer:hover {
-    transform: scale(1.1);
-}
-
-.detailsDiv {
-    background-color: white;
-    opacity: .0;
-    padding-left: 20px;
-    font-size: 12px;
-    z-index: -1;
-}
-
-.movieContainer:hover .detailsDiv {
-    width: 50%;
-    opacity: 1;
-}
-
-.movieContainer:hover img {
-    border-radius: 0;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-}
-
-.titleD {
-    font-size: 20px;
-}
-
-.originalTitle {
-    line-height: 12px;
-    margin-bottom: 26px;
-}
-
-.director,
-.producer {
-    font-weight: bold;
-}
-
-.movieDetailDiv {
-    position: absolute;
-    top: 100px;
-    width: 800px;
-    border: 1px solid black;
-    z-index: 3;
-}
-
-.movieBanner {
-    width: 800px;
-    border: 1px solid red;
-}
-
-.infoDiv {
-    background-color: white;
-    width: 100%;
-    position: absolute;
-    border: 1px solid red;
-} */

@@ -81,51 +81,50 @@ nav {
 
 .container {
     width: 1400px;
-    margin: 160px auto;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    padding: 3rem;
 }
 
 .movieContainer {
-    background: white;
     border-radius: 8px;
-    overflow: hidden;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all .3s ease;
 }
 
 .movieImg {
     width: 100%;
+    height: 100%;
     border-radius: 8px;
-    object-fit: cover;
-    transition: all .3s ease;
-    transition: width 0s ease;
 }
 
 .movieContainer:hover {
     transform: scale(1.05);
-    width: 200%;
-    flex-direction: row;
+    box-shadow: none;
 }
 
 .detailsDiv {
+    background-color: white;
+    width: 100%;
+    position: absolute;
     padding: 0.8rem;
-    display: none;
+    opacity: 0;
+    transition: all .3s ease;
 }
 
 .movieContainer:hover .detailsDiv {
-    margin-left: 50%;
-    display: block;
-    width: 50%;
+    opacity: 1;
 }
 
-.movieContainer:hover .movieImg {
-    width: 50%;
+.movieContainer:hover .detailsDiv {
+    display: block;
 }
+
+
+
 
 .titleD {
     font-size: 20px;

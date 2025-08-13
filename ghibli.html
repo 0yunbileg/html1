@@ -7,10 +7,6 @@
     <title>Ghibli</title>
     <link rel="stylesheet" href="ghibli.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" media="screen and (min-width: 480px) and (max-width: 700px)" href="mobile.css">
-    <link rel="stylesheet" media="screen and (min-width: 701px) and (max-width: 900px)" href="tablet.css">
-    <link rel="stylesheet" media="screen and (min-width: 901px) and (max-width: 1200px)" href="laptop1.css">
-    <link rel="stylesheet" media="screen and (min-width: 1201px) and (max-width: 1800px)" href="laptop.css">
 </head>
 
 <body>
@@ -39,9 +35,10 @@
             <div class="headerRight">
                 <div id="search">
                     <form class="searchArea">
-                        <input type="text" name="movieName" placeholder="Enter movie name ..." class="nameInput">
+                        <input type="text" name="movieName" placeholder="Enter movie name ..." class="nameInput"
+                            onkeydown="search()">
                     </form>
-                    <i class="material-icons searchIcon" onclick="search()">search</i>
+                    <i class="material-icons searchIcon" onclick="displaySearchArea()">search</i>
                 </div>
                 <span class="headerIcon">Kids</span>
                 <i class="material-icons headerIcon">notifications</i>
@@ -49,35 +46,94 @@
             </div>
         </header>
 
-        <div class="hero">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/i63STOtAL2g?si=oOwWJ2EywNRIs2Vv&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="hero" id="hero">
+            <div class="heroVid">
+                <iframe
+                    src="https://www.youtube.com/embed/i63STOtAL2g?playlist=i63STOtAL2g&autoplay=1&mute=1&loop=1&si=oOwWJ2EywNRIs2Vv&amp;controls=0"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                </iframe>
+
+                <div class="heroText">
+                    <h3 class="mainTitle">STUDIO GHIBLI</h3>
+                    <p class="heroDescription">A legendary Japanese animation studio, celebrated for its hand-drawn
+                        artistry,
+                        heartfelt
+                        storytelling, and enchanting worlds.</p>
+                    <button class="heroBtn">See more</button>
+                </div>
+            </div>
         </div>
 
-        <div class="colors">
-            <div class="color1">color1</div>
-            <div class="color2">color2</div>
-            <div class="color3">color3</div>
-            <div class="color4">color4</div>
-            <div class="color5">color5</div>
-        </div>
-    
-        <div class="mainDiv">
+        <div class="mainDiv" id="mainDiv">
+            <h3 class="mainDivTitle"></h3>
             <div class="container"></div>
         </div>
+
+        <div class="movieDetailDiv"></div>
+        <div class="overlay"></div>
+
+        <footer>
+            <div class="footerTop">
+                <div class="quickLinksDiv">
+                    <h4 class="footerTitle">Quick Links</h4>
+                    <ul class="quickLinks">
+                        <li>Home</li>
+                        <li>Movies</li>
+                        <li>About</li>
+                        <li>Contact</li>
+                    </ul>
+                </div>
+
+                <div class="officialLinksDiv">
+                    <h4 class="footerTitle">Official Studio Ghibli Links</h4>
+                    <ul class="officialLinks">
+                        <li><a href="https://www.ghibli.jp/">Official Studio Ghibli Website</a></li>
+                        <li><a href="https://www.ghibli-museum.jp/en/">Ghibli Museum, Mitaka</a></li>
+                        <li><a href="https://ghibli-park.jp/en/">Ghibli Park</a></li>
+                        <li><a href="https://www.maison-ghibli.com/en/">Maison Ghibli (Official Merchandise Store)</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="contactUsDiv">
+                    <h4 class="footerTitle">Connect Us</h4>
+                    <ul class="contactUs">
+                        <li><a href="">Instagram</a></li>
+                        <li><a href="">Twitter / X</a></li>
+                        <li><a href="">YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footerBottom">
+                <div class="disclaimerDiv">
+                    <h4 class="footerTitle">Disclaimer</h4>
+                    <p>This website is a non-commercial project made for educational purposes. It is not affiliated with
+                        or endorsed by Studio Ghibli, Ghibli Museum, or any related entities.</p>
+                </div>
+                <p>© 2025 YourSiteName. All rights reserved.</p>
+            </div>
+        </footer>
     </main>
 
     <script>
+        let movies;
         const container = document.querySelector(".container");
+        const overlay = document.querySelector('.overlay');
 
         async function getMovies() {
+            const title = document.querySelector(".mainDivTitle");
+            title.innerHTML = "All Ghibli Movies..."
+
             fetch(`https://ghibliapi.vercel.app/films`)
                 .then((res) => {
                     if (!res.ok) throw new Error("Movies not found, api wrong");
                     return res.json();
                 })
                 .then((data) => {
-                    console.log(data);
-                    const movies = data;
+                    movies = data;
                     movies.map((movie) => { displayMovieCard(movie) });
                 });
         }
@@ -86,9 +142,9 @@
         async function displayMovieCard(movie) {
             const list = document.createElement("div");
             list.classList.add("movieContainer");
-
+            list.onclick = () => { displayMovieDetail(movie.id) };
             list.innerHTML = `
-                            <img class="movieImg" src="${movie.image}" alt="${movie.title}" onclick="displayMovieDetail('${movie.id}')"/>
+                            <img class="movieImg" src="${movie.movie_banner}" alt="${movie.title}" onclick="displayMovieDetail('${movie.id}')"/>
                             <div class="detailsDiv">
                                 <p class="titleD">${movie.title} (${movie.release_date})</p>
                                 <p class="originalTitle">${movie.original_title} - ${movie.original_title_romanised}</p>
@@ -110,54 +166,47 @@
         }
 
         async function search() {
-            displaySearchArea();
+            document.getElementById("hero").style.display = "none";
+            document.querySelector(".mainDivTitle").innerHTML = "Movies you might like..."
+
             const name = document.querySelector(".nameInput").value;
+            container.innerHTML = "";
 
-            if (name) {
-                container.innerHTML = "";
-            }
-
-            fetch(`https://ghibliapi.vercel.app/films`)
-                .then((res) => {
-                    if (!res.ok) throw new Error("Movies not found, api wrong");
-                    return res.json();
-                })
-                .then((data) => {
-                    const movies = data;
-                    const target = movies.filter((movie) => movie.title.toLowerCase().includes(name.toLowerCase()));
-                    target.map((movie) => { displayMovieCard(movie); });
-                });
-
-            document.querySelector(".nameInput").value = "";
+            const target = movies.filter((movie) => movie.title.toLowerCase().includes(name.toLowerCase()));
+            target.map((movie) => { displayMovieCard(movie); });
         }
 
         async function displayMovieDetail(id) {
-            console.log("movie detail: ", id);
-
-            fetch(`https://ghibliapi.vercel.app/films`)
-                .then((res) => {
-                    if (!res.ok) throw new Error("Movies not found, api wrong");
-                    return res.json();
-                })
-                .then((data) => {
-                    const movies = data;
-                    const movie = movies.find((movie) => movie.id === id);
-                    const list = document.createElement("div");
-                    list.classList.add("movieDetailDiv");
-
-                    list.innerHTML = `
-                            <img class="movieBanner" src="${movie.movie_banner}" alt="${movie.title}"/>
+            const movie = movies.find((movie) => movie.id === id);
+            const detailDiv = document.querySelector(".movieDetailDiv");
+            const runningHour = Math.floor(Number(movie.running_time) / 60);
+            let runningMin = Number(movie.running_time) % 60;
+            if (runningMin < 10) { runningMin = `0${runningMin}`; }
+            detailDiv.innerHTML = `
+                            <img class="detailImage" src="${movie.image}" alt="${movie.title}"/>
                             <div class="infoDiv">
+                                <button class="closeDetailBtn" onclick="closeDetail()">x</button>
                                 <p class="titleD">${movie.title} (${movie.release_date})</p>
                                 <p class="originalTitle">${movie.original_title} - ${movie.original_title_romanised}</p>
                                 <p class="director">Director: <span>${movie.director}</span></p>
-                                <p class="producer">Producer: <span>${movie.producer}</span></p>
+                                <p class="producer">Producer: <span>${movie.producer}</span></p>                                
+                                <p class="description">${movie.description}</p>
+                                <div class="progressBarContainer">
+                                    <div class="progressBar">
+                                        <div class="progress"></div>    
+                                    </div>
+                                    <span class="runningTime">${runningHour}:${runningMin}:00</span>
+                                </div>
                             </div>
                             `;
-
-                    document.querySelector(".mainDiv").appendChild(list);
-                });
+            overlay.classList.add("active");
         }
+
+        function closeDetail() {
+            document.querySelector(".movieDetailDiv").innerHTML = "";
+            overlay.classList.remove("active");
+        }
+
     </script>
 </body>
 
