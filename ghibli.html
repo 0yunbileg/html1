@@ -34,10 +34,10 @@
             </div>
             <div class="headerRight">
                 <div id="search">
-                    <form class="searchArea">
-                        <input type="text" name="movieName" placeholder="Enter movie name ..." class="nameInput"
+
+                        <input type="text" name="movieName" placeholder="Enter movie name ..." class="nameInput searchArea"
                             onkeydown="search()">
-                    </form>
+
                     <i class="material-icons searchIcon" onclick="displaySearchArea()">search</i>
                 </div>
                 <span class="headerIcon">Kids</span>
@@ -71,6 +71,11 @@
             <div class="container"></div>
         </div>
 
+        <div class="wishWrapper">
+            <h3 class="mainDivTitle">My Wishlist: </h3>
+            <div class="wishlistDiv"></div>
+        </div>
+ 
         <div class="movieDetailDiv"></div>
         <div class="overlay"></div>
 
@@ -99,23 +104,23 @@
                 </div>
 
                 <div class="contactUsDiv">
-                    <h4 class="footerTitle">Connect Us</h4>
+                    <h4 class="footerTitle">Contact Us</h4>
                     <ul class="contactUs">
                         <li><a target="_blank" href="">Instagram</a></li>
                         <li><a target="_blank" href="">Twitter / X</a></li>
                         <li><a target="_blank" href="">YouTube</a></li>
                     </ul>
                 </div>
+
+                <div class="disclaimerDiv">
+                    <h4 class="disclaimerTitle">Disclaimer</h4>
+                    <p class="disclaimer">This website is a non-commercial project made for educational purposes. It is not affiliated with
+                        or endorsed by Studio Ghibli, Ghibli Museum, or any related entities.</p>
+                </div>
             </div>
 
             <div class="footerBottom">
-                <div class="disclaimerDiv">
-                    <h4 class="footerTitle">Disclaimer</h4>
-                    <p>This website is a non-commercial project made for educational purposes. It is not affiliated with
-                        or endorsed by Studio Ghibli, Ghibli Museum, or any related entities.</p>
-                </div>
-
-                <p>© 2025 YourSiteName. All rights reserved.</p>
+                <p class="footerText">© 2025 Ghibli OB. All rights reserved.</p>
             </div>
         </footer>
     </main>
@@ -124,6 +129,9 @@
         let movies;
         const container = document.querySelector(".container");
         const overlay = document.querySelector('.overlay');
+        let wishList = new Array();
+
+
 
         async function getMovies() {
             const title = document.querySelector(".mainDivTitle");
@@ -136,35 +144,53 @@
                 })
                 .then((data) => {
                     movies = data;
-                    movies.map((movie) => { displayMovieCard(movie) });
+                    movies.map((movie) => {
+                        const list = document.createElement("div");
+                        list.classList.add("movieContainer");
+                        console.log(displayMovieCard(movie));
+                        list.innerHTML = displayMovieCard(movie);
+                        container.appendChild(list); 
+                    });
                 });
         }
         getMovies();
 
-        async function displayMovieCard(movie) {
-            const list = document.createElement("div");
-            list.classList.add("movieContainer");
-            list.onclick = () => { displayMovieDetail(movie.id) };
-            list.innerHTML = `
-                            <img class="movieImg" src="${movie.movie_banner}" alt="${movie.title}" onclick="displayMovieDetail('${movie.id}')"/>
-                            <div class="detailsDiv">
-                                <p class="titleD">${movie.title} (${movie.release_date})</p>
-                                <p class="originalTitle">${movie.original_title} - ${movie.original_title_romanised}</p>
-                                <p class="director">Director: <span>${movie.director}</span></p>
-                                <p class="producer">Producer: <span>${movie.producer}</span></p>
-                            </div>
-                            `;
-
-            container.appendChild(list);
+        function displayMovieCard(movie) {
+            const text = `<img class="movieImg" src="${movie.movie_banner}" alt="${movie.title}" onclick="displayMovieDetail('${movie.id}')"/>
+                    <div class="overlayWrapper">
+                        <div class="detailsDiv" onclick="displayMovieDetail('${movie.id}')">
+                            <p class="titleD">${movie.title} (${movie.release_date})</p>
+                            <p class="originalTitle">${movie.original_title} - ${movie.original_title_romanised}</p>
+                            <p class="director">Director: <span>${movie.director}</span></p>
+                            <p class="producer">Producer: <span>${movie.producer}</span></p>
+                        </div>
+                        
+                        <div class="cardBtnDiv">
+                            <div class="rating">RT Score: ${movie.rt_score}</div>
+                            <button class="wishlistBtn" onclick="addToWishList('${movie.id}')">Add to Wishlist</button>
+                        </div>
+                    </div>
+                    `;
+            return text;
         }
 
-        async function displaySearchArea() {
-            const search = document.querySelector(".searchArea");
-            if (search.classList.contains("searchAreaDisplay")) {
-                search.classList.remove("searchAreaDisplay");
-            } else {
-                search.classList.add("searchAreaDisplay");
-            };
+        function displayMovieCardW(movie) {
+            const text = `<img class="movieImg" src="${movie.movie_banner}" alt="${movie.title}" onclick="displayMovieDetail('${movie.id}')"/>
+                    <div class="overlayWrapper">
+                        <div class="detailsDiv" onclick="displayMovieDetail('${movie.id}')">
+                            <p class="titleD">${movie.title} (${movie.release_date})</p>
+                            <p class="originalTitle">${movie.original_title} - ${movie.original_title_romanised}</p>
+                            <p class="director">Director: <span>${movie.director}</span></p>
+                            <p class="producer">Producer: <span>${movie.producer}</span></p>
+                        </div>
+                        
+                        <div class="cardBtnDiv">
+                            <div class="rating">RT Score: ${movie.rt_score}</div>
+                            <button class="wishlistBtn" onclick="removeFromWishlist('${movie.id}')">Remove from Wishlist</button>
+                        </div>
+                    </div>
+                    `;
+            return text;
         }
 
         async function search() {
@@ -175,7 +201,12 @@
             container.innerHTML = "";
 
             const target = movies.filter((movie) => movie.title.toLowerCase().includes(name.toLowerCase()));
-            target.map((movie) => { displayMovieCard(movie); });
+            target.map((movie) => {
+                const list = document.createElement("div");
+                list.classList.add("movieContainer");
+                list.innerHTML = displayMovieCard(movie);
+                container.appendChild(list); 
+            });
         }
 
         async function displayMovieDetail(id) {
@@ -209,6 +240,28 @@
             overlay.classList.remove("active");
         }
 
+        function addToWishList(id) {
+            movieToAdd = movies.find(movie => movie.id === id);
+            wishList.push(movieToAdd);
+            displayWishlist();
+        }
+
+        function removeFromWishlist(id) {
+            console.log("removing")
+            wishList = wishList.filter(movie => movie.id != id);
+            displayWishlist();
+        }
+
+        function displayWishlist() {
+            const wrapper = document.querySelector(".wishlistDiv");
+            wrapper.innerHTML = "";
+            wishList.map(movie => {
+                const list = document.createElement("div");
+                list.classList.add("movieContainer");
+                list.innerHTML = displayMovieCardW(movie);
+                wrapper.appendChild(list);
+            })
+        }
     </script>
 </body>
 
