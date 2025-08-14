@@ -17,26 +17,20 @@
                     <img class="logo" src="images/logo.png">
                 </div>
                 <nav class="menu">
-                    <a>home</a>
-                    <a class="ratingSearch">
-                        <p>rating</p>
-                        <!-- <label for="minRating">min</label>
-                        <input type="number" />
-                        <label for="maxRating">max</label>
-                        <input type="number" /> -->
-                    </a>
-                    <a>movie</a>
+                    <a href="#hero">home</a>
+                    <a href="#rtSearch">rating</a>
+                    <a href="#mainDiv">movie</a>
                     <a>game</a>
                     <a>Latest Content</a>
-                    <a>My Wishlist</a>
+                    <a href="#wishlistWrapper">My Wishlist</a>
                     <a>Browse by Language</a>
                 </nav>
             </div>
             <div class="headerRight">
                 <div id="search">
 
-                        <input type="text" name="movieName" placeholder="Enter movie name ..." class="nameInput searchArea"
-                            onkeydown="search()">
+                    <input type="text" name="movieName" placeholder="Enter movie name ..." class="nameInput searchArea"
+                        onkeydown="search()">
 
                     <i class="material-icons searchIcon" onclick="displaySearchArea()">search</i>
                 </div>
@@ -46,8 +40,8 @@
             </div>
         </header>
 
-        <div class="hero" id="hero">
-            <div class="heroVid">
+        <div class="hero biggerDiv" id="hero">
+            <div class="heroVid bigDiv">
                 <iframe
                     src="https://www.youtube.com/embed/i63STOtAL2g?playlist=i63STOtAL2g&autoplay=1&mute=1&loop=1&si=oOwWJ2EywNRIs2Vv&amp;controls=0"
                     title="YouTube video player" frameborder="0"
@@ -66,18 +60,42 @@
             </div>
         </div>
 
-        <div class="mainDiv" id="mainDiv">
+        <div class="mainDiv biggerDiv" id="mainDiv">
             <h3 class="mainDivTitle"></h3>
-            <div class="container"></div>
+            <div class="container bigDiv"></div>
         </div>
 
-        <div class="wishWrapper">
+        <div class="wishWrapper biggerDiv" id="wishlistWrapper">
             <h3 class="mainDivTitle">My Wishlist: </h3>
-            <div class="wishlistDiv"></div>
+            <div class="wishlistDiv bigDiv"></div>
         </div>
- 
+
         <div class="movieDetailDiv"></div>
         <div class="overlay"></div>
+
+        <div class="rtSearch biggerDiv" id="rtSearch">
+            <h3 class="mainDivTitle">Search Movies by RT Score...</h3>
+            <div class="rtSearchDiv bigDiv">
+                <div class="rtFormDiv">
+                    <div class="rtInputDiv">
+                        <div class="minInputDiv">
+                            <label for="minScore">Min:</label>
+                            <input type="number" name="minScore" class="minScore" placeholder="0" />
+                        </div>
+                        <div class="minInputDiv">
+                            <label for="maxScore">Max:</label>
+                            <input type="number" name="maxScore" class="maxScore" placeholder="100" />
+                        </div>
+                    </div>
+
+                    <button class="rtBtn" onclick="rtSearch()">Filter</button>
+                </div>
+
+                <div class="rtMoviesDiv">
+
+                </div>
+            </div>
+        </div>
 
         <footer>
             <div class="footerTop">
@@ -114,7 +132,8 @@
 
                 <div class="disclaimerDiv">
                     <h4 class="disclaimerTitle">Disclaimer</h4>
-                    <p class="disclaimer">This website is a non-commercial project made for educational purposes. It is not affiliated with
+                    <p class="disclaimer">This website is a non-commercial project made for educational purposes. It is
+                        not affiliated with
                         or endorsed by Studio Ghibli, Ghibli Museum, or any related entities.</p>
                 </div>
             </div>
@@ -147,9 +166,8 @@
                     movies.map((movie) => {
                         const list = document.createElement("div");
                         list.classList.add("movieContainer");
-                        console.log(displayMovieCard(movie));
                         list.innerHTML = displayMovieCard(movie);
-                        container.appendChild(list); 
+                        container.appendChild(list);
                     });
                 });
         }
@@ -205,7 +223,7 @@
                 const list = document.createElement("div");
                 list.classList.add("movieContainer");
                 list.innerHTML = displayMovieCard(movie);
-                container.appendChild(list); 
+                container.appendChild(list);
             });
         }
 
@@ -241,9 +259,11 @@
         }
 
         function addToWishList(id) {
-            movieToAdd = movies.find(movie => movie.id === id);
-            wishList.push(movieToAdd);
-            displayWishlist();
+            if (!wishList.some(movie => movie.id === id)) {
+                movieToAdd = movies.find(movie => movie.id === id);
+                wishList.push(movieToAdd);
+                displayWishlist();
+            }
         }
 
         function removeFromWishlist(id) {
@@ -259,6 +279,21 @@
                 const list = document.createElement("div");
                 list.classList.add("movieContainer");
                 list.innerHTML = displayMovieCardW(movie);
+                wrapper.appendChild(list);
+            })
+        }
+
+        function rtSearch() {
+            const wrapper = document.querySelector(".rtMoviesDiv");
+            wrapper.innerHTML = "";
+            const min = document.querySelector(".minScore").value;
+            const max = document.querySelector(".maxScore").value;
+
+            const target = movies.filter((movie) => Number(movie.rt_score) >= min && Number(movie.rt_score) <= max);
+            target.map(movie => {
+                const list = document.createElement("div");
+                list.classList.add("movieContainer");
+                list.innerHTML = displayMovieCard(movie);
                 wrapper.appendChild(list);
             })
         }

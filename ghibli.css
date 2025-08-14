@@ -1,4 +1,6 @@
-* { box-sizing: border-box;}
+* {
+    box-sizing: border-box;
+}
 
 body {
     margin: 0;
@@ -47,6 +49,11 @@ nav {
     width: 100px;
 }
 
+a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
 #search,
 .nameInput {
     display: flex;
@@ -59,9 +66,13 @@ nav {
     overflow: hidden;
 }
 
-.nameInput:focus { outline: none; }
+input:focus {
+    outline: none;
+}
 
-.searchIcon { color: #556B5B; }
+.searchIcon {
+    color: #556B5B;
+}
 
 .searchArea {
     visibility: hidden;
@@ -70,33 +81,43 @@ nav {
     transition: width .5s ease;
 }
 
-#search:hover  .searchArea{
+#search:hover .searchArea {
     width: 200px;
     visibility: visible;
 }
 
-.hero {
+.biggerDiv {
     width: 1600px;
     border-radius: 10px;
-    background-color: #B5D6D6;
-    pointer-events: none;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     padding: 60px 0;
     margin-top: 60px;
 }
 
+.bigDiv {
+    width: 1400px;
+    align-self: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+}
+
+.hero {
+    background-color: #B5D6D6;
+}
+
 .heroVid {
-    border: none;
-    width: 1320px;
     position: relative;
 }
 
 .heroVid iframe {
-    width: 1320px;
+    width: 1400px;
     height: 742px;
     object-fit: cover;
     border-radius: 10px;
+    pointer-events: none;
 }
 
 .heroText {
@@ -128,28 +149,21 @@ nav {
     font-size: 20px;
     padding: 10px;
     border-radius: 8px;
+    transition: all .3s ease-out;
+}
+
+.heroBtn:hover {
+    background-color: #556B5B;
 }
 
 .mainDiv {
-    width: 1600px;
     background-color: blanchedalmond;
-    border-radius: 10px;
-    margin-top: 60px;
 }
 
 .mainDivTitle {
     font-size: 40px;
     color: #556B5B;
     margin-left: 100px;
-}
-
-.container {
-    width: 1400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
-    padding-bottom: 60px;
 }
 
 .movieContainer {
@@ -192,7 +206,7 @@ nav {
     opacity: .6;
 }
 
-.movieContainer:hover .cardBtnDiv{
+.movieContainer:hover .cardBtnDiv {
     opacity: .9;
 }
 
@@ -220,11 +234,12 @@ nav {
     opacity: 0;
 }
 
-.rating, .wishlistBtn {
+.rating,
+.wishlistBtn {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color:#9BBF9B;
+    background-color: #9BBF9B;
     font-size: 14px;
     width: 100px;
     height: 30px;
@@ -233,14 +248,14 @@ nav {
     color: whitesmoke;
 }
 
-.wishlistBtn{
+.wishlistBtn {
     border: none;
     width: 120px;
     transition: all .3s ease-out;
 }
 
 .wishlistBtn:hover {
-    background-color:#556B5B;
+    background-color: #556B5B;
 }
 
 .movieDetailDiv {
@@ -317,21 +332,72 @@ nav {
 }
 
 .wishWrapper {
-    width: 1600px;
-    margin-top: 60px;
+    background-color: #B5D6D6;
+}
+
+.wishlistDiv {}
+
+.rtSearch {
+    background-color: antiquewhite;
+}
+
+.rtSearchDiv {}
+
+.rtFormDiv {
+    padding: 30px 40px;
     display: flex;
     flex-direction: column;
     background-color: #B5D6D6;
     border-radius: 10px;
-    padding-bottom: 60px;
 }
 
-.wishlistDiv {
-    width: 1400px;
+.rtInputDiv {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    color: #556B5B;
+}
+
+.rtMoviesDiv {
+    grid-column: 2/5;
+    font-size: 30px;
+}
+
+.minScore,
+.maxScore {
+    width: 80px;
+    display: block;
+    margin-top: 16px;
+    height: 40px;
+    padding-left: 10px;
+    accent-color: antiquewhite;
+    background-color: antiquewhite;
+    border: none;
+    border-radius: 6px;
+}
+
+.rtBtn {
+    background-color: antiquewhite;
+    font-size: 14px;
+    height: 30px;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #556B5B;
+    border: none;
+    width: 80px;
+    transition: all .3s ease-out;
+    align-self: flex-end;
+    margin-top: 20px;
+}
+
+.rtBtn:hover {
+    background-color: #556B5B;
+}
+
+.rtMoviesDiv {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 40px;
-    align-self: center;
 }
 
 footer {
@@ -351,12 +417,8 @@ footer {
     justify-content: space-between;
 }
 
-.contactUs a, .quickLinks a {
-    text-decoration: none;
-}
-
-a {
-    color: whitesmoke;
+.officialLinks a {
+    text-decoration: underline;
 }
 
 .footerTitle {
@@ -396,4 +458,8 @@ ul {
     justify-content: center;
     padding-left: 40px;
     z-index: 4;
+}
+
+.abtn:hover {
+    background-color: #556B5B;
 }
