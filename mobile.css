@@ -1,0 +1,465 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 80px;
+    background-color: #556B5B;
+    font-size: 16px;
+    color: white;
+    z-index: 2;
+}
+
+a,
+.material-icons,
+.headerIcon {
+    transition: all .2s;
+}
+
+a:hover,
+.headerIcon:hover {
+    color: blanchedalmond;
+}
+
+.headerLeft,
+.headerRight,
+nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.logo {
+    width: 100px;
+}
+
+a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+#search,
+.nameInput {
+    display: flex;
+    color: #556B5B;
+    border: none;
+    border-radius: 20px;
+    padding: 4px 6px;
+    background-color: blanchedalmond;
+    accent-color: blanchedalmond;
+    overflow: hidden;
+}
+
+input:focus {
+    outline: none;
+}
+
+.searchIcon {
+    color: #556B5B;
+}
+
+.searchArea {
+    visibility: hidden;
+    width: 0px;
+    transition: visibility .1s ease;
+    transition: width .5s ease;
+}
+
+#search:hover .searchArea {
+    width: 200px;
+    visibility: visible;
+}
+
+.biggerDiv {
+    width: 1600px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 0;
+    margin-top: 60px;
+}
+
+.bigDiv {
+    width: 1400px;
+    align-self: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+}
+
+.hero {
+    background-color: #B5D6D6;
+}
+
+.heroVid {
+    position: relative;
+}
+
+.heroVid iframe {
+    width: 1400px;
+    height: 742px;
+    object-fit: cover;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+.heroText {
+    position: absolute;
+    top: 26%;
+    left: 10%;
+    z-index: 1;
+    width: 600px;
+    position: absolute;
+    color: white;
+}
+
+.mainTitle {
+    font-size: 60px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.heroDescription {
+    font-size: 28px;
+    line-height: 30px;
+    font-family: serif;
+}
+
+.heroBtn {
+    margin-top: 50px;
+    background-color: #9BBF9B;
+    color: white;
+    border: none;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all .3s ease-out;
+}
+
+.heroBtn:hover {
+    background-color: #556B5B;
+}
+
+.mainDiv {
+    background-color: blanchedalmond;
+}
+
+.mainDivTitle {
+    font-size: 40px;
+    color: #556B5B;
+    margin-left: 100px;
+}
+
+.movieContainer {
+    position: relative;
+    transition: all .3s ease-out;
+}
+
+.movieImg {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.movieContainer:hover {
+    transform: scale(1.2);
+}
+
+.overlayWrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+
+.detailsDiv {
+    border-radius: 8px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    opacity: 0;
+    padding: 0 10px;
+    font-size: 10px;
+    background: rgb(0, 0, 0);
+    color: white;
+    transition: all .3s ease-out;
+}
+
+.movieContainer:hover .detailsDiv {
+    opacity: .6;
+}
+
+.movieContainer:hover .cardBtnDiv {
+    opacity: .9;
+}
+
+.titleD {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.originalTitle {
+    line-height: 12px;
+}
+
+.director,
+.producer {
+    font-weight: bold;
+}
+
+.cardBtnDiv {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    padding: 0 46px 16px 10px;
+    justify-content: space-between;
+    bottom: 0px;
+    opacity: 0;
+}
+
+.rating,
+.wishlistBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #9BBF9B;
+    font-size: 14px;
+    width: 100px;
+    height: 30px;
+    border-radius: 6px;
+    font-weight: bold;
+    color: whitesmoke;
+}
+
+.wishlistBtn {
+    border: none;
+    width: 120px;
+    transition: all .3s ease-out;
+}
+
+.wishlistBtn:hover {
+    background-color: #556B5B;
+}
+
+.movieDetailDiv {
+    position: fixed;
+    top: 20%;
+    width: 800px;
+    display: flex;
+    z-index: 3;
+    background-color: whitesmoke;
+    border-radius: 10px;
+}
+
+.detailImage {
+    width: 400px;
+    border-radius: 10px;
+}
+
+.infoDiv {
+    width: 100%;
+    padding: 40px 30px;
+}
+
+.progressBarContainer {
+    display: flex;
+    align-items: center;
+}
+
+.progressBar {
+    width: 250px;
+    height: 10px;
+    background-color: grey;
+    border-radius: 10px;
+}
+
+.progress {
+    width: 200px;
+    height: 10px;
+    background-color: red;
+    border-radius: 10px;
+}
+
+.runningTime {
+    margin-left: 20px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    z-index: 1;
+}
+
+.overlay.active {
+    display: block;
+}
+
+.closeDetailBtn {
+    background-color: rgba(128, 128, 128, 0.808);
+    border: none;
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    color: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: end;
+    margin-top: -20px;
+    font-size: 26px;
+}
+
+.wishWrapper {
+    background-color: #B5D6D6;
+}
+
+.wishlistDiv {}
+
+.rtSearch {
+    background-color: antiquewhite;
+}
+
+.rtSearchDiv {}
+
+.rtFormDiv {
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    background-color: #B5D6D6;
+    border-radius: 10px;
+}
+
+.rtInputDiv {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    color: #556B5B;
+}
+
+.rtMoviesDiv {
+    grid-column: 2/5;
+    font-size: 30px;
+}
+
+.minScore,
+.maxScore {
+    width: 80px;
+    display: block;
+    margin-top: 16px;
+    height: 40px;
+    padding-left: 10px;
+    accent-color: antiquewhite;
+    background-color: antiquewhite;
+    border: none;
+    border-radius: 6px;
+}
+
+.rtBtn {
+    background-color: antiquewhite;
+    font-size: 14px;
+    height: 30px;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #556B5B;
+    border: none;
+    width: 80px;
+    transition: all .3s ease-out;
+    align-self: flex-end;
+    margin-top: 20px;
+}
+
+.rtBtn:hover {
+    background-color: #556B5B;
+}
+
+.rtMoviesDiv {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+footer {
+    background-color: #556B5B;
+    width: 100%;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: whitesmoke;
+}
+
+.footerTop {
+    display: flex;
+    padding-bottom: 60px;
+    width: 1400px;
+    justify-content: space-between;
+}
+
+.officialLinks a {
+    text-decoration: underline;
+}
+
+.footerTitle {
+    margin-left: 40px;
+    margin-bottom: 0px;
+    font-size: 20px;
+}
+
+ul {
+    list-style-type: none;
+    font-size: 18px;
+    line-height: 34px;
+}
+
+.disclaimerDiv {
+    width: 450px;
+    font-size: 20px;
+}
+
+.disclaimerTitle {
+    margin-bottom: 0px;
+}
+
+.disclaimer {
+    font-size: 18px;
+    line-height: 34px;
+}
+
+.footerBottom {
+    background-color: #556B5B;
+    position: fixed;
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 40px;
+    z-index: 4;
+}
+
+.abtn:hover {
+    background-color: #556B5B;
+}
