@@ -1,0 +1,161 @@
+* {
+    margin: 0;
+}
+
+body {
+    box-sizing: border-box;
+    background: #003366;
+    color: whitesmoke;
+    font-family: Arial, sans-serif;
+    /* text-align: center; */
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    margin: 20px 0 40px 0;
+}
+
+main {
+    display: flex;
+}
+
+.numbersDiv {
+    display: flex;
+}
+
+#results, .controls, .input-section {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    font-size: 22px;
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 10px;
+    margin-right: 40px;
+}
+
+label {
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+}
+
+input, .resultNumber, select {
+    font-size: 20px;
+    padding: 6px;
+    width: 100px;
+    border-radius: 6px;
+    border: none;
+    background-color: white;
+    color: #001a33;
+}
+
+select {
+    width: 150px;
+}
+
+input:focus {
+    outline: none;
+}
+
+canvas {
+    background: #001a33;
+    display: block;
+}
+
+.resultLine {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    line-height: 28px;
+    font-weight: bold;
+}
+
+#formulas {
+    margin-top: 20px;
+    background: rgba(0,0,0,0.4);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: left;
+    display: inline-block;
+}
+
+
+
+/* .inline-details {
+    display: inline-block;
+    margin-left: 5px;
+  }
+  .inline-details summary {
+    cursor: pointer;
+    display: inline;
+    list-style: none;
+  }
+  .inline-details summary::marker {
+    display: none;
+  }
+   */
+
+  .input-label {
+    display: block;
+    margin-bottom: 20px;
+    height: fit-content;
+  }
+  
+  .inline-details {
+    display: inline-block;   /* arrow inline */
+    vertical-align:text-top;
+    margin-left: 5px;
+  }
+  
+  .inline-details summary {
+    cursor: pointer;
+    display: inline;
+    list-style: none;
+  }
+  
+  .inline-details summary::marker {
+    display: none; 
+  }
+  
+  .extra-inputs {
+    margin-top: 6px;
+    display: block;
+    padding-left: 20px;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: all .5s linear;
+    /* border: 1px solid white; */
+  }
+
+  .showMorevelocity {
+    height: 300px;
+    opacity: 1;
+    height: max-content;
+  }
+
+  .showMoreangle, .showMorevt, .showMorevf, .showMoreva, .showMoretime {
+    height: 103px;
+    opacity: 1;
+  }
+
+  .showMorey-coordinate {
+    height: 153.6px;
+    opacity: 1;
+  }
+
+  .showMorex-coordinate {
+    height: 153.6px;
+    opacity: 1;
+  }
+
+  .inputLine {
+    /* border: 1px solid white; */
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  
