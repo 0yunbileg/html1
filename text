@@ -1,0 +1,114 @@
+<label class="input-label">
+    <div class="inputLine">
+        <p>
+            <strong>Initial velocity (v₀)</strong>:
+            <button onclick="showMore('velocity')">more</button>
+        </p>
+        <div id="v0" class="resultBox">12</div>
+    </div>
+    <div class="extra-inputs velocity">
+        <div class="inputLine">
+            vx₀: <div id="vx0" class="resultBox">12</div>
+        </div>
+        <div class="inputLine">
+            vy₀: <div id="vy0" class="resultBox">12</div>
+        </div>
+        <div class="inputLine">
+            <p>
+                v(final):
+                <button onclick="showMore('vf')">more</button>
+            </p>
+            <div id="vf" class="resultBox">12</div>
+        </div>
+        <div class="extra-inputs vf">
+            <div class="inputLine">
+                vx(f): <div id="vxf" class="resultBox">12</div>
+            </div>
+            <div class="inputLine">
+                vy(f): <div id="vyf" class="resultBox">12</div>
+            </div>
+        </div>
+        <div class="inputLine">
+            <p>
+                v(apex):
+                <button onclick="showMore('va')">more</button>
+            </p>
+            <div id="va" class="resultBox">12</div>
+        </div>
+        <div class="extra-inputs va">
+            <div class="inputLine">
+                vx(a): <div id="vxa" class="resultBox">12</div>
+            </div>
+            <div class="inputLine">
+                vy(a): <div id="vya" class="resultBox">12</div>
+            </div>
+        </div>
+
+    </div>
+</label>
+
+<label class="input-label">
+    <div class="inputLine">
+        Launch angle (θ₀): <div id="angle0" class="resultBox">12</div>
+    </div>
+    <div class="inputLine">
+        Angle(final): <div id="angleFinal" class="resultBox">12</div>
+    </div>
+</label>
+
+<label class="input-label">
+    <div class="inputLine">
+        <p>
+            <strong>Initial height (y₀):</strong>
+            <button onclick="showMore('y-coordinate')">more</button>
+        </p>
+        <div id="y0" class="resultBox">12</div>
+    </div>
+    <div class="extra-inputs y-coordinate">
+        <div class="inputLine">
+            y(final): <div id="yf" class="resultBox">12</div>
+        </div>
+        <div class="inputLine">
+            y(apex): <div id="yApex" class="resultBox">12</div>
+        </div>
+    </div>
+</label>
+
+<label class="input-label">
+    <div class="inputLine">
+        <p>
+            <strong>Initial x (x₀):</strong>
+            <button onclick="showMore('x-coordinate')">more</button>
+        </p>
+        <div id="x0" class="resultBox">12</div>
+    </div>
+    <div class="extra-inputs x-coordinate">
+        <div class="inputLine">
+            x(final): <div id="xf" class="resultBox">12</div>
+        </div>
+        <div class="inputLine">
+            x(apex): <div id="xApex" class="resultBox">12</div>
+        </div>
+    </div>
+</label>
+
+<label class="input-label inputLine">
+    </strong>Gravity (g):</strong>
+    <select id="gravityPreset">
+        <option value="9.81">Earth (9.81)</option>
+        <option value="1.62">Moon (1.62)</option>
+        <option value="3.71">Mars (3.71)</option>
+        <option value="24.79">Jupiter (24.79)</option>
+        <option value="274">Sun (274)</option>
+        <option value="custom">Custom</option>
+    </select>
+</label>
+
+<label class="input-label">
+    <div class="inputLine">
+        t (time of flight): <div id="tFlight" class="resultBox">12</div>
+    </div>
+    <div class="inputLine">
+        t (time to apex): <div id="tApex" class="resultBox">12</div>
+    </div>
+</label>
