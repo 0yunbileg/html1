@@ -70,14 +70,36 @@ canvas {
 }
 
 #formulas {
-  width: 670px;
-  margin-top: 20px;
   background: #F6F4EB;
-  padding: 15px;
+  color: #4682A9;
+  width: 670px;
   border-radius: 10px;
-  text-align: left;
-  display: inline-block;
+  padding: 15px 20px;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  /* center if container allows */
 }
+
+#formulas h2 {
+  margin-bottom: 12px;
+  font-size: 1.5rem;
+  color: #315f78;
+  /* slightly darker for header */
+}
+
+#formulas ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+#formulas li {
+  margin-bottom: 8px;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
 
 .input-label {
   display: block;
