@@ -1,6 +1,6 @@
 let missions = new Array();
-const upcomingContainer = document.querySelector(".upcomingMissionsWrapper");
-const pastContainer = document.querySelector(".pastMissionsWrapper");
+const upcomingContainer = document.querySelector(".upcomingMissionsDiv");
+const pastContainer = document.querySelector(".pastMissionsDiv");
 
 
 async function getMissions() {
@@ -16,14 +16,14 @@ getMissions().then(missions => {
     const pastMissions = missions.filter(mission => !mission.upcoming);
 
     upcomingMissions.forEach(mission => {
-        const list = document.createElement("div");
+        const list = document.createElement("tr");
         list.classList.add("missionWrapper");
         list.innerHTML = displayMissionCard(mission);
         upcomingContainer.appendChild(list);
     });
 
     pastMissions.forEach(mission => {
-        const list = document.createElement("div");
+        const list = document.createElement("tr");
         list.classList.add("missionWrapper");
         list.innerHTML = displayMissionCard(mission);
         pastContainer.appendChild(list);
@@ -31,13 +31,13 @@ getMissions().then(missions => {
 });
 
 function displayMissionCard(mission) {
+    const linksArray = Object.values(mission.links);
+    const connectionLink = linksArray.find(link => typeof(link) == "string")
     const text = `
-            <div class="overlayWrapper">
-                <div class="detailsDiv" onclick="displaymissionDetail('${mission.id}')">
-                    <p class="titleD">${mission.name} (${mission.static_fire_date_utc})</p>
-                </div>
-            </div>
+            <td>${mission.name}</td>
+            <td>${mission.date_utc}</td>
+            <td>${mission.flight_number}</td>
+            <td><a href="${connectionLink}">${connectionLink}</a></td>
             `;
-            console.log(text, "text")
     return text;
 }

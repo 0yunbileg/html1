@@ -59,8 +59,13 @@ header * {
 }
 
 @keyframes heroTextToRight {
-    from {left: -36%;}
-    to {left: 6%;}
+    from {
+        left: -36%;
+    }
+
+    to {
+        left: 6%;
+    }
 }
 
 .heroTitle {
@@ -68,10 +73,61 @@ header * {
     font-weight: 800;
     margin-bottom: 1rem;
     letter-spacing: 2px;
-  }
-  
+}
+
 .heroText {
     font-size: 1.8rem;
     font-weight: 300;
     line-height: 1.5;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: sans-serif;
+    font-size: 0.95rem;
+    background: #0a0a0a;
+    /* dark bg for space vibes */
+    color: #f5f5f5;
+}
+
+thead {
+    background: #111;
+    /* darker header row */
+}
+
+th,
+td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+th {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
+    /* subtle striping */
+}
+
+tbody tr:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transition: 0.2s;
+}
+
+a {
+    color: #4886b9;
+    /* light blue for links */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
 }

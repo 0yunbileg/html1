@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Projectile Motion Calculator</title>
+    <link rel="stylesheet" href="projectile.css">
+</head>
+
+<body>
+    <h1>Projectile Motion Calculator</h1>
+
+    <main>
+
+        <div class="numbersDiv">
+            <div class="controls">
+                <label>Initial Velocity (m/s):
+                    <input type="number" id="velocity" value="20">
+                </label>
+                <label>Angle (deg):
+                    <input type="number" id="angle" value="45">
+                </label>
+                <label>Initial Height (m):
+                    <input type="number" id="height" value="0">
+                </label>
+                <label>Gravity (m/s²):
+                    <input type="number" id="gravity" value="9.81">
+                </label>
+            </div>
+
+            <div id="results"></div>
+        </div>
+
+        <div class="graphFormulaDiv">
+            <div class="graphDiv">
+                <canvas id="trajectoryCanvas" width="700" height="400"></canvas>
+                <div class="buttons">
+                    <button id="playBtn">Play Animation</button>
+                </div>
+            </div>
+
+            <div id="formulas">
+                <h2>Formulas</h2>
+                <ul>
+                    <li>Horizontal velocity: vx = v₀ · cosθ</li>
+                    <li>Vertical velocity: vy = v₀ · sinθ</li>
+                    <li>Time to apex: t = vy / g</li>
+                    <li>Max height: h = h₀ + vy² / (2g)</li>
+                    <li>Time of flight: from quadratic solution of y(t)=0</li>
+                    <li>Range: R = vx · total time</li>
+                    <li>Final velocity: v = √(vx² + vyf²)</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script src="projectile.js"></script>
+</body>
+
+</html>
