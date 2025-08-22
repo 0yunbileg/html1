@@ -6,16 +6,48 @@
     <title>Tax Calculator</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
             margin: 0;
-            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #FFFBDE;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            background-color: #4682A9;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
         }
 
         .container {
             max-width: 500px;
             margin: auto;
-            background: white;
+            background: #749BC2;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -27,20 +59,20 @@
 
         input,
         button {
-            width: 100%;
+            width: 80%;
             padding: 10px;
-            margin: 8px 0;
+            margin: 8px auto;
         }
 
         button {
-            background: #007bff;
-            color: white;
+            background: #FFFBDE;
+            color: #4682A9;
             border: none;
             cursor: pointer;
         }
 
         button:hover {
-            background: #0056b3;
+            background: #4682A9;
         }
 
         .hidden {
@@ -63,40 +95,35 @@
         th {
             background: #eee;
         }
+
+        footer {
+            background-color: #4682A9;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
     </style>
 </head>
 
 <body>
 
+    <header>
+        <h1>Team Gambling Nerds</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
     <div class="container" id="authPage">
-        <!-- <h2>Login / Signup</h2>
-        <div id="signupForm">
-            <h3>Signup</h3>
-            <input type="text" id="signupName" placeholder="Name">
-            <input type="password" id="signupPass" placeholder="Password">
-            <input type="text" id="signupId" placeholder="ID (tax type)">
-            <label>
-                <input type="checkbox" id="signupWorking"> Currently working?
-            </label>
-            <button onclick="signup()">Sign Up</button>
-        </div>
-        <hr>
-        <div id="loginForm">
-            <h3>Login</h3>
-            <input type="text" id="loginId" placeholder="ID">
-            <input type="password" id="loginPass" placeholder="Password">
-            <button onclick="login()">Login</button>
-        </div> -->
-
-        <!-- Login Form -->
         <div id="loginForm">
             <h2>Нэвтрэх</h2>
             <label>Нэр</label>
-            <input type="text" id="loginName" placeholder="Нэрээ оруулна уу">
+            <input type="text" id="loginName" placeholder="Нэрээ оруулна уу"><br>
             <label>Нууц үг</label>
-            <input type="password" id="loginPassword" placeholder="Нууц үг">
+            <input type="password" id="loginPassword" placeholder="Нууц үг"><br>
             <label>Татварын ID</label>
-            <input type="number" id="loginId" placeholder="ID">
+            <input type="number" id="loginId" placeholder="ID"><br>
             <button onclick="login()">Нэвтрэх</button>
             <p style="text-align:center; margin-top:10px;">Бүртгэлгүй юу?
                 <a href="#" onclick="showSignup()">Бүртгүүлэх</a>
@@ -107,9 +134,9 @@
         <div id="signupForm" class="hidden">
             <h2>Бүртгүүлэх</h2>
             <label>Нэр</label>
-            <input type="text" id="signupName" placeholder="Нэрээ оруулна уу">
+            <input type="text" id="signupName" placeholder="Нэрээ оруулна уу"><br>
             <label>Нууц үг</label>
-            <input type="password" id="signupPassword" placeholder="Нууц үг">
+            <input type="password" id="signupPassword" placeholder="Нууц үг"><br>
             <button onclick="startQuestions()">Асуулга эхлэх</button>
             <p style="text-align:center; margin-top:10px;">
                 Аль хэдийн бүртгэлтэй юу?
@@ -179,7 +206,9 @@
         </div>
     </div>
 
-
+    <footer>
+        <p>&copy; 2025 My Website | All Rights Reserved</p>
+    </footer>
 
     <script>
         const questions = {
@@ -471,7 +500,7 @@
                 employer_insurance: 0,
                 employee_insurance: 0
             },
-        
+
             6: {
                 employer_pension: 8.5,
                 employee_pension: 0,
@@ -484,7 +513,7 @@
                 employer_insurance: 0,
                 employee_insurance: 0
             },
-        
+
             7: {
                 employer_pension: 8.5,
                 employee_pension: 0,
@@ -510,7 +539,7 @@
                 employer_insurance: 1.8,
                 employee_insurance: 0
             },
-        
+
             9: {
                 employer_pension: 8.5,
                 employee_pension: 8.5,
@@ -614,7 +643,7 @@
                 employer_insurance: 1.8,
                 employee_insurance: 0
             },
-        
+
             17: {
                 employer_pension: 8.5,
                 employee_pension: 0,
@@ -627,7 +656,7 @@
                 employer_insurance: 0,
                 employee_insurance: 0
             },
-        
+
             18: {
                 employer_pension: 8.5,
                 employee_pension: 0,
@@ -640,7 +669,7 @@
                 employer_insurance: 0,
                 employee_insurance: 0
             },
-        
+
             19: {
                 employer_pension: 8.5,
                 employee_pension: 8.5,
@@ -653,7 +682,7 @@
                 employer_insurance: 1.8,
                 employee_insurance: 0
             },
-        
+
             20: {
                 employer_pension: 8.5,
                 employee_pension: 8.5,
@@ -666,7 +695,7 @@
                 employer_insurance: 0,
                 employee_insurance: 0
             },
-        
+
             21: {
                 employer_pension: 8.5,
                 employee_pension: 0,
@@ -692,7 +721,7 @@
                 employer_insurance: 1.8,
                 employee_insurance: 0
             },
-        
+
             23: {
                 employer_pension: 11.5,
                 employee_pension: 0,
@@ -705,7 +734,7 @@
                 employer_insurance: 0,
                 employee_insurance: 0
             },
-        
+
             24: {
                 employer_pension: 0,
                 employee_pension: 0,
@@ -731,7 +760,7 @@
                 employer_insurance: 0,
                 employee_insurance: 0
             },
-        
+
 
             //examples
             26: {
@@ -746,7 +775,7 @@
                 employer_insurance: 0,
                 employee_insurance: 0
             },
-        
+
             27: {
                 employer_pension: 11.5,
                 employee_pension: 0,
@@ -824,7 +853,7 @@
                 employer_insurance: 0,
                 employee_insurance: 0
             },
-        
+
             33: {
                 employer_pension: 11.5,
                 employee_pension: 0,
@@ -915,7 +944,7 @@
                 employer_insurance: 0,
                 employee_insurance: 0
             },
-        
+
             40: {
                 employer_pension: 11.5,
                 employee_pension: 0,
@@ -1096,19 +1125,19 @@
             }
 
             const taxInfo = taxAmounts[user.id];
-            const taxByEmployer = taxInfo.employer_pension + 
-                                    taxInfo.employer_allowance + 
-                                    taxInfo.employer_health +
-                                    taxInfo.employer_insurance +
-                                    taxInfo.employer_unemployment;
+            const taxByEmployer = taxInfo.employer_pension +
+                taxInfo.employer_allowance +
+                taxInfo.employer_health +
+                taxInfo.employer_insurance +
+                taxInfo.employer_unemployment;
 
-            const taxByEmployee = taxInfo.employee_pension + 
-                                    taxInfo.employee_allowance + 
-                                    taxInfo.employee_health +
-                                    taxInfo.employee_insurance +
-                                    taxInfo.employee_unemployment;
+            const taxByEmployee = taxInfo.employee_pension +
+                taxInfo.employee_allowance +
+                taxInfo.employee_health +
+                taxInfo.employee_insurance +
+                taxInfo.employee_unemployment;
 
-            const grossP = 100 + taxByEmployer;         
+            const grossP = 100 + taxByEmployer;
             const grossAmount = (salary * 100 / (100 - taxByEmployer)).toFixed(2);
             const grossNet = grossP;
 
@@ -1140,11 +1169,11 @@
             document.getElementById("aoAmount").textContent = aoAmount.toLocaleString();
             document.getElementById("aoNet").textContent = aoNet.toLocaleString();
 
-            
+
             document.getElementById("salary%").textContent = "100".toLocaleString();
             document.getElementById("salaryAmount").textContent = salary.toLocaleString();
             document.getElementById("salaryNet").textContent = salary.toLocaleString();
-            
+
             document.getElementById("hh%").textContent = taxByEmployee.toLocaleString();
             document.getElementById("hhAmount").textContent = hhAmount.toLocaleString();
             document.getElementById("hhNet").textContent = hhNet.toLocaleString();

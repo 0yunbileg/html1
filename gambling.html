@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TugsuusChips - menu</title>
+    <style>
+         :root {
+          --bg: #0b0f17;
+          --card: #121826;
+          --text: #e8eefc;
+          --muted: #9ba7c0;
+          --accent: #36d399; 
+          --accent-2: #f59e0b; 
+          --stroke: #1f2937;
+        }
+
+    
+        * { box-sizing: border-box; }
+        body {
+          margin: 0;
+          font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+          background: linear-gradient(160deg, #0b0f17 0%, #101b2a 60%, #0b0f17 100%);
+          color: var(--text);
+        }
+    
+    
+        .header {
+          position: sticky;
+          top: 0;
+          z-index: 50;
+          background: rgba(11, 15, 23, 0.85);
+          backdrop-filter: blur(10px);
+          border-bottom: 1px solid var(--stroke);
+        }
+    
+        .container {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 12px 16px;
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+    
+    
+        .logo {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          text-decoration: none;
+          width: 90px;
+        }
+        .logo-badge {
+          width: 36px; height: 36px;
+          display: grid; place-items: center;
+          background: radial-gradient(120% 120% at 20% 20%, #1f2937 0%, #0f172a 60%);
+          border: 1px solid var(--stroke);
+          border-radius: 10px;
+          box-shadow: 0 6px 20px rgba(54, 211, 153, 0.08) inset;
+          font-size: 18px;
+        }
+    
+    
+        #nav-toggle { display: none; }
+        .hamburger {
+          margin-left: auto;
+          width: 42px; height: 42px;
+          display: grid; place-items: center;
+          border-radius: 12px;
+          border: 1px solid var(--stroke);
+          background: var(--card);
+          cursor: pointer;
+        }
+        .hamburger span,
+        .hamburger::before,
+        .hamburger::after {
+          content: "";
+          display: block;
+          width: 20px; height: 2px;
+          background: var(--text);
+          border-radius: 2px;
+          transition: transform .25s ease, opacity .2s ease;
+        }
+        .hamburger::before { transform: translateY(-6px); }
+        .hamburger::after  { transform: translateY(6px); }
+        #nav-toggle:checked + label.hamburger span { opacity: 0; }
+        #nav-toggle:checked + label.hamburger::before { transform: translateY(0) rotate(45deg); }
+        #nav-toggle:checked + label.hamburger::after  { transform: translateY(0) rotate(-45deg); }
+    
+        nav {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          margin-left: 8px;
+          flex: 1;
+        }
+    
+        .nav-links {
+          display: none; 
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 10px;
+          margin-left: 4px;
+        }
+        .nav-links a,
+        .nav-links button.linklike {
+          text-decoration: none;
+          color: var(--muted);
+          font-weight: 600;
+          padding: 10px 12px;
+          border-radius: 10px;
+          border: 1px solid transparent;
+          background: transparent;
+          cursor: pointer;
+        }
+        .nav-links a:hover,
+        .nav-links button.linklike:hover {
+          color: var(--text);
+          background: rgba(255,255,255,0.04);
+          border-color: var(--stroke);
+        }
+    
+        
+        .dropdown { position: relative; }
+        .dropdown:hover .menu,
+        .dropdown:focus-within .menu { display: block; }
+        .menu {
+          display: none;
+          position: absolute;
+          top: 44px; left: 0;
+          min-width: 180px;
+          background: var(--card);
+          border: 1px solid var(--stroke);
+          border-radius: 14px;
+          padding: 6px;
+          box-shadow: 0 14px 40px rgba(0,0,0,.35);
+        }
+        .menu a {
+          display: block;
+          padding: 10px 12px;
+          border-radius: 10px;
+          color: var(--text);
+          text-decoration: none;
+          white-space: nowrap;
+        }
+        .menu a:hover { background: rgba(255,255,255,0.05); }
+    
+        
+        .spacer { flex: 1; }
+        .wallet {
+          display: none; 
+          align-items: center;
+          gap: 8px;
+          padding: 8px 10px;
+          border-radius: 12px;
+          border: 1px dashed var(--stroke);
+          background: rgba(53, 162, 106, 0.06);
+          font-weight: 700;
+        }
+        .wallet .dot {
+          width: 8px; height: 8px; border-radius: 999px; background: var(--accent);
+          box-shadow: 0 0 0 3px rgba(54,211,153,.18);
+        }
+        .cta {
+          display: none; 
+          gap: 10px;
+        }
+        .btn {
+          border: 1px solid var(--stroke);
+          background: var(--card);
+          color: var(--text);
+          padding: 10px 14px;
+          border-radius: 12px;
+          font-weight: 700;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .btn.primary {
+          background: linear-gradient(135deg, var(--accent), #22c55e);
+          border-color: rgba(255,255,255,0.12);
+          color: #0a0f15;
+        }
+        .btn.primary:hover { filter: brightness(1.05); }
+    
+    
+        @media (min-width: 800px) {
+          .hamburger { display: none; }
+          .nav-links { display: flex; }
+          .wallet { display: inline-flex; }
+          .cta { display: inline-flex; }
+        }
+    
+        #nav-toggle:checked ~ nav .nav-links { display: flex; width: 100%; }
+        #nav-toggle:checked ~ nav .wallet { display: inline-flex; }
+        #nav-toggle:checked ~ nav .cta { display: inline-flex; }
+    
+    
+        @media (max-width: 799px) {
+          nav { flex-wrap: wrap; }
+          .nav-links, .wallet, .cta { width: 100%; }
+        }
+        .slot-container {
+            display: grid;
+            grid-template-columns: repeat(3, 200px);
+            column-gap: 20px;
+        }
+        .slots {
+            border: 1px solid red;
+            width: 200px;
+            height: 200px;
+            border-radius: 2px;
+        }
+        .gambling-paragraph {
+            display: flex;
+            justify-content: center;
+            flex-direction: column-reverse;
+        }
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+      </style>
+</head>
+<body>
+    <header class="header">
+            <div class="container">
+                <img class="logo" src="images/gambling-app-logo.svg" alt="">
+              </a>
+        
+        
+              <input type="checkbox" id="nav-toggle" aria-label="Open menu" />
+              <label for="nav-toggle" class="hamburger" aria-hidden>
+                <span></span>
+              </label>
+        
+              <nav>
+                <div class="nav-links">
+                  <a href="home.html">Home</a>
+                  <div class="dropdown">
+                    <button class="linklike" aria-haspopup="true" aria-expanded="false">Games ▾</button>
+                    <div class="menu" role="menu">
+                      <a href="slots.html" role="menuitem">Slots</a>
+                      <a href="roullete.html" role="menuitem">Roulette</a>
+                      <a href="blackjack.html" role="menuitem">Blackjack</a>
+                      <a href="crash.html" role="menuitem">Crash</a>
+                    </div>
+                  </div>
+                  <a href="https://melbet-mn.com/mn">Promotions</a>
+                </div>
+        
+                <div class="spacer"></div>
+        
+                <div class="wallet" title="Balance">
+                  <span class="dot"></span>
+                  <span>₮ 125,000</span>
+                </div>
+        
+                <div class="cta">
+                  <a class="btn" href="#">Log in</a>
+                  <a class="btn primary" href="#">Sign up</a>
+                </div>
+              </nav>
+            </div>
+    </header>
+
+  <main class="container" style="padding: 40px 16px;">
+  <div class="gambling-paragraph-container">
+    <h1 class="paragraph-h">Why gambling is good</h1>
+    <p class="gambling-paragraph">
+        <div>
+            <h2>1. Gambling Makes Players Happier</h2>
+        </div>
+        Online betting
+        The Positives of gambling start with mental health effects. Although it’s a known fact that gambling can be addictive, did you know that it’s also a perfectly reasonable way to relax? Plus, did you know positive and negative effects stem from the same source? <br>
+        
+        Over 5,000 gamblers were surveyed as to why they like to gamble. “To win a lot” was one response, as you might expect, but other popular answers included “because it’s fun” and “it’s exciting.” <br>
+        
+        A psychologist at the UK’s Nottingham Trent University, Mark Griffiths, stated that this is because your body produces adrenaline and endorphins. In other words, the mental health benefits of sports gambling and playing casino games comes from the natural feel-good chemicals it generates.
+    </p>
+    <p class="gambling-paragraph">
+        <div>
+            <h2>2. Improves Intelligence</h2>
+        </div>
+        The good things about casinos and online casinos are that they always have plenty of games to choose from. This ties into one of the most convincing pro gambling arguments out there, in that gambling improve intelligence. If, for example, you play table games like roulette, poker or blackjack, a solid grasp of both the rules and math can help you.
+        
+        Learning rules exercises your memory and recall ability. Understanding the math and probability behind casino games means you gain a better grasp of different strategies.
+        
+        The same is true if you like to bet on sports. Every wager involves odds, and working out what these mean helps develop your number skills. Plus, examining the statistics behind a team’s performance helps you make informed wagering choices.
+        
+        Problem-solving, parsing data, and learning rules/probability are also skills you can use in other parts of your life, too, not just for gambling.</p>
+    <p class="gambling-paragraph">
+        <div>
+            <h2>3. Helps With Getting to Know New People</h2>
+        </div>
+        Gambling Roulette
+        Gambling’s social benefits are numerous; one of the primary good things about casinos is that they’re social environments. Whether it’s at the craps table or in an online poker room, you’re playing alongside fellow enthusiasts. Conversation can come easy, as you share the enjoyment of winning (and the pain of defeat).
+        
+        A research paper by the Scottish government (Research on the Social Impacts of Gambling: Final Report) found that “casinos can have very different types of [social] impacts, depending on size, location and local market.”
+        
+        For example, if you visit a huge casino resort, you’re more likely to meet new people simply because more people are there. Likewise, if you live far from a land-based casino and therefore use an online site, there’s a good chance you’ll meet players from all over the world.
+        
+        As for sports fans, being part of a crowd as your favourite team wins or your horse crosses the finish line first is an equally valid way to meet other people who share your interests.
+        
+        </p>
+    <p class="gambling-paragraph">
+        <div>
+            <h2>4. Helps Local Economies</h2>
+        </div>
+        Gambling is good for the economy because it can help local communities. As an example, Oklahoma has the third-largest US gambling economy (with California and Nevada in front), with a substantial $10 billion annual economic impact.
+        
+        In Oklahoma, money from the gambling sector supports over 70,000 employees and contributes $1.69 billion in annual tax and towards tribal exclusivity fees.
+        
+        This is just one example – we’ll look at other ways gambling helps local economies further below.
+        
+    </p>
+    <p class="gambling-paragraph"> 
+        <div>
+            <h2>5. Gambling Helps People Have Fun</h2>
+        </div>
+        Out of the multiple advantages and disadvantages of gambling, one of the biggest advantages is that it’s fun, pure and simple. Placing a wager on a roulette spin or an American football prop bet amounts to the same thing: you’re doing something you enjoy. Plus, if you’re having fun, you can relax and take your mind off daily worries, at least for a little while.</p>
+    <p class="gambling-paragraph">
+        <div>
+            <h2>6. Helps With Money</h2>
+        </div>
+        We don’t want to suggest gambling equals an easy way to earn (a wager is always down to luck in the end, and the odds are on the casino’s side), but there’s no denying that landing a jackpot or winning a six-bet accumulator, is a good thing.
+        
+        We wouldn’t recommend chasing a win a viable source of income, but if you gamble responsibly and it never stops being fun, maybe you can end up as a professional. For example, many top-tier poker players compete in regular tournaments around the world for millions of dollars in prize money.
+        
+        On a smaller scale, some online casinos run slot tournaments where the more you play in a given time period, the more chances there are to win things like a share of a jackpot.</p>
+    <p class="gambling-paragraph">
+        <div>
+            <h2>7. Government Collects Taxes</h2>
+        </div>
+        Many countries put a tax on gambling, with this money then going towards the local economy. We mentioned Oklahoma above, but did you know that Malta also generates tax from gamblers? 5% of all wins is collected by the Malta Gaming Authority, with over €65 million earned from relevant contributions in 2020.
+        
+        On the other hand, if you live in Australia, you don’t pay tax on any gambling-related winnings. The Australian Tax Office only collects from your winnings if you either own a gambling business or you’re a professional with gambling industry connections.</p>
+    <p class="gambling-paragraph">
+        <div>
+            <h2>8. Casinos Create Jobs</h2>
+        </div>
+        Poker gambling
+        It’s not just brick-and-mortar sites that provide the benefits of gambling for the economy. Online casinos (and sportsbooks) need employees, whether it’s to run the site behind the scenes or in front of a camera for live games.
+        
+        In Las Vegas, casinos needed so many new employees in April 2021 that many held drive-thru hiring events – available jobs ranged from croupiers to bartenders.
+        
+        It’s not just for local communities, either. Paddy Power, one of the most well-known betting sites, employs over 7,000 people worldwide. The economic benefits of gambling can’t be overstated.</p>
+    <p class="gambling-paragraph">
+        <div>
+            <h2>9. Reduces Stress</h2>
+        </div>
+        An hour spinning the reels on slots can help take your mind off a hard day at work, as can playing a few table games. As we noted above, positive facts about gambling include how your body releases adrenaline and endorphins when you place a bet.
+        
+        Best of all, if you’re thinking, “but what’s the point of relaxing with a few casino games only to then worry about the money I’ve lost?”, many online casinos provide demo versions of games, so you don’t even need to risk real cash.
+        
+        </p>
+    <p class="gambling-paragraph">
+        <div>
+            <h2>10. Gambling Improves Concentration</h2>
+        </div>
+        Online betting
+        Slots are easy to play and learn, but many other casino games require some effort to understand and play. Card games like blackjack and poker come with different strategies and card combinations and require concentration if you want to improve your chances of winning.
+        
+        Playing these kinds of casino games helps stimulate your brain and creates new neural pathways. In short, concentrating on a casino game doesn’t just improve this skill but helps your brain figure out new, quicker ways to solve problems.</p>
+  </main>
+  </div>
+  <footer>
+    <div>
+        <h4 class="footer">©Tugsuu 2025/August/20</h4>
+    </div>
+  </footer>
+</body>
+</html>

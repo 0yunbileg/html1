@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TugsuusChips - Blackjack</title>
+    <style>
+                 :root {
+          --bg: #0b0f17;
+          --card: #121826;
+          --text: #e8eefc;
+          --muted: #9ba7c0;
+          --accent: #36d399; 
+          --accent-2: #f59e0b; 
+          --stroke: #1f2937;
+        }
+
+        
+        * { box-sizing: border-box; }
+        body {
+          margin: 0;
+          font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+          background: linear-gradient(160deg, #0b0f17 0%, #101b2a 60%, #0b0f17 100%);
+          color: var(--text);
+        }
+    
+    
+        .header {
+          position: sticky;
+          top: 0;
+          z-index: 50;
+          background: rgba(11, 15, 23, 0.85);
+          backdrop-filter: blur(10px);
+          border-bottom: 1px solid var(--stroke);
+        }
+    
+        .container {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 12px 16px;
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+    
+    
+        .logo {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          text-decoration: none;
+          width: 90px;
+        }
+        .logo-badge {
+          width: 36px; height: 36px;
+          display: grid; place-items: center;
+          background: radial-gradient(120% 120% at 20% 20%, #1f2937 0%, #0f172a 60%);
+          border: 1px solid var(--stroke);
+          border-radius: 10px;
+          box-shadow: 0 6px 20px rgba(54, 211, 153, 0.08) inset;
+          font-size: 18px;
+        }
+    
+    
+        #nav-toggle { display: none; }
+        .hamburger {
+          margin-left: auto;
+          width: 42px; height: 42px;
+          display: grid; place-items: center;
+          border-radius: 12px;
+          border: 1px solid var(--stroke);
+          background: var(--card);
+          cursor: pointer;
+        }
+        .hamburger span,
+        .hamburger::before,
+        .hamburger::after {
+          content: "";
+          display: block;
+          width: 20px; height: 2px;
+          background: var(--text);
+          border-radius: 2px;
+          transition: transform .25s ease, opacity .2s ease;
+        }
+        .hamburger::before { transform: translateY(-6px); }
+        .hamburger::after  { transform: translateY(6px); }
+        #nav-toggle:checked + label.hamburger span { opacity: 0; }
+        #nav-toggle:checked + label.hamburger::before { transform: translateY(0) rotate(45deg); }
+        #nav-toggle:checked + label.hamburger::after  { transform: translateY(0) rotate(-45deg); }
+    
+        nav {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          margin-left: 8px;
+          flex: 1;
+        }
+    
+        .nav-links {
+          display: none; 
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 10px;
+          margin-left: 4px;
+        }
+        .nav-links a,
+        .nav-links button.linklike {
+          text-decoration: none;
+          color: var(--muted);
+          font-weight: 600;
+          padding: 10px 12px;
+          border-radius: 10px;
+          border: 1px solid transparent;
+          background: transparent;
+          cursor: pointer;
+        }
+        .nav-links a:hover,
+        .nav-links button.linklike:hover {
+          color: var(--text);
+          background: rgba(255,255,255,0.04);
+          border-color: var(--stroke);
+        }
+    
+        
+        .dropdown { position: relative; }
+        .dropdown:hover .menu,
+        .dropdown:focus-within .menu { display: block; }
+        .menu {
+          display: none;
+          position: absolute;
+          top: 44px; left: 0;
+          min-width: 180px;
+          background: var(--card);
+          border: 1px solid var(--stroke);
+          border-radius: 14px;
+          padding: 6px;
+          box-shadow: 0 14px 40px rgba(0,0,0,.35);
+        }
+        .menu a {
+          display: block;
+          padding: 10px 12px;
+          border-radius: 10px;
+          color: var(--text);
+          text-decoration: none;
+          white-space: nowrap;
+        }
+        .menu a:hover { background: rgba(255,255,255,0.05); }
+    
+        
+        .spacer { flex: 1; }
+        .wallet {
+          display: none; 
+          align-items: center;
+          gap: 8px;
+          padding: 8px 10px;
+          border-radius: 12px;
+          border: 1px dashed var(--stroke);
+          background: rgba(53, 162, 106, 0.06);
+          font-weight: 700;
+        }
+        .wallet .dot {
+          width: 8px; height: 8px; border-radius: 999px; background: var(--accent);
+          box-shadow: 0 0 0 3px rgba(54,211,153,.18);
+        }
+        .cta {
+          display: none; 
+          gap: 10px;
+        }
+        .btn {
+          border: 1px solid var(--stroke);
+          background: var(--card);
+          color: var(--text);
+          padding: 10px 14px;
+          border-radius: 12px;
+          font-weight: 700;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .btn.primary {
+          background: linear-gradient(135deg, var(--accent), #22c55e);
+          border-color: rgba(255,255,255,0.12);
+          color: #0a0f15;
+        }
+        .btn.primary:hover { filter: brightness(1.05); }
+    
+    
+        @media (min-width: 800px) {
+          .hamburger { display: none; }
+          .nav-links { display: flex; }
+          .wallet { display: inline-flex; }
+          .cta { display: inline-flex; }
+        }
+    
+        #nav-toggle:checked ~ nav .nav-links { display: flex; width: 100%; }
+        #nav-toggle:checked ~ nav .wallet { display: inline-flex; }
+        #nav-toggle:checked ~ nav .cta { display: inline-flex; }
+    
+    
+        @media (max-width: 799px) {
+          nav { flex-wrap: wrap; }
+          .nav-links, .wallet, .cta { width: 100%; }
+        }
+        .slot-container {
+            display: grid;
+            grid-template-columns: repeat(3, 200px);
+            column-gap: 20px;
+            row-gap: 20px;
+            justify-content: center;
+        }
+        .slots {
+            border: 1px solid red;
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+        }
+        .paragraph-p {
+            font-size: 15px;
+        }
+        .footer {
+            display: flex;
+            justify-content: center;
+        }
+        #money-input {
+            border-radius: 10px;
+            border: 1px solid green;
+        }
+        .reels {
+        font-size: 60px;
+        display: grid;
+        grid-template-columns: repeat(3, 200px);
+        row-gap: 20px;
+        column-gap: 20px;
+        }
+
+        .result {
+            font-size: 20px;
+        }
+
+        button {
+        font-size: 20px;
+        padding: 10px 30px;
+        background-color: #f39c12;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        color: white;
+        }
+
+        button:hover {
+        background-color: #e67e22;
+        }
+        .symbols {
+            justify-content: center;
+            display: flex;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .wallet {
+            margin: 20px;
+            font-size: 1.5em;
+        }
+        .game-container {
+            margin: 20px;
+        }
+        .cards {
+            margin: 10px;
+            font-size: 1.5em;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .btn.primary {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+        .btn.primary:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .cart {
+            border: 1px solid rgba(255, 255, 255, 0.487);
+            padding: 20px;
+            
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <img class="logo" src="images/gambling-app-logo.svg" alt="">
+          </a>
+    
+    
+          <input type="checkbox" id="nav-toggle" aria-label="Open menu" />
+          <label for="nav-toggle" class="hamburger" aria-hidden>
+            <span></span>
+          </label>
+    
+          <nav>
+            <div class="nav-links">
+              <a href="home.html">Home</a>
+              <div class="dropdown">
+                <button class="linklike" aria-haspopup="true" aria-expanded="false">Games ▾</button>
+                <div class="menu" role="menu">
+                  <a href="slots.html" role="menuitem">Slots</a>
+                  <a href="roullete.html" role="menuitem">Roulette</a>
+                  <a href="blackjack.html" role="menuitem">Blackjack</a>
+                  <a href="crash.html" role="menuitem">Crash</a>
+                </div>
+              </div>
+              <a href="https://melbet-mn.com/mn">Promotions</a>
+            </div>
+    
+            <div class="spacer"></div>
+    
+            <div class="wallet" title="Balance">
+              <span class="dot"></span>
+              <span>₮ 125,000</span>
+            </div>
+    
+            <div class="cta">
+              <a class="btn" href="#">Log in</a>
+              <a class="btn primary" href="#">Sign up</a>
+            </div>
+          </nav>
+        </div>
+</header>
+
+        <div class="container">
+            <h1>Blackjack Game</h1>
+        </div>
+        <div class="carts-container">
+            <span class="cart">1</span>
+            <span class="cart">2</span>
+            <span class="cart">3</span>
+            <span class="cart">4</span>
+            <span class="cart">5</span>
+            <span class="cart">6</span>
+            <span class="cart">7</span>
+            <span class="cart">8</span>
+            <span class="cart">9</span>
+            <span class="cart">10</span>
+            <span class="cart">11</span>
+            <span class="cart">1</span>
+            <span class="cart">2</span>
+            <span class="cart">3</span>
+            <span class="cart">4</span>
+            <span class="cart">5</span>
+            <span class="cart">6</span>
+            <span class="cart">7</span>
+            <span class="cart">8</span>
+            <span class="cart">9</span>
+            <span class="cart">10</span>
+            <span class="cart">11</span>
+            <span class="cart">1</span>
+            <span class="cart">2</span>
+            <span class="cart">3</span>
+            <span class="cart">4</span>
+            <span class="cart">5</span>
+            <span class="cart">6</span>
+            <span class="cart">7</span>
+            <span class="cart">8</span>
+            <span class="cart">9</span>
+            <span class="cart">10</span>
+            <span class="cart">11</span>
+            <span class="cart">1</span>
+            <span class="cart">2</span>
+            <span class="cart">3</span>
+            <span class="cart">4</span>
+            <span class="cart">5</span>
+            <span class="cart">6</span>
+            <span class="cart">7</span>
+            <span class="cart">8</span>
+            <span class="cart">9</span>
+            <span class="cart">10</span>
+            <span class="cart">11</span>
+        </div>
+
+    <main>
+        <div class="wallet">
+            Wallet Balance: <span id="wallet-balance">₮ 125,000</span>
+        </div>
+
+        <div class="game-container">
+            <div>
+                <button class="btn primary" onclick="startGame()">Start Game</button>
+                <button class="btn" onclick="hit()">Hit</button>
+                <button class="btn" onclick="stand()">Stand</button>
+            </div>
+            <div class="cards">
+                <h3>Your Cards: <span id="player-cards"></span> (<span id="player-score">0</span>)</h3>
+                <h3>Dealer's Cards: <span id="dealer-cards"></span> (<span id="dealer-score">0</span>)</h3>
+            </div>
+            <div class="result" id="result"></div>
+        </div>
+    </main>
+
+    <script>
+        const cards = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11"
+        let walletBalance = 125000;
+        let playerCards = [];
+        let dealerCards = [];
+        let playerScore = 0;
+        let dealerScore = 0;
+        let gameActive = false;
+
+        function updateWalletDisplay() {
+            document.getElementById('wallet-balance').textContent = `₮ ${walletBalance.toLocaleString()}`;
+        }
+        function movecarts(cart) {
+
+        }
+        function getCard() {
+            return Math.floor(Math.random() * 11) + 1;
+            if (card = 1) {
+                return movecarts()
+            }
+        }
+
+        function calculateScore(cards) {
+            return cards.reduce((sum, card) => sum + card, 0);
+        }
+
+        function startGame() {
+            if (gameActive) {
+                document.getElementById('result').textContent = "Game already in progress!";
+                return;
+            }
+
+            playerCards = [getCard(), getCard()];
+            dealerCards = [getCard(), getCard()];
+            playerScore = calculateScore(playerCards);
+            dealerScore = calculateScore(dealerCards);
+            gameActive = true;
+
+            updateDisplay();
+            document.getElementById('result').textContent = "Game started! Make your move.";
+        }
+
+        function hit() {
+            if (!gameActive) {
+                document.getElementById('result').textContent = "Start a new game first!";
+                return;
+            }
+
+            playerCards.push(getCard());
+            playerScore = calculateScore(playerCards);
+
+            if (playerScore > 21) {
+                endGame("Bust! You lose.");
+            } else {
+                updateDisplay();
+            }
+        }
+
+        function stand() {
+            if (!gameActive) {
+                document.getElementById('result').textContent = "Start a new game first!";
+                return;
+            }
+
+            while (dealerScore < 17) {
+                dealerCards.push(getCard());
+                dealerScore = calculateScore(dealerCards);
+            }
+
+            if (dealerScore > 21 || playerScore > dealerScore) {
+                endGame("You win!");
+            } else if (playerScore < dealerScore) {
+                endGame("Dealer wins!");
+            } else {
+                endGame("It's a tie!");
+            }
+        }
+
+        function endGame(message) {
+            gameActive = false;
+            document.getElementById('result').textContent = message;
+
+            if (message === "You win!") {
+                walletBalance += 1000;
+            } else if (message === "Bust! You lose." || message === "Dealer wins!") {
+                walletBalance -= 1000;
+            }
+
+            updateWalletDisplay();
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            document.getElementById('player-cards').textContent = playerCards.join(", ");
+            document.getElementById('dealer-cards').textContent = dealerCards.join(", ");
+            document.getElementById('player-score').textContent = playerScore;
+            document.getElementById('dealer-score').textContent = dealerScore;
+        }
+
+        updateWalletDisplay();
+    </script>
+</body>
+</html>
