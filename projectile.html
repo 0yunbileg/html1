@@ -8,12 +8,19 @@
 </head>
 
 <body>
+    <img src="images/earth.jpg" class="background" id="earthImg"/>
+    <img src="images/moon.jpg" class="background" id="moonImg"/>
+    <img src="images/mars.jpg" class="background" id="marsImg"/>
+    <img src="images/jupiter.jpg" class="background" id="jupiterImg"/>
+    <img src="images/sun.jpg" class="background" id="sunImg"/>
+
     <h1>Projectile Motion Calculator</h1>
 
     <main>
 
         <div class="numbersDiv">
             <div class="controls">
+                <h3 class="sectionTitle">Inputs</h3>
                 <label>Initial Velocity (m/s):
                     <input type="number" id="velocity" value="20">
                 </label>
@@ -23,12 +30,21 @@
                 <label>Initial Height (m):
                     <input type="number" id="height" value="0">
                 </label>
-                <label>Gravity (m/s²):
-                    <input type="number" id="gravity" value="9.81">
+                <label>
+                    Gravity (g):
+                    <select id="gravityPreset">
+                        <option value="9.81">Earth (9.81)</option>
+                        <option value="1.62">Moon (1.62)</option>
+                        <option value="3.71">Mars (3.71)</option>
+                        <option value="24.79">Jupiter (24.79)</option>
+                        <option value="274">Sun (274)</option>
+                    </select>
                 </label>
+        
             </div>
 
-            <div id="results"></div>
+            <div id="results">
+            </div>
         </div>
 
         <div class="graphFormulaDiv">

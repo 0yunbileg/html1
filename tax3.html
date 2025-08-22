@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tax Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        td,
+        th {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: right;
+        }
+
+        th {
+            background: #eee;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="authPage">
+        <!-- <h2>Login / Signup</h2>
+        <div id="signupForm">
+            <h3>Signup</h3>
+            <input type="text" id="signupName" placeholder="Name">
+            <input type="password" id="signupPass" placeholder="Password">
+            <input type="text" id="signupId" placeholder="ID (tax type)">
+            <label>
+                <input type="checkbox" id="signupWorking"> Currently working?
+            </label>
+            <button onclick="signup()">Sign Up</button>
+        </div>
+        <hr>
+        <div id="loginForm">
+            <h3>Login</h3>
+            <input type="text" id="loginId" placeholder="ID">
+            <input type="password" id="loginPass" placeholder="Password">
+            <button onclick="login()">Login</button>
+        </div> -->
+
+        <!-- Login Form -->
+        <div id="loginForm">
+            <h2>Нэвтрэх</h2>
+            <label>Нэр</label>
+            <input type="text" id="loginName" placeholder="Нэрээ оруулна уу">
+            <label>Нууц үг</label>
+            <input type="password" id="loginPassword" placeholder="Нууц үг">
+            <label>Татварын ID</label>
+            <input type="number" id="loginId" placeholder="ID">
+            <button onclick="login()">Нэвтрэх</button>
+            <p style="text-align:center; margin-top:10px;">Бүртгэлгүй юу?
+                <a href="#" onclick="showSignup()">Бүртгүүлэх</a>
+            </p>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signupForm" class="hidden">
+            <h2>Бүртгүүлэх</h2>
+            <label>Нэр</label>
+            <input type="text" id="signupName" placeholder="Нэрээ оруулна уу">
+            <label>Нууц үг</label>
+            <input type="password" id="signupPassword" placeholder="Нууц үг">
+            <button onclick="startQuestions()">Асуулга эхлэх</button>
+            <p style="text-align:center; margin-top:10px;">
+                Аль хэдийн бүртгэлтэй юу?
+                <a href="#" onclick="showLogin()">Нэвтрэх</a>
+            </p>
+        </div>
+
+        <div id="questionnaire" class="hidden">
+            <div id="question"></div>
+            <div id="answers"></div>
+            <div id="result"></div>
+        </div>
+
+        <div class="container hidden" id="dashboard">
+            <h2>Tax Calculator</h2>
+            <p>Welcome, <span id="userName"></span>!</p>
+            <input type="number" id="salary" placeholder="Enter monthly salary">
+            <button onclick="calculateTax()">Calculate</button>
+
+            <div id="userInfo">
+
+            </div>
+            <table id="resultTable" class="hidden">
+                <tr>
+                    <th>Агуулга</th>
+                    <th>Хувь хэмжээ(%)</th>
+                    <th>Хэмжээ</th>
+                    <th>Цалингийн хэмжээ</th>
+                </tr>
+                <tr>
+                    <td>Нийт цалин</td>
+                    <td id="gross%"></td>
+                    <td id="grossAmount"></td>
+                    <td id="grossNet"></td>
+                </tr>
+                <tr>
+                    <td>НДШ-Ажил олгогчийн төлөх</td>
+                    <td id="ao%"></td>
+                    <td id="aoAmount"></td>
+                    <td id="aoNet"></td>
+                </tr>
+                <tr>
+                    <td>Үндсэн цалин</td>
+                    <td id="salary%"></td>
+                    <td id="salaryAmount"></td>
+                    <td id="salaryNet"></td>
+                </tr>
+                <tr>
+                    <td>НДШ-Хувь хүн төлөх</td>
+                    <td id="hh%"></td>
+                    <td id="hhAmount"></td>
+                    <td id="hhNet"></td>
+                </tr>
+                <tr>
+                    <td>ХХОАТ</td>
+                    <td id="tax%"></td>
+                    <td id="taxAmount"></td>
+                    <td id="taxNet"></td>
+                </tr>
+                <tr>
+                    <td><b>Гарт олгох</b></td>
+                    <td id="net%"></td>
+                    <td id="netAmount"></td>
+                    <td id="netNet"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+
+    <script>
+        const questions = {
+            start: {
+                text: "Та одоо ажил эрхэлдэг үү?",
+                answers: [
+                    { text: "Тийм", next: "work_yes" },
+                    { text: "Үгүй", next: "work_no" }
+                ]
+            },
+
+            work_yes: {
+                text: "Та тэтгэвэр тогтоолгосон уу?",
+                answers: [
+                    { text: "Тийм", next: "retired_yes" },
+                    { text: "Үгүй", next: "retired_no" }
+                ]
+            },
+
+            retired_yes: {
+                text: "Та аль ангилалд хамаарах вэ?",
+                answers: [
+                    { text: "4", next: "final_4" },
+                    { text: "21", next: "final_21" },
+                    { text: "22", next: "final_22" },
+                    { text: "41", next: "final_41" },
+                    { text: "42", next: "final_42" }
+                ]
+            },
+
+            retired_no: {
+                text: "Та аль салбарт ажилладаг вэ?",
+                answers: [
+                    { text: "Энгийн ажилтан", next: "employee" },
+                    { text: "Цэрэг цагдаа", next: "military" },
+                    { text: "Малчин", next: "herder" },
+                    { text: "Лам санваартан", next: "monk" },
+                    { text: "Хуульч өмгөөлөгч", next: "lawyer" }
+                ]
+            },
+
+            employee: {
+                text: "Та аль ангилалд хамаарах вэ?",
+                answers: [
+                    { text: "Аж ахуйн нэгж, байгууллагын энгийн ажилтан", next: "final_1" },
+                    { text: "Иргэний хуулийн ажил гүйцэтгэх, хөлсөөр ажиллах гэрээгээр ажиллагч", next: "final_2" },
+                    { text: "Үндсэн ажлаас гадуур давхар ажил эрхэлж байгаа ажилтан /даатгуулагч", next: "final_3" },
+                    { text: "Хөдөлмөрийн гэрээгээр БНСУ-д ажиллаж байгаа Монгол Улсын иргэн", next: "final_31" },
+                    { text: "БНСУ-д ажиллаж байгаа Монгол Улсын иргэн /Сайн дурын даатгуулагч", next: "final_32" },
+                    { text: "Хөдөлмөрийн хөлс, түүнтэй адилтгах орлого авсан хүүхдээ асарч байгаа эх", next: "final_40" }
+                ]
+            },
+
+            military: {
+                text: "Та аль ангилалд хамаарах вэ?",
+                answers: [
+                    { text: "Иргэний хамгаалалтын болон дайчилгаанд хамрагдсан даатгуулагч", next: "final_17" },
+                    { text: "Цэрэг, цагдаагийн ажилтан", next: "final_24" },
+                    { text: "Хугацаат цэргийн албан хаагч, Цэрэг, хууль сахиулахын сургуулийн сонсогч", next: "final_25" },
+                    { text: "Цэргийн гэрээт алба хаагч", next: "final_26" }
+                ]
+            },
+
+            herder: {
+                text: "Та аль ангилалд хамаарах вэ?",
+                answers: [
+                    { text: "Цаа буга маллан амьдарч буй цаатан иргэн", next: "final_23" },
+                    { text: "Тэтгэврийн даатгалын шимтгэл нөхөн төлсөн малчин, хувиараа хөдөлмөр эрхлэгч", next: "final_35" }
+                ]
+            },
+
+            monk: {
+                text: "Та аль ангилалд хамаарах вэ?",
+                answers: [{ text: "Лам санваартан", next: "final_20" }]
+            },
+
+            lawyer: {
+                text: "Та аль ангилалд хамаарах вэ?",
+                answers: [{ text: "Хууль зүйн туслалцаа үзүүлэх гэрээтэй өмгөөлөгч", next: "final_13" }]
+            },
+
+            work_no: {
+                text: "Та яг одоо суралцаж байна уу?",
+                answers: [
+                    { text: "Тийм", next: "student_yes" },
+                    { text: "Үгүй", next: "student_no" }
+                ]
+            },
+
+            student_yes: {
+                text: "Та аль ангилалд хамаарах вэ?",
+                answers: [
+                    { text: "Ажил олгогчийн захиалгаар суралцагч", next: "final_5" },
+                    { text: "Цэрэг, цагдаагийн байгууллагын захиалгаар суралцагч цэргийн цолтой алба хаагч", next: "final_43" }
+                ]
+            },
+
+            student_no: {
+                text: "Та жирэмсний / амаржсаны амралттай байгаа ажилтан уу?",
+                answers: [
+                    { text: "Тийм", next: "ppp_yes" },
+                    { text: "Үгүй", next: "ppp_no" }
+                ]
+            },
+
+            ppp_yes: {
+                text: "Та аль ангилалд хамаарах вэ?",
+                answers: [
+                    { text: "Хүүхэд асрах чөлөөтэй байгаа аж ахуйн нэгж, байгууллагын ажилтан эх /эцэг", next: "final_6" },
+                    { text: "Жирэмсний, амаржсаны амралттай байгаа ажилтан эх", next: "final_7" },
+                    { text: "Жирэмсний болон амаржсаны амралттай байгаа цэргийн алба хаагч эх", next: "final_27" },
+                    { text: "Цэргийн цолны мөнгө авсан хүүхдээ асарч байгаа цэргийн алба хаагч эх", next: "final_33" },
+                    { text: "Жирэмсний болон амаржсаны тэтгэмж авсан, хүүхдээ 3 нас хүртэл асарч байгаа сайн дурын даатгуулагч эх", next: "final_36" },
+                    { text: "Жирэмсний болон амаржсаны тэтгэмж аваагүй, хүүхдээ 3 нас хүртэл асарч байгаа сайн дурын даатгуулагч эх", next: "final_37" }
+                ]
+            },
+
+            ppp_no: {
+                text: "Та нэг сараас илүү хугацаагаар хөдөлмөрийн чадвараа алдсан уу?",
+                answers: [
+                    { text: "Тийм", next: "disabled_yes" },
+                    { text: "Үгүй", next: "disabled_no" }
+                ]
+            },
+
+            disabled_yes: {
+                text: "Та аль ангилалд хамаарах вэ?",
+                answers: [
+                    { text: "Нэг сараас дээш хугацаагаар хөдөлмөрийн чадвараа алдсан ажилтан", next: "final_8" },
+                    { text: "Нэг сараас дээш хугацаагаар хөдөлмөрийн чадвараа алдсан цэргийн алба хаагч", next: "final_28" },
+                    { text: "ҮОМШӨ-ний даатгалын сангаас тэтгэврийн даатгалын шимтгэл төлсөн тахир дутуугийн тэтгэвэр авагч", next: "final_38" },
+                ]
+            },
+
+            disabled_no: {
+                text: "Таны эхнэр / нөхөр цэрэг цагдаагийн албанд ажилладаг уу? ",
+                answers: [
+                    { text: "Тийм", next: "police_partner_yes" },
+                    { text: "Үгүй", next: "police_partner_no" }
+                ]
+            },
+
+            police_partner_yes: {
+                text: "Та аль ангилалд хамаарах вэ?",
+                answers: [
+                    { text: "Улсын хил дээр ажиллаж байгаа гаалийн улсын байцаагчийн ажилгүй байгаа эхнэр/ нөхөр", next: "final_14" },
+                    { text: "Улсын хил дээр алба хааж байгаа офицер, ахлагчийн ажилгүй байгаа эхнэр/ нөхөр", next: "final_15" },
+                    { text: "Дипломат төлөөлөгчийн газарт ажиллагчийн тодорхой ажил эрхлээгүй эхнэр/ нөхөр", next: "final_16" },
+                    { text: "Шилжин ажилласан цагдаагийн алба хаагчийн ажилгүй байгаа эхнэр/нөхөр", next: "final_29" }
+                ]
+            },
+
+            police_partner_no: {
+                text: "Таны ажил зөвхөн түр хугацаанд зогссон байгаа юу?",
+                answers: [
+                    { text: "Тийм", next: "temporary_unemployment_yes" },
+                    { text: "Үгүй", next: "temporary_unemployment_no" }
+                ]
+            },
+
+            temporary_unemployment_yes: {
+                text: "Та аль ангилалд хамаарах вэ?",
+                answers: [
+                    { text: "Жилд 7 сараас доошгүй хугацаанд үндсэн үйл ажиллагаагаа явуулдаг улирлын чанартай үйл ажиллагаатай байгууллагад хөдөлмөрийн гэрээгээр ажиллагч /ажил зогссон үед", next: "final_11" },
+                    { text: "Сул зогсолтын үеийн олговор авч байгаа даатгуулагч", next: "final_12" },
+                    { text: "Сул зогсолтын үеийн олговор авч байгаа тэтгэвэр тогтоолгосон ажилтан", next: "final_19" }
+                ]
+            },
+
+            temporary_unemployment_no: {
+                text: "Та аль ангилалд хамаарах вэ?",
+                answers: [
+                    { text: "Хууль бусаар ажлаас халагдсан ажилтан", next: "final_18" },
+                    { text: "Сайн дурын даатгуулагч", next: "final_30" },
+                    { text: "Ажилласан жил, тэтгэврийн даатгалын шимтгэл төлсөн даатгуулагч", next: "final_34" },
+                    { text: "Цэргийн алба хаасан хугацааг иргэний байгууллагад ажилласнаар тооцон улсын төсвөөс нийгмийн даатгалын шимтгэлээ төлүүлсэн иргэн", next: "final_39" },
+                    { text: "Хууль бусаар ажлаас зайлуулагдан мөрдөгдсөн, хилс хэргээр хорих ял эдэлсэн даатгуулагч", next: "final_44" }
+                ]
+            },
+
+            final_1: { finalId: 1 },
+            final_2: { finalId: 2 },
+            final_3: { finalId: 3 },
+            final_4: { finalId: 4 },
+            final_5: { finalId: 5 },
+            final_6: { finalId: 6 },
+            final_7: { finalId: 7 },
+            final_8: { finalId: 8 },
+            final_9: { finalId: 9 },
+            final_10: { finalId: 10 },
+            final_11: { finalId: 11 },
+            final_12: { finalId: 12 },
+            final_13: { finalId: 13 },
+            final_14: { finalId: 14 },
+            final_15: { finalId: 15 },
+            final_16: { finalId: 16 },
+            final_17: { finalId: 17 },
+            final_18: { finalId: 18 },
+            final_19: { finalId: 19 },
+            final_20: { finalId: 20 },
+            final_21: { finalId: 21 },
+            final_22: { finalId: 22 },
+            final_23: { finalId: 23 },
+            final_24: { finalId: 24 },
+            final_25: { finalId: 25 },
+            final_26: { finalId: 26 },
+            final_27: { finalId: 27 },
+            final_28: { finalId: 28 },
+            final_29: { finalId: 29 },
+            final_30: { finalId: 30 },
+            final_31: { finalId: 31 },
+            final_32: { finalId: 32 },
+            final_33: { finalId: 33 },
+            final_34: { finalId: 34 },
+            final_35: { finalId: 35 },
+            final_36: { finalId: 36 },
+            final_37: { finalId: 37 },
+            final_38: { finalId: 38 },
+            final_39: { finalId: 39 },
+            final_40: { finalId: 40 },
+            final_41: { finalId: 41 },
+            final_42: { finalId: 42 },
+            final_43: { finalId: 43 },
+            final_44: { finalId: 44 }
+        };
+
+        const taxAmounts = {
+            1: {
+                employer_pension: 8.5,
+                employee_pension: 8.5,
+                employer_allowance: 1.0,
+                employee_allowance: 0.8,
+                employer_health: 2.0,
+                employee_health: 2.0,
+                employer_unemployment: 0.2,
+                employee_unemployment: 0.2,
+                employer_insurance: 1.8,
+                employee_insurance: 0
+            },
+
+            2: {
+                employer_pension: 8.5,
+                employee_pension: 8.5,
+                employer_allowance: 1.0,
+                employee_allowance: 0.8,
+                employer_health: 2.0,
+                employee_health: 2.0,
+                employer_unemployment: 0.2,
+                employee_unemployment: 0.2,
+                employer_insurance: 1.8,
+                employee_insurance: 0
+            },
+
+            3: {
+                employer_pension: 8.5,
+                employee_pension: 8.5,
+                employer_allowance: 1.0,
+                employee_allowance: 0.8,
+                employer_health: 2.0,
+                employee_health: 2.0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 1.8,
+                employee_insurance: 0
+            },
+
+            4: {
+                employer_pension: 8.5,
+                employee_pension: 8.5,
+                employer_allowance: 1.0,
+                employee_allowance: 0.8,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 1.8,
+                employee_insurance: 0
+            },
+
+            5: {
+                employer_pension: 8.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+        
+            6: {
+                employer_pension: 8.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+        
+            7: {
+                employer_pension: 8.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 2.0,
+                employee_health: 0,
+                employer_unemployment: 0.2,
+                employee_unemployment: 0,
+                employer_insurance: 1.8,
+                employee_insurance: 0
+            },
+
+            8: {
+                employer_pension: 8.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 2.0,
+                employee_health: 0,
+                employer_unemployment: 0.2,
+                employee_unemployment: 0,
+                employer_insurance: 1.8,
+                employee_insurance: 0
+            },
+        
+            9: {
+                employer_pension: 8.5,
+                employee_pension: 8.5,
+                employer_allowance: 1.0,
+                employee_allowance: 0.8,
+                employer_health: 2.0,
+                employee_health: 2.0,
+                employer_unemployment: 0.2,
+                employee_unemployment: 0.2,
+                employer_insurance: 1.8,
+                employee_insurance: 0
+            },
+
+            10: {
+                employer_pension: 0,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0.8,
+                employer_health: 2.0,
+                employee_health: 2.0,
+                employer_unemployment: 0.2,
+                employee_unemployment: 0.2,
+                employer_insurance: 1.8,
+                employee_insurance: 0
+            },
+
+            11: {
+                employer_pension: 8.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 2.0,
+                employee_health: 0,
+                employer_unemployment: 0.2,
+                employee_unemployment: 0,
+                employer_insurance: 1.8,
+                employee_insurance: 0
+            },
+
+            12: {
+                employer_pension: 8.5,
+                employee_pension: 8.5,
+                employer_allowance: 1.0,
+                employee_allowance: 0.8,
+                employer_health: 2.0,
+                employee_health: 2.0,
+                employer_unemployment: 0.2,
+                employee_unemployment: 0.2,
+                employer_insurance: 1.8,
+                employee_insurance: 0
+            },
+
+            13: {
+                employer_pension: 8.5,
+                employee_pension: 8.5,
+                employer_allowance: 1.0,
+                employee_allowance: 0.8,
+                employer_health: 2.0,
+                employee_health: 2.0,
+                employer_unemployment: 0.2,
+                employee_unemployment: 0.2,
+                employer_insurance: 1.8,
+                employee_insurance: 0
+            },
+
+            14: {
+                employer_pension: 8.5,
+                employee_pension: 0,
+                employer_allowance: 0,
+                employee_allowance: 0,
+                employer_health: 2.0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+
+            15: {
+                employer_pension: 8.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 2.0,
+                employee_health: 0,
+                employer_unemployment: 0.2,
+                employee_unemployment: 0,
+                employer_insurance: 1.8,
+                employee_insurance: 0
+            },
+
+            16: {
+                employer_pension: 8.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 2.0,
+                employee_health: 0,
+                employer_unemployment: 0.2,
+                employee_unemployment: 0,
+                employer_insurance: 1.8,
+                employee_insurance: 0
+            },
+        
+            17: {
+                employer_pension: 8.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+        
+            18: {
+                employer_pension: 8.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+        
+            19: {
+                employer_pension: 8.5,
+                employee_pension: 8.5,
+                employer_allowance: 1.0,
+                employee_allowance: 0.8,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 1.8,
+                employee_insurance: 0
+            },
+        
+            20: {
+                employer_pension: 8.5,
+                employee_pension: 8.5,
+                employer_allowance: 1.0,
+                employee_allowance: 0.8,
+                employer_health: 2.0,
+                employee_health: 2.0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+        
+            21: {
+                employer_pension: 8.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 1.8,
+                employee_insurance: 0
+            },
+
+            22: {
+                employer_pension: 8.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 1.8,
+                employee_insurance: 0
+            },
+        
+            23: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+        
+            24: {
+                employer_pension: 0,
+                employee_pension: 0,
+                employer_allowance: 0,
+                employee_allowance: 0,
+                employer_health: 2.0,
+                employee_health: 2.0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+
+            25: {
+                employer_pension: 8.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+        
+
+            //examples
+            26: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+        
+            27: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+
+            28: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+
+            29: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+
+            30: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+
+            31: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+
+            32: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+        
+            33: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+
+            34: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+
+            35: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+
+            36: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+
+            37: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+
+            38: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+
+            39: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+        
+            40: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+
+            41: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+
+            42: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+
+            43: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+
+            44: {
+                employer_pension: 11.5,
+                employee_pension: 0,
+                employer_allowance: 1.0,
+                employee_allowance: 0,
+                employer_health: 0,
+                employee_health: 0,
+                employer_unemployment: 0,
+                employee_unemployment: 0,
+                employer_insurance: 0,
+                employee_insurance: 0
+            },
+        }
+
+        const questionEl = document.getElementById("question");
+        const answersEl = document.getElementById("answers");
+        const resultEl = document.getElementById("result");
+
+        let user;
+
+        let signupData = {}; // temporarily hold during signup
+
+        function showQuestion(key) {
+            const q = questions[key];
+            answersEl.innerHTML = "";
+            resultEl.innerHTML = "";
+
+            if (q.finalId) {
+                questionEl.textContent = "Таны ангилал тодорхой боллоо:";
+                resultEl.textContent = "Татварын ID: " + q.finalId;
+                signupData.id = q.finalId;
+                saveSignup();
+                return;
+            }
+
+            questionEl.textContent = q.text;
+            q.answers.forEach(a => {
+                const btn = document.createElement("button");
+                btn.textContent = a.text;
+                btn.onclick = () => showQuestion(a.next);
+                answersEl.appendChild(btn);
+            });
+        }
+
+        function saveSignup() {
+            const name = document.getElementById("signupName").value;
+            const pass = document.getElementById("signupPassword").value;
+            if (!name || !pass || !signupData.id) {
+                alert("Мэдээлэл дутуу байна!");
+                return;
+            }
+            const users = JSON.parse(localStorage.getItem("users") || "[]");
+            users.push({ name, pass, id: signupData.id });
+            localStorage.setItem("users", JSON.stringify(users));
+            alert("Бүртгэл амжилттай. Та ID = " + signupData.id + " авлаа.");
+            showLogin();
+        }
+
+        function login() {
+            const name = document.getElementById("loginName").value;
+            const pass = document.getElementById("loginPassword").value;
+            const id = parseInt(document.getElementById("loginId").value);
+            const users = JSON.parse(localStorage.getItem("users") || "[]");
+            user = users.find(u => u.name === name && u.pass === pass && u.id === id) || false;
+            if (user) {
+                showDashboard(user);
+            } else {
+                alert("Буруу мэдээлэл!");
+            }
+        }
+
+        function showSignup() {
+            document.getElementById("loginForm").classList.add("hidden");
+            document.getElementById("signupForm").classList.remove("hidden");
+            document.getElementById("questionnaire").classList.add("hidden");
+            document.getElementById("dashboard").classList.add("hidden");
+        }
+
+        function showDashboard(user) {
+            document.getElementById("loginForm").classList.add("hidden");
+            document.getElementById("signupForm").classList.add("hidden");
+            document.getElementById("questionnaire").classList.add("hidden");
+            document.getElementById("dashboard").classList.remove("hidden");
+            document.getElementById("userInfo").textContent =
+                "Сайн байна уу, " + user.name + "! Таны татварын ID: " + user.id;
+        }
+
+        function logout() {
+            document.getElementById("dashboard").classList.add("hidden");
+            showLogin();
+        }
+
+        function showLogin() {
+            document.getElementById("loginForm").classList.remove("hidden");
+            document.getElementById("signupForm").classList.add("hidden");
+            document.getElementById("questionnaire").classList.add("hidden");
+            document.getElementById("dashboard").classList.add("hidden");
+        }
+
+        function saveSignup() {
+            const name = document.getElementById("signupName").value;
+            const pass = document.getElementById("signupPassword").value;
+            if (!name || !pass || !signupData.id) {
+                alert("Мэдээлэл дутуу байна!");
+                return;
+            }
+            const users = JSON.parse(localStorage.getItem("users") || "[]");
+            users.push({ name, pass, id: signupData.id });
+            localStorage.setItem("users", JSON.stringify(users));
+            alert("Бүртгэл амжилттай. Та ID = " + signupData.id + " авлаа.");
+            showLogin();
+        }
+
+        function startQuestions() {
+            signupData = {};
+            document.getElementById("signupForm").classList.add("hidden");
+            document.getElementById("questionnaire").classList.remove("hidden");
+            showQuestion("start");
+        }
+
+        function calculateTax() {
+            const salary = parseFloat(document.getElementById("salary").value);
+            if (!salary || salary <= 0) {
+                alert("Enter valid salary");
+                return;
+            }
+
+            const taxInfo = taxAmounts[user.id];
+            const taxByEmployer = taxInfo.employer_pension + 
+                                    taxInfo.employer_allowance + 
+                                    taxInfo.employer_health +
+                                    taxInfo.employer_insurance +
+                                    taxInfo.employer_unemployment;
+
+            const taxByEmployee = taxInfo.employee_pension + 
+                                    taxInfo.employee_allowance + 
+                                    taxInfo.employee_health +
+                                    taxInfo.employee_insurance +
+                                    taxInfo.employee_unemployment;
+
+            const grossP = 100 + taxByEmployer;         
+            const grossAmount = (salary * 100 / (100 - taxByEmployer)).toFixed(2);
+            const grossNet = grossP;
+
+            const aoP = taxByEmployer;
+            const aoAmount = (grossP * taxByEmployer / 100).toFixed(2);
+            const aoNet = salary;
+
+            const salapyP = "100";
+            const salaryAmount = salary;
+            const salaryNet = salary;
+
+            const hhP = taxByEmployee;
+            const hhAmount = (salary * taxByEmployee / 100).toFixed(2);
+            const hhNet = salary - hhAmount;
+
+            const taxP = "10";
+            const taxAmount = hhNet * 0.1;
+            const taxNet = hhNet * 0.9;
+
+            const netP = 100 - taxByEmployee - taxByEmployer - 10;
+            const netAmount = taxNet;
+            const netNet = taxNet;
+
+            document.getElementById("gross%").textContent = grossP.toLocaleString();
+            document.getElementById("grossAmount").textContent = grossAmount.toLocaleString();
+            document.getElementById("grossNet").textContent = grossNet.toLocaleString();
+
+            document.getElementById("ao%").textContent = taxByEmployer.toLocaleString();
+            document.getElementById("aoAmount").textContent = aoAmount.toLocaleString();
+            document.getElementById("aoNet").textContent = aoNet.toLocaleString();
+
+            
+            document.getElementById("salary%").textContent = "100".toLocaleString();
+            document.getElementById("salaryAmount").textContent = salary.toLocaleString();
+            document.getElementById("salaryNet").textContent = salary.toLocaleString();
+            
+            document.getElementById("hh%").textContent = taxByEmployee.toLocaleString();
+            document.getElementById("hhAmount").textContent = hhAmount.toLocaleString();
+            document.getElementById("hhNet").textContent = hhNet.toLocaleString();
+
+            document.getElementById("tax%").textContent = taxP.toLocaleString();
+            document.getElementById("taxAmount").textContent = taxAmount.toLocaleString();
+            document.getElementById("taxNet").textContent = taxNet.toLocaleString();
+
+            document.getElementById("net%").textContent = netP.toLocaleString();
+            document.getElementById("netAmount").textContent = netAmount.toLocaleString();
+            document.getElementById("netNet").textContent = netNet.toLocaleString();
+
+            document.getElementById("resultTable").classList.remove("hidden");
+        }
+    </script>
+
+</body>
+
+</html>

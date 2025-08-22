@@ -13,13 +13,46 @@ function timeOfFlight(vy, h0, g) {
     const t1 = (-b + Math.sqrt(discriminant)) / (2 * a);
     const t2 = (-b - Math.sqrt(discriminant)) / (2 * a);
     return Math.max(t1, t2);
-    }
+}
 
-    function calculateProjectile() {
+function calculateProjectile() {
     const v0 = parseFloat(document.getElementById("velocity").value);
     const angleDeg = parseFloat(document.getElementById("angle").value);
     const h0 = parseFloat(document.getElementById("height").value);
-    const g = parseFloat(document.getElementById("gravity").value);
+    const g = parseFloat(document.querySelector("#gravityPreset").value);
+
+    if(g === 9.81) {
+        document.getElementById("earthImg").style.display = 'block';
+        document.getElementById("moonImg").style.display = 'none';
+        document.getElementById("marsImg").style.display = 'none';
+        document.getElementById("jupiterImg").style.display = 'none';
+        document.getElementById("sunImg").style.display = 'none';
+
+    } else if(g === 1.62) {
+        document.getElementById("earthImg").style.display = 'none';
+        document.getElementById("moonImg").style.display = 'block';
+        document.getElementById("marsImg").style.display = 'none';
+        document.getElementById("jupiterImg").style.display = 'none';
+        document.getElementById("sunImg").style.display = 'none';
+    } else if(g === 3.71) {
+        document.getElementById("earthImg").style.display = 'none';
+        document.getElementById("moonImg").style.display = 'none';
+        document.getElementById("marsImg").style.display = 'block';
+        document.getElementById("jupiterImg").style.display = 'none';
+        document.getElementById("sunImg").style.display = 'none';
+    } else if(g === 24.79) {
+        document.getElementById("earthImg").style.display = 'none';
+        document.getElementById("moonImg").style.display = 'none';
+        document.getElementById("marsImg").style.display = 'none';
+        document.getElementById("jupiterImg").style.display = 'block';
+        document.getElementById("sunImg").style.display = 'none';
+    } else if(g === 274) {
+        document.getElementById("earthImg").style.display = 'none';
+        document.getElementById("moonImg").style.display = 'none';
+        document.getElementById("marsImg").style.display = 'none';
+        document.getElementById("jupiterImg").style.display = 'none';
+        document.getElementById("sunImg").style.display = 'block';
+    }
 
     const angleRad = angleDeg * Math.PI / 180;
     const vx0 = v0 * Math.cos(angleRad);
@@ -43,26 +76,27 @@ function timeOfFlight(vy, h0, g) {
     const angleFinalRad = Math.atan2(vyFinal, vxFinal);
     const angleFinalDeg = angleFinalRad * 180 / Math.PI; 
 
-  // Generate trajectory points
-  let trajectory = [];
-  const steps = 100;
-  for (let i = 0; i <= steps; i++) {
-    const t = (i / steps) * totalTime;
-    const x = vx0 * t;
-    const y = h0 + vy0 * t - 0.5 * g * t * t;
-    if (y < 0) break;
-    trajectory.push({ x, y });
-  }
+    // Generate trajectory points
+    let trajectory = [];
+    const steps = 100;
+    for (let i = 0; i <= steps; i++) {
+        const t = (i / steps) * totalTime;
+        const x = vx0 * t;
+        const y = h0 + vy0 * t - 0.5 * g * t * t;
+        if (y < 0) break;
+        trajectory.push({ x, y });
+    }
 
-  drawTrajectory(trajectory);
+    drawTrajectory(trajectory);
 
-  // Display results
-  resultsDiv.innerHTML = `
+    // Display results
+    resultsDiv.innerHTML = `
+    <h3 class="sectionTitle">Results</h3>
     <label class="input-label">
         <div class="inputLine">
             <p>
                 <strong>Initial velocity (v₀)</strong>:
-                <button onclick="showMore('velocity')">more</button>
+                <button class="moreBtnvelocity" onclick="showMore('velocity')">more</button>
             </p>
             <div id="v0" class="resultBox">${v0.toFixed(2)} m/s</div>
         </div>
@@ -76,7 +110,7 @@ function timeOfFlight(vy, h0, g) {
             <div class="inputLine">
                 <p>
                     v(final):
-                    <button onclick="showMore('vf')">more</button>
+                    <button class="moreBtnvf" onclick="showMore('vf')">more</button>
                 </p>
                 <div id="vf" class="resultBox">${vFinal.toFixed(2)} m/s</div>
             </div>
@@ -91,7 +125,7 @@ function timeOfFlight(vy, h0, g) {
             <div class="inputLine">
                 <p>
                     v(apex):
-                    <button onclick="showMore('va')">more</button>
+                    <button class="moreBtnva" onclick="showMore('va')">more</button>
                 </p>
                 <div id="va" class="resultBox">${vApex.toFixed(2)} m/s</div>
             </div>
@@ -123,7 +157,7 @@ function timeOfFlight(vy, h0, g) {
         <div class="inputLine">
             <p>
                 <strong>Initial height (y₀):</strong>
-                <button onclick="showMore('y-coordinate')">more</button>
+                <button class="moreBtny-coordinate" onclick="showMore('y-coordinate')">more</button>
             </p>
             <div id="y0" class="resultBox">${h0.toFixed(2)} m</div>
         </div>
@@ -141,7 +175,7 @@ function timeOfFlight(vy, h0, g) {
         <div class="inputLine">
             <p>
                 <strong>Initial x (x₀):</strong>
-                <button onclick="showMore('x-coordinate')">more</button>
+                <button class="moreBtnx-coordinate" onclick="showMore('x-coordinate')">more</button>
             </p>
             <div id="x0" class="resultBox">0 m</div>
         </div>
@@ -155,29 +189,26 @@ function timeOfFlight(vy, h0, g) {
         </div>
     </label>
 
-    <label class="input-label inputLine">
-        </strong>Gravity (g):</strong>
-        <select id="gravityPreset">
-            <option value="9.81">Earth (9.81)</option>
-            <option value="1.62">Moon (1.62)</option>
-            <option value="3.71">Mars (3.71)</option>
-            <option value="24.79">Jupiter (24.79)</option>
-            <option value="274">Sun (274)</option>
-            <option value="custom">Custom</option>
-        </select>
+    <label class="input-label">
+        <div class="inputLine">
+            <strong>Gravitational const: </strong><div id="gravityPreset" class="resultBox">${g.toFixed(2)} m/s^2</div>
+        </div>
     </label>
 
     <label class="input-label">
         <div class="inputLine">
-            t (time of flight): <div id="tFlight" class="resultBox">${totalTime.toFixed(2)} s</div>
+            <strong>t (time of flight): </strong><div id="tFlight" class="resultBox">${totalTime.toFixed(2)} s</div>
         </div>
+    </label>
+
+    <label class="input-label">
         <div class="inputLine">
-            t (time to apex): <div id="tApex" class="resultBox">${tApex.toFixed(2)} s</div>
+            <strong>t (time to apex): </strong><div id="tApex" class="resultBox">${tApex.toFixed(2)} s</div>
         </div>
     </label>
   `;
 
-  return { vx0, vy0, g, h0, trajectory, totalTime };
+    return { vx0, vy0, g, h0, trajectory, totalTime };
 }
 
 function drawTrajectory(trajectory) {
@@ -211,6 +242,7 @@ function drawProjectile(x, y, scaleX, scaleY) {
 }
 
 function playAnimation() {
+
   cancelAnimationFrame(animationId); 
   const { vx0, vy0, g, h0, totalTime } = calculateProjectile();
 
@@ -249,7 +281,7 @@ window.addEventListener("DOMContentLoaded", () => {
 //     f.style.display = f.style.display === "none" ? "block" : "none";
 //   });
 
-  document.querySelectorAll("#velocity, #angle, #height, #gravity")
+  document.querySelectorAll("#velocity, #angle, #height, #gravityPreset")
     .forEach(el => {
       el.addEventListener("input", calculateProjectile);
       el.addEventListener("change", calculateProjectile);
@@ -258,10 +290,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 function showMore(nameOfClass) {
+    let btn = document.querySelector(`.moreBtn${nameOfClass}`)
     let element = document.querySelector(`.${nameOfClass}`);
     if(element.classList.contains(`showMore${nameOfClass}`)) {
         element.classList.remove(`showMore${nameOfClass}`)
+        btn.innerHTML = "more"
     } else {
         element.classList.add(`showMore${nameOfClass}`);
+        btn.innerHTML = "less"
     }
 }

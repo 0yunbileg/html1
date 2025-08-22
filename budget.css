@@ -1,0 +1,110 @@
+body {
+    font-family: system-ui, sans-serif;
+    background: #f9fafb;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+  }
+
+  h1,
+  h2 {
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  section {
+    background: white;
+    padding: 15px;
+    margin: 20px auto;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  label {
+    display: block;
+    margin: 8px 0 4px;
+    font-size: 14px;
+  }
+
+  input,
+  select,
+  button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  button {
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  button:hover {
+    background: #1d4ed8;
+  }
+
+  #summary div {
+    margin: 5px 0;
+    font-size: 15px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+
+  th {
+    background: #f3f4f6;
+    font-weight: 500;
+  }
+
+  tr:hover {
+    background: #f9fafb;
+  }
+
+  td button {
+    width: auto;
+    padding: 4px 8px;
+    font-size: 13px;
+    margin: 0 2px;
+    background: #f3f4f6;
+    color: #333;
+    border: 1px solid #ddd;
+  }
+
+  td button:hover {
+    background: #e5e7eb;
+  }
+
+  .budget-category {
+    margin-bottom: 15px;
+  }
+
+  .budget-category progress {
+    width: 100%;
+    height: 18px;
+    margin: 5px 0;
+  }
+
+  .amount-display {
+    display: block;
+    font-size: 14px;
+    margin-top: 2px;
+    text-align: right;
+    color: #555;
+  }

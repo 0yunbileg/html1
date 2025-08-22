@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <title>Татварын систем</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .box {
+      max-width: 500px;
+      width: 100%;
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 8px;
+      background: #007bff;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    #question, #answers, #result {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .hidden { display: none; }
+    #logoutBtn {
+      margin-top: 15px;
+      background: #dc3545;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <!-- Login Form -->
+    <div id="loginForm">
+      <h2>Нэвтрэх</h2>
+      <label>Нэр</label>
+      <input type="text" id="loginName" placeholder="Нэрээ оруулна уу">
+      <label>Нууц үг</label>
+      <input type="password" id="loginPassword" placeholder="Нууц үг">
+      <label>Татварын ID</label>
+      <input type="number" id="loginId" placeholder="ID">
+      <button onclick="login()">Нэвтрэх</button>
+      <p style="text-align:center; margin-top:10px;">Бүртгэлгүй юу? 
+        <a href="#" onclick="showSignup()">Бүртгүүлэх</a>
+      </p>
+    </div>
+
+    <!-- Signup Form -->
+    <div id="signupForm" class="hidden">
+      <h2>Бүртгүүлэх</h2>
+      <label>Нэр</label>
+      <input type="text" id="signupName" placeholder="Нэрээ оруулна уу">
+      <label>Нууц үг</label>
+      <input type="password" id="signupPassword" placeholder="Нууц үг">
+      <button onclick="startQuestions()">Асуулга эхлэх</button>
+      <p style="text-align:center; margin-top:10px;">
+        Аль хэдийн бүртгэлтэй юу? 
+        <a href="#" onclick="showLogin()">Нэвтрэх</a>
+      </p>
+    </div>
+
+    <!-- Questionnaire -->
+    <div id="questionnaire" class="hidden">
+      <div id="question"></div>
+      <div id="answers"></div>
+      <div id="result"></div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="hidden">
+      <h2>Тавтай морил!</h2>
+      <div id="userInfo"></div>
+      <button id="logoutBtn" onclick="logout()">Гарах</button>
+    </div>
+  </div>
+
+  <script>
+    // === Миний өмнөх асуулт-н жишээ decision tree-г богиносгосон хувилбар ===
+    const questions = {
+      start: {
+        text: "Та одоо ажил эрхэлдэг үү?",
+        answers: [
+          { text: "Тийм", next: "retiredQ" },
+          { text: "Үгүй", next: "studentQ" }
+        ]
+      },
+      retiredQ: {
+        text: "Та тэтгэвэр тогтоолгосон уу?",
+        answers: [
+          { text: "Тийм", next: "final_4" },
+          { text: "Үгүй", next: "final_1" }
+        ]
+      },
+      studentQ: {
+        text: "Та суралцаж байна уу?",
+        answers: [
+          { text: "Тийм", next: "final_5" },
+          { text: "Үгүй", next: "final_11" }
+        ]
+      },
+      final_1: { finalId: 1 },
+      final_4: { finalId: 4 },
+      final_5: { finalId: 5 },
+      final_11: { finalId: 11 }
+    };
+
+    const questionEl = document.getElementById("question");
+    const answersEl = document.getElementById("answers");
+    const resultEl = document.getElementById("result");
+
+    let signupData = {}; // temporarily hold during signup
+
+    function showQuestion(key) {
+      const q = questions[key];
+      answersEl.innerHTML = "";
+      resultEl.innerHTML = "";
+
+      if (q.finalId) {
+        questionEl.textContent = "Таны ангилал тодорхой боллоо:";
+        resultEl.textContent = "Татварын ID: " + q.finalId;
+        signupData.id = q.finalId;
+        saveSignup();
+        return;
+      }
+
+      questionEl.textContent = q.text;
+      q.answers.forEach(a => {
+        const btn = document.createElement("button");
+        btn.textContent = a.text;
+        btn.onclick = () => showQuestion(a.next);
+        answersEl.appendChild(btn);
+      });
+    }
+
+    // === LocalStorage-based user system ===
+    function saveSignup() {
+      const name = document.getElementById("signupName").value;
+      const pass = document.getElementById("signupPassword").value;
+      if (!name || !pass || !signupData.id) {
+        alert("Мэдээлэл дутуу байна!");
+        return;
+      }
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      users.push({ name, pass, id: signupData.id });
+      localStorage.setItem("users", JSON.stringify(users));
+      alert("Бүртгэл амжилттай. Та ID = " + signupData.id + " авлаа.");
+      showLogin();
+    }
+
+    function login() {
+      const name = document.getElementById("loginName").value;
+      const pass = document.getElementById("loginPassword").value;
+      const id = parseInt(document.getElementById("loginId").value);
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      const user = users.find(u => u.name === name && u.pass === pass && u.id === id);
+      if (user) {
+        showDashboard(user);
+      } else {
+        alert("Буруу мэдээлэл!");
+      }
+    }
+
+    function showDashboard(user) {
+      document.getElementById("loginForm").classList.add("hidden");
+      document.getElementById("signupForm").classList.add("hidden");
+      document.getElementById("questionnaire").classList.add("hidden");
+      document.getElementById("dashboard").classList.remove("hidden");
+      document.getElementById("userInfo").textContent =
+        "Сайн байна уу, " + user.name + "! Таны татварын ID: " + user.id;
+    }
+
+    function logout() {
+      document.getElementById("dashboard").classList.add("hidden");
+      showLogin();
+    }
+
+    // === UI helpers ===
+    function showSignup() {
+      document.getElementById("loginForm").classList.add("hidden");
+      document.getElementById("signupForm").classList.remove("hidden");
+      document.getElementById("questionnaire").classList.add("hidden");
+      document.getElementById("dashboard").classList.add("hidden");
+    }
+
+    function showLogin() {
+      document.getElementById("loginForm").classList.remove("hidden");
+      document.getElementById("signupForm").classList.add("hidden");
+      document.getElementById("questionnaire").classList.add("hidden");
+      document.getElementById("dashboard").classList.add("hidden");
+    }
+
+    function startQuestions() {
+      signupData = {};
+      document.getElementById("signupForm").classList.add("hidden");
+      document.getElementById("questionnaire").classList.remove("hidden");
+      showQuestion("start");
+    }
+  </script>
+</body>
+</html>
