@@ -73,6 +73,7 @@
 
         button:hover {
             background: #4682A9;
+            color: #FFFBDE;
         }
 
         .hidden {
@@ -137,7 +138,7 @@
             <input type="text" id="signupName" placeholder="Нэрээ оруулна уу"><br>
             <label>Нууц үг</label>
             <input type="password" id="signupPassword" placeholder="Нууц үг"><br>
-            <button onclick="startQuestions()">Асуулга эхлэх</button>
+            <button onclick="startQuestions()">Асуулга эхлэх</button><br>
             <p style="text-align:center; margin-top:10px;">
                 Аль хэдийн бүртгэлтэй юу?
                 <a href="#" onclick="showLogin()">Нэвтрэх</a>
@@ -231,11 +232,11 @@
             retired_yes: {
                 text: "Та аль ангилалд хамаарах вэ?",
                 answers: [
-                    { text: "4", next: "final_4" },
-                    { text: "21", next: "final_21" },
-                    { text: "22", next: "final_22" },
-                    { text: "41", next: "final_41" },
-                    { text: "42", next: "final_42" }
+                    { text: "Өндөр насны тэтгэвэр тогтоолгосны дараа ажиллаж байгаа ажилтан /энгийн/", next: "final_4" },
+                    { text: "Жирэмсний болон амаржсаны амралттай байгаа тэтгэвэр тогтоолгосны дараа ажиллаж байгаа ажилтан", next: "final_21" },
+                    { text: "Тэтгэвэр тогтоолгосны дараа ажиллаж байгаа 1 сараас дээш хугацаагаар хөдөлмөрийн чадвараа алдсан ажилтан", next: "final_22" },
+                    { text: "Цэргийн алба хаасны болон хөдөлмөрийн чадвар алдсаны тэтгэвэр тогтоолгосны дараа цэргийн цолтой  ажиллаж байгаа алба хаагч ", next: "final_41" },
+                    { text: "Тахир дутуугийн тэтгэвэр тогтоолгосны дараа ажиллаж байгаа ажилтан /энгийн/", next: "final_42" }
                 ]
             },
 
