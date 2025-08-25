@@ -1,0 +1,48 @@
+.heroDiv {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.heroBackgroundImg {
+    width: 100%;
+    height: auto;
+}
+
+.heroOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1));
+}
+
+.heroContentWrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 60px;
+    color: white;
+}
+
+.heroImgWrapper {
+    width: 500px;
+    height: 500px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+
+}
+
+.heroImg {
+    width: auto;
+    height: 100%;
+}
+
+.heroTextWrapper {
+    width: 500px;
+}

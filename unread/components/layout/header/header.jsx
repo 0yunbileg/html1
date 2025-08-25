@@ -4,11 +4,25 @@ import "./header.css"
 const Header = () => {
     return (
         <header>
-            <div>
-                <Image src={"/images/menu.png"} alt={"menu"} width={50} height={50} />
-            </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, quaerat.</p>
+            <div><Image src={"/images/menu.png"} alt={"menu"} width={24} height={24} /></div>
 
+            <div className="searchWrapper">
+                <div><Image src={"/images/logo.png"} alt={"logo"} width={150} height={20}/></div>
+                <div className="searchDiv"><Image src={"/images/search.png"} alt={"seat"} width={20} height={20}/></div>
+                <input className="searchInput" placeholder="Нийтлэл хайх"/>
+            </div>
+            
+            <div className="nextArticleWrapper">
+                <p className="nextArticleName">Дараагийн нийтлэл: <span>TECHWORM</span></p>
+                <p className="nextArticleDue">Маргааш орно</p>
+            </div>
+
+            <div className="linksWrapper">
+                <a target="_blank" href="https://www.facebook.com/UnreadToday/"><Image src={"/images/fb-logo.png"} alt={"fb logo link"} width={16} height={16}/></a>
+                <a target="_blank" href="https://www.instagram.com/unreadtoday/"><Image src={"/images/instagram-logo.png"} alt={"fb logo link"} width={16} height={16}/></a>
+                <a target="_blank" href="https://x.com/UnreadToday"><Image src={"/images/x-logo.png"} alt={"fb logo link"} width={16} height={16}/></a>
+                <a target="_blank" href="https://www.linkedin.com/company/unreadmedia"><Image src={"/images/linkedin-logo.png"} alt={"fb logo link"} width={16} height={16}/></a>
+            </div>
         </header>
     )
 }
