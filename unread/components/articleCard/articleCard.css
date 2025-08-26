@@ -1,13 +1,18 @@
 .card {
     position: relative;
-    width: 250px;
-    height: 350px;
+    width: 18%;
+    aspect-ratio: 37 / 55;
     border-radius: 10px;
+    transition: all .3s linear;
+}
+
+.card:hover {
+    transform: scale(1.1);
 }
 
 .cardImgDiv {
-    width: 250px;
-    height: 350px;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -54,7 +59,9 @@
     gap: 12px;
 }
 
-.cardCounts, .cardViewWrapper, .cardCommentWrapper {
+.cardCounts,
+.cardViewWrapper,
+.cardCommentWrapper {
     font-size: 14px;
     display: flex;
     align-items: center;
@@ -63,7 +70,9 @@
 .cardCounts {
     gap: 20px;
 }
-.cardViewWrapper, .cardCommentWrapper {
+
+.cardViewWrapper,
+.cardCommentWrapper {
     gap: 4px;
 }
 

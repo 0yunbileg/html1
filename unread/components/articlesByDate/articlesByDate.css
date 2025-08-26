@@ -1,0 +1,63 @@
+.articlesByDateWrapper {
+    margin: 80px auto;
+    width: 85%;
+}
+
+.dateControlWrapper {
+    width: 100%;
+    display: flex;
+    gap: 80px;
+    justify-content: space-between;
+    color: gray;
+    border-bottom: 1px solid gray;
+}
+
+.dateChoice {
+    padding: 16px 0;
+    width: 100%;
+    height: 100%;
+}
+
+.dateChoice:hover {
+    border-bottom: 2px solid blue;
+    color: blue;
+}
+
+.dateChoice:nth-child(2),
+.dateChoice:nth-child(3) {
+    text-align: center;
+}
+
+.dateChoice:nth-child(4) {
+    text-align: end;
+}
+
+.articlesGroupWrapper {
+    margin-top: 40px;
+    width: 100%;
+    aspect-ratio: 5/3;
+    display: grid;
+    grid-template: 1fr / 1fr 1fr;
+    gap: 20px;
+}
+
+.articlesLeftGroup,
+.articlesRightGroup,
+.articleDiv {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    gap: 20px;
+}
+
+.articlesLeftGroup {
+    grid-template: 7fr 5fr / 1fr 1fr;
+}
+
+.articlesRightGroup {
+    grid-template: 5fr 7fr / 1fr 1fr;
+}
+
+.articlesLeftGroup .articleDiv:nth-child(1) {
+    grid-column: 1/3;
+}

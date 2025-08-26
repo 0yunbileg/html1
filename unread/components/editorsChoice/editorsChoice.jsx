@@ -16,42 +16,47 @@ const EditorsChoice = () => {
             <div className="bottomSection">
                 <ArticleCard
                     title={"Намар нээлтээ хийх бүтээлүүдээс онцлох 10 кино"}
-                    viewCount={7360}
+                    viewCount={6122}
                     commentCount={0}
                     category={"ЧӨЛӨӨТ"}
                     readTime={"6 мин"}
+                    image={"/images/article1.jpg"}
                 />
 
                 <ArticleCard
-                    title={"Намар нээлтээ хийх бүтээлүүдээс онцлох 10 кино"}
+                    title={"Эрүүл мэндийн шидэт ундаануудын шид нь юундаа байна вэ?"}
                     viewCount={7360}
                     commentCount={0}
-                    category={"ЧӨЛӨӨТ"}
-                    readTime={"6 мин"}
+                    category={"Мэдүүштэй"}
+                    readTime={"9 мин"}
+                    image={"/images/article2.jpg"}
                 />
 
                 <ArticleCard
-                    title={"Намар нээлтээ хийх бүтээлүүдээс онцлох 10 кино"}
+                    title={"Хиймэл оюун биднийг амьтадтай ярихад тусалж чадах уу?"}
                     viewCount={7360}
                     commentCount={0}
-                    category={"ЧӨЛӨӨТ"}
+                    category={"Мэдүүштэй"}
                     readTime={"6 мин"}
+                    image={"/images/article3.jpg"}
                 />
 
                 <ArticleCard
-                    title={"Намар нээлтээ хийх бүтээлүүдээс онцлох 10 кино"}
+                    title={"Unpacked 2025: Биднийг унтаж байхад Самсунгийн танилцуулсан бүх зүйл"}
                     viewCount={7360}
                     commentCount={0}
-                    category={"ЧӨЛӨӨТ"}
-                    readTime={"6 мин"}
+                    category={"Techworm"}
+                    readTime={"4 мин"}
+                    image={"/images/article4.jpeg"}
                 />
 
                 <ArticleCard
-                    title={"Намар нээлтээ хийх бүтээлүүдээс онцлох 10 кино"}
+                    title={"Unread туршив: Шатрын сайт, аппууд"}
                     viewCount={7360}
                     commentCount={0}
-                    category={"ЧӨЛӨӨТ"}
-                    readTime={"6 мин"}
+                    category={"Мэдүүштэй"}
+                    readTime={"7 мин"}
+                    image={"/images/article5.png"}
                 />
             </div>
         </div>
